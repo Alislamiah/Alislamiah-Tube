@@ -42,11 +42,17 @@ h1{font-size:1.25rem;line-height:1.5;margin:16px 2px 8px}.meta{display:flex;flex
 </header>
 <main>
   <div class="player-shell" id="player-shell">
-    <video id="main-player" controls playsinline preload="metadata" crossorigin="anonymous"></video>
-    <div class="no-video" id="no-video" hidden><b id="no-video-title">لم يتم تحديد فيديو</b><span id="no-video-text">افتح صفحة المشاهدة مع رابط فيديو مباشر.</span></div>
+    <video id="main-player" controls playsinline preload="metadata"></video>
+    <div class="no-video" id="no-video" hidden>
+      <b id="no-video-title">لم يتم تحديد فيديو</b>
+      <span id="no-video-text">افتح صفحة المشاهدة مع رابط فيديو مباشر.</span>
+    </div>
   </div>
   <h1 id="video-display-title">فيديو من Alislamiah-Tube</h1>
-  <div class="meta"><span class="pill" id="views-label">◉ 0 مشاهدة</span><span class="pill" id="published-label">Alislamiah-Tube</span></div>
+  <div class="meta">
+    <span class="pill" id="views-label">◉ 0 مشاهدة</span>
+    <span class="pill" id="published-label">Alislamiah-Tube</span>
+  </div>
   <div class="actions-bar">
     <button class="action-btn" id="like-btn" type="button" onclick="toggleLike()">♡ <span id="like-label">إعجاب</span> <span id="like-count">0</span></button>
     <button class="action-btn" id="share-btn" type="button" onclick="shareVideo()">↗ <span id="share-label">مشاركة</span></button>
@@ -67,85 +73,249 @@ h1{font-size:1.25rem;line-height:1.5;margin:16px 2px 8px}.meta{display:flex;flex
 </nav>
 <div class="toast" id="toast"></div>
 <script>
-const params=new URLSearchParams(location.search);
-const videoParam=params.get("v")||params.get("video")||"";
-const titleParam=params.get("title")||"";
-const descParam=params.get("description")||"";
+const params = new URLSearchParams(location.search);
+const videoParam = params.get("v") || params.get("video") || "";
+const titleParam = params.get("title") || "";
+const descParam = params.get("description") || "";
 
-function simpleHash(str){let h=0;for(let i=0;i<str.length;i++){h=((h<<5)-h)+str.charCodeAt(i);h|=0;}return "k"+Math.abs(h);}
-const videoKey=videoParam||titleParam||location.href;
-const storagePrefix="alislamiah_tube_video_"+simpleHash(videoKey).slice(0,50);
+function simpleHash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) - h) + str.charCodeAt(i);
+    h |= 0;
+  }
+  return "k" + Math.abs(h);
+}
+const videoKey = videoParam || titleParam || location.href;
+const storagePrefix = "alislamiah_tube_video_" + simpleHash(videoKey).slice(0, 50);
 
-const player=document.getElementById("main-player");
-const shell=document.getElementById("player-shell");
-const noVideoBox=document.getElementById("no-video");
-const titleEl=document.getElementById("video-display-title");
+const player = document.getElementById("main-player");
+const shell = document.getElementById("player-shell");
+const noVideoBox = document.getElementById("no-video");
+const titleEl = document.getElementById("video-display-title");
 
-const translations={
- ar:{views:"مشاهدة",like:"إعجاب",liked:"تم الإعجاب",share:"مشاركة",summarize:"الملخص",comments:"التعليقات",placeholder:"أضف تعليقًا...",send:"إرسال",home:"الرئيسية",search:"بحث",settings:"الإعدادات",noTitle:"لم يتم تحديد فيديو",noText:"افتح صفحة المشاهدة مع رابط فيديو مباشر.",defaultTitle:"فيديو من Alislamiah-Tube",description:"شاهد الفيديو على Alislamiah-Tube.",commentEmpty:"اكتب تعليقًا أولاً.",shareDone:"تم نسخ رابط الفيديو.",shareFail:"فشل النسخ.",loadFail:"فشل تحميل الفيديو. تأكد من صحة الرابط."},
- en:{views:"views",like:"Like",liked:"Liked",share:"Share",summarize:"Summarize",comments:"Comments",placeholder:"Add a comment...",send:"Post",home:"Home",search:"Search",settings:"Settings",noTitle:"No video selected",noText:"Open with a direct MP4 link.",defaultTitle:"Video on Alislamiah-Tube",description:"Watch this video on Alislamiah-Tube.",commentEmpty:"Write a comment first.",shareDone:"Video link copied.",shareFail:"Copy failed.",loadFail:"Failed to load video."},
- fr:{views:"vues",like:"J’aime",liked:"Aimé",share:"Partager",summarize:"Résumer",comments:"Commentaires",placeholder:"Ajouter un commentaire…",send:"Publier",home:"Accueil",search:"Recherche",settings:"Paramètres",noTitle:"Aucune vidéo sélectionnée",noText:"Ouvrez avec un lien vidéo direct.",defaultTitle:"Vidéo sur Alislamiah-Tube",description:"Regardez cette vidéo sur Alislamiah-Tube.",commentEmpty:"Écrivez d’abord un commentaire.",shareDone:"Lien vidéo copié.",shareFail:"Copie impossible.",loadFail:"Échec du chargement vidéo."}
+const translations = {
+  ar: {
+    views: "مشاهدة", like: "إعجاب", liked: "تم الإعجاب", share: "مشاركة", summarize: "الملخص",
+    comments: "التعليقات", placeholder: "أضف تعليقًا...", send: "إرسال",
+    home: "الرئيسية", search: "بحث", settings: "الإعدادات",
+    noTitle: "لم يتم تحديد فيديو", noText: "افتح صفحة المشاهدة مع رابط فيديو مباشر.",
+    defaultTitle: "فيديو من Alislamiah-Tube", description: "شاهد الفيديو على Alislamiah-Tube.",
+    commentEmpty: "اكتب تعليقًا أولاً.", shareDone: "تم نسخ رابط الفيديو.", shareFail: "فشل النسخ.",
+    loadFail: "فشل تحميل الفيديو. تأكد من صحة الرابط.", loadErrorTitle: "خطأ في التحميل"
+  },
+  en: {
+    views: "views", like: "Like", liked: "Liked", share: "Share", summarize: "Summarize",
+    comments: "Comments", placeholder: "Add a comment...", send: "Post",
+    home: "Home", search: "Search", settings: "Settings",
+    noTitle: "No video selected", noText: "Open with a direct MP4 link.",
+    defaultTitle: "Video on Alislamiah-Tube", description: "Watch this video on Alislamiah-Tube.",
+    commentEmpty: "Write a comment first.", shareDone: "Video link copied.", shareFail: "Copy failed.",
+    loadFail: "Failed to load video. Check the link.", loadErrorTitle: "Loading error"
+  },
+  fr: {
+    views: "vues", like: "J’aime", liked: "Aimé", share: "Partager", summarize: "Résumer",
+    comments: "Commentaires", placeholder: "Ajouter un commentaire…", send: "Publier",
+    home: "Accueil", search: "Recherche", settings: "Paramètres",
+    noTitle: "Aucune vidéo sélectionnée", noText: "Ouvrez avec un lien vidéo direct.",
+    defaultTitle: "Vidéo sur Alislamiah-Tube", description: "Regardez cette vidéo sur Alislamiah-Tube.",
+    commentEmpty: "Écrivez d’abord un commentaire.", shareDone: "Lien vidéo copié.", shareFail: "Copie impossible.",
+    loadFail: "Échec du chargement de la vidéo.", loadErrorTitle: "Erreur de chargement"
+  }
 };
-let lang=localStorage.getItem("app_lang")||"ar";
-if(!["ar","en","fr"].includes(lang)) lang="ar";
-function tr(){return translations[lang]||translations.ar;}
-function applyLanguage(){
- const t=tr(); document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr";
- document.getElementById("like-label").textContent=t.like;
- document.getElementById("share-label").textContent=t.share;
- document.getElementById("summarize-label").textContent=t.summarize;
- document.getElementById("comments-title").textContent=t.comments;
- document.getElementById("comment-input").placeholder=t.placeholder;
- document.getElementById("comment-submit").textContent=t.send;
- document.getElementById("nav-home").textContent=t.home;
- document.getElementById("nav-search").textContent=t.search;
- document.getElementById("nav-settings").textContent=t.settings;
- if(!titleParam) titleEl.textContent=t.defaultTitle;
- if(!descParam) document.getElementById("video-description").textContent=t.description;
- document.title=(titleParam||t.defaultTitle)+" | Alislamiah-Tube";
- renderLike(); renderViews();
+
+let lang = localStorage.getItem("app_lang") || "ar";
+if (!["ar", "en", "fr"].includes(lang)) lang = "ar";
+
+function tr() { return translations[lang] || translations.ar; }
+
+function applyLanguage() {
+  const t = tr();
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.getElementById("like-label").textContent = t.like;
+  document.getElementById("share-label").textContent = t.share;
+  document.getElementById("summarize-label").textContent = t.summarize;
+  document.getElementById("comments-title").textContent = t.comments;
+  document.getElementById("comment-input").placeholder = t.placeholder;
+  document.getElementById("comment-submit").textContent = t.send;
+  document.getElementById("nav-home").textContent = t.home;
+  document.getElementById("nav-search").textContent = t.search;
+  document.getElementById("nav-settings").textContent = t.settings;
+  if (!titleParam) titleEl.textContent = t.defaultTitle;
+  if (!descParam) document.getElementById("video-description").textContent = t.description;
+  document.title = (titleParam || t.defaultTitle) + " | Alislamiah-Tube";
+  renderLike();
+  renderViews();
 }
-function showToast(m){const el=document.getElementById("toast");el.textContent=m;el.style.display="block";clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>el.style.display="none",2600);}
-function getNumber(k){return Number(localStorage.getItem(k)||0)||0;}
-function renderViews(){document.getElementById("views-label").textContent="◉ "+getNumber(storagePrefix+"_views")+" "+tr().views;}
-function renderLike(){const liked=localStorage.getItem(storagePrefix+"_liked")==="1";const btn=document.getElementById("like-btn");btn.classList.toggle("liked",liked);btn.firstChild.textContent=liked?"♥ ":"♡ ";document.getElementById("like-label").textContent=liked?tr().liked:tr().like;document.getElementById("like-count").textContent=getNumber(storagePrefix+"_likes");}
-function toggleLike(){let likes=getNumber(storagePrefix+"_likes");if(localStorage.getItem(storagePrefix+"_liked")==="1"){localStorage.removeItem(storagePrefix+"_liked");likes=Math.max(0,likes-1);}else{localStorage.setItem(storagePrefix+"_liked","1");likes++;}localStorage.setItem(storagePrefix+"_likes",String(likes));renderLike();}
-async function shareVideo(){try{if(navigator.share){await navigator.share({title:titleEl.textContent,url:location.href});return;}await navigator.clipboard.writeText(location.href);showToast(tr().shareDone);}catch(e){showToast(tr().shareFail);}}
-function summarizeVideo(){
- const outputLang=lang;
- const title=titleEl.textContent.trim();
- const videoUrl=player.currentSrc || player.src || videoParam || location.href;
- const url=new URL("sumarize.html", location.href);
- url.searchParams.set("summarize","1");
- url.searchParams.set("title",title);
- url.searchParams.set("videoUrl",videoUrl);
- url.searchParams.set("outputLang",outputLang);
- location.href=url.href;
+
+function showToast(m) {
+  const el = document.getElementById("toast");
+  el.textContent = m;
+  el.style.display = "block";
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => el.style.display = "none", 2600);
 }
-function getComments(){try{return JSON.parse(localStorage.getItem(storagePrefix+"_comments")||"[]");}catch{return[];}}
-function renderComments(){
- const box=document.getElementById("comments-box");box.innerHTML="";
- const comments=getComments();
- if(!comments.length){const empty=document.createElement("div");empty.className="comment";empty.style.color="var(--muted)";empty.textContent=lang==="ar"?"لا توجد تعليقات بعد.":lang==="fr"?"Aucun commentaire pour le moment.":"No comments yet.";box.appendChild(empty);return;}
- comments.slice().reverse().forEach(c=>{const el=document.createElement("div");el.className="comment";const date=document.createElement("small");date.textContent=new Date(c.time).toLocaleString(lang==="ar"?"ar-DZ":lang==="fr"?"fr-FR":"en-US");const body=document.createElement("div");body.textContent=c.text;el.append(date,body);box.appendChild(el);});
+
+function getNumber(k) { return Number(localStorage.getItem(k) || 0) || 0; }
+
+function renderViews() {
+  document.getElementById("views-label").textContent = "◉ " + getNumber(storagePrefix + "_views") + " " + tr().views;
 }
-document.getElementById("comment-form").addEventListener("submit",e=>{
- e.preventDefault();const input=document.getElementById("comment-input");const text=input.value.trim();if(!text){showToast(tr().commentEmpty);return;}
- const comments=getComments();comments.push({text,time:Date.now()});localStorage.setItem(storagePrefix+"_comments",JSON.stringify(comments.slice(-200)));input.value="";renderComments();
+
+function renderLike() {
+  const liked = localStorage.getItem(storagePrefix + "_liked") === "1";
+  const btn = document.getElementById("like-btn");
+  btn.classList.toggle("liked", liked);
+  btn.firstChild.textContent = liked ? "♥ " : "♡ ";
+  document.getElementById("like-label").textContent = liked ? tr().liked : tr().like;
+  document.getElementById("like-count").textContent = getNumber(storagePrefix + "_likes");
+}
+
+function toggleLike() {
+  let likes = getNumber(storagePrefix + "_likes");
+  if (localStorage.getItem(storagePrefix + "_liked") === "1") {
+    localStorage.removeItem(storagePrefix + "_liked");
+    likes = Math.max(0, likes - 1);
+  } else {
+    localStorage.setItem(storagePrefix + "_liked", "1");
+    likes++;
+  }
+  localStorage.setItem(storagePrefix + "_likes", String(likes));
+  renderLike();
+}
+
+async function shareVideo() {
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: titleEl.textContent, url: location.href });
+      return;
+    }
+    await navigator.clipboard.writeText(location.href);
+    showToast(tr().shareDone);
+  } catch (e) {
+    showToast(tr().shareFail);
+  }
+}
+
+function summarizeVideo() {
+  const outputLang = lang;
+  const title = titleEl.textContent.trim();
+  const videoUrl = player.currentSrc || player.src || videoParam || location.href;
+  const url = new URL("sumarize.html", location.href);
+  url.searchParams.set("summarize", "1");
+  url.searchParams.set("title", title);
+  url.searchParams.set("videoUrl", videoUrl);
+  url.searchParams.set("outputLang", outputLang);
+  location.href = url.href;
+}
+
+function getComments() {
+  try { return JSON.parse(localStorage.getItem(storagePrefix + "_comments") || "[]"); }
+  catch { return []; }
+}
+
+function renderComments() {
+  const box = document.getElementById("comments-box");
+  box.innerHTML = "";
+  const comments = getComments();
+  if (!comments.length) {
+    const empty = document.createElement("div");
+    empty.className = "comment";
+    empty.style.color = "var(--muted)";
+    empty.textContent = lang === "ar" ? "لا توجد تعليقات بعد." : lang === "fr" ? "Aucun commentaire pour le moment." : "No comments yet.";
+    box.appendChild(empty);
+    return;
+  }
+  comments.slice().reverse().forEach(c => {
+    const el = document.createElement("div");
+    el.className = "comment";
+    const date = document.createElement("small");
+    date.textContent = new Date(c.time).toLocaleString(lang === "ar" ? "ar-DZ" : lang === "fr" ? "fr-FR" : "en-US");
+    const body = document.createElement("div");
+    body.textContent = c.text;
+    el.append(date, body);
+    box.appendChild(el);
+  });
+}
+
+document.getElementById("comment-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const input = document.getElementById("comment-input");
+  const text = input.value.trim();
+  if (!text) { showToast(tr().commentEmpty); return; }
+  const comments = getComments();
+  comments.push({ text, time: Date.now() });
+  localStorage.setItem(storagePrefix + "_comments", JSON.stringify(comments.slice(-200)));
+  input.value = "";
+  renderComments();
 });
-function loadVideo(){
- if(!videoParam){player.style.display="none";noVideoBox.hidden=false;document.getElementById("no-video-title").textContent=tr().noTitle;document.getElementById("no-video-text").textContent=tr().noText;return;}
- try{
-   let finalUrl;try{finalUrl=new URL(videoParam, location.href).href;}catch{finalUrl=videoParam;}
-   shell.classList.add("loading");noVideoBox.hidden=true;player.style.display="block";player.src=finalUrl;player.load();
-   player.onloadeddata=()=>{shell.classList.remove("loading");noVideoBox.hidden=true;};
-   player.onerror=()=>{shell.classList.remove("loading");player.style.display="none";noVideoBox.hidden=false;document.getElementById("no-video-title").textContent="خطأ في التحميل";document.getElementById("no-video-text").textContent=tr().loadFail+"\n"+finalUrl;};
- }catch(err){shell.classList.remove("loading");player.style.display="none";noVideoBox.hidden=false;document.getElementById("no-video-text").textContent=err.message;}
+
+function loadVideo() {
+  if (!videoParam) {
+    player.style.display = "none";
+    noVideoBox.hidden = false;
+    document.getElementById("no-video-title").textContent = tr().noTitle;
+    document.getElementById("no-video-text").textContent = tr().noText;
+    return;
+  }
+
+  try {
+    let finalUrl;
+    try {
+      finalUrl = new URL(videoParam, location.href).href;
+    } catch {
+      finalUrl = videoParam;
+    }
+
+    // ترميز إضافي للأسماء العربية التي تحتوي على مسافات وأقواس
+    try {
+      const urlObj = new URL(finalUrl);
+      const parts = urlObj.pathname.split("/").map(p => {
+        try { return encodeURIComponent(decodeURIComponent(p)); }
+        catch { return encodeURIComponent(p); }
+      });
+      urlObj.pathname = parts.join("/");
+      finalUrl = urlObj.href;
+    } catch (e) {}
+
+    shell.classList.add("loading");
+    noVideoBox.hidden = true;
+    player.style.display = "block";
+    player.src = finalUrl;
+    player.load();
+
+    player.onloadeddata = () => {
+      shell.classList.remove("loading");
+      noVideoBox.hidden = true;
+    };
+
+    player.onerror = () => {
+      shell.classList.remove("loading");
+      player.style.display = "none";
+      noVideoBox.hidden = false;
+      document.getElementById("no-video-title").textContent = tr().loadErrorTitle;
+      document.getElementById("no-video-text").textContent = tr().loadFail + "\n" + finalUrl;
+    };
+  } catch (err) {
+    shell.classList.remove("loading");
+    player.style.display = "none";
+    noVideoBox.hidden = false;
+    document.getElementById("no-video-text").textContent = err.message;
+  }
 }
-titleEl.textContent=titleParam||tr().defaultTitle;
-if(descParam) document.getElementById("video-description").textContent=descParam;
-if(!sessionStorage.getItem(storagePrefix+"_counted")){localStorage.setItem(storagePrefix+"_views",String(getNumber(storagePrefix+"_views")+1));sessionStorage.setItem(storagePrefix+"_counted","1");}
-applyLanguage();renderComments();loadVideo();
+
+titleEl.textContent = titleParam || tr().defaultTitle;
+if (descParam) document.getElementById("video-description").textContent = descParam;
+
+if (!sessionStorage.getItem(storagePrefix + "_counted")) {
+  localStorage.setItem(storagePrefix + "_views", String(getNumber(storagePrefix + "_views") + 1));
+  sessionStorage.setItem(storagePrefix + "_counted", "1");
+}
+
+applyLanguage();
+renderComments();
+loadVideo();
 </script>
 </body>
 </html>
