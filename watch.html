@@ -14,7 +14,7 @@ header{height:62px;display:flex;align-items:center;gap:11px;padding:0 15px;borde
 main{max-width:1000px;margin:0 auto;padding:16px 13px}
 .player-shell{overflow:hidden;border:1px solid #223c5d;border-radius:18px;background:#000;box-shadow:0 18px 45px #0005;aspect-ratio:16/9;display:grid;place-items:center;position:relative}
 .player-shell video{width:100%;height:100%;max-height:70vh;background:#000;object-fit:contain}
-.player-shell.loading::after{content:"جاري التحميل...";position:absolute;color:#9ec8ff;top:50%;left:50%;transform:translate(-50%,-50%)}
+.player-shell.loading::after{content:"جاري التحميل...";position:absolute;color:#9ec8ff;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.1rem}
 .no-video{color:#b6c7dc;text-align:center;padding:20px;line-height:1.7;max-width:90%}
 .no-video b{display:block;color:#fff;font-size:1.1rem;margin-bottom:7px}
 h1{font-size:1.25rem;line-height:1.5;margin:16px 2px 8px}.meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:.85rem;margin:0 2px 15px}.pill{background:#0c1c30;border:1px solid var(--line);border-radius:999px;padding:5px 10px}
@@ -74,9 +74,17 @@ h1{font-size:1.25rem;line-height:1.5;margin:16px 2px 8px}.meta{display:flex;flex
 <div class="toast" id="toast"></div>
 <script>
 const params = new URLSearchParams(location.search);
-const videoParam = params.get("v") || params.get("video") || "";
+let videoParam = params.get("v") || params.get("video") || "";
 const titleParam = params.get("title") || "";
 const descParam = params.get("description") || "";
+
+// إصلاح خاص لأسماء الملفات العربية التي تحتوي على مسافات
+if (videoParam) {
+  // إذا كان الرابط قد تم فك ترميزه جزئياً
+  try {
+    videoParam = decodeURIComponent(videoParam);
+  } catch(e) {}
+}
 
 function simpleHash(str) {
   let h = 0;
@@ -167,7 +175,11 @@ function renderLike() {
   const liked = localStorage.getItem(storagePrefix + "_liked") === "1";
   const btn = document.getElementById("like-btn");
   btn.classList.toggle("liked", liked);
-  btn.firstChild.textContent = liked ? "♥ " : "♡ ";
+  // تحديث الأيقونة بأمان
+  const iconNode = btn.childNodes[0];
+  if (iconNode && iconNode.nodeType === 3) {
+    iconNode.textContent = liked ? "♥ " : "♡ ";
+  }
   document.getElementById("like-label").textContent = liked ? tr().liked : tr().like;
   document.getElementById("like-count").textContent = getNumber(storagePrefix + "_likes");
 }
@@ -261,43 +273,60 @@ function loadVideo() {
   }
 
   try {
+    // بناء الرابط بشكل صحيح
     let finalUrl;
-    try {
+    
+    // إذا كان الفيديو نسبي (اسم ملف فقط)
+    if (!videoParam.startsWith("http") && !videoParam.startsWith("//") && !videoParam.startsWith("/")) {
+      // ترميز اسم الملف بشكل صحيح
+      const encodedName = encodeURIComponent(videoParam).replace(/%2F/g, "/");
+      finalUrl = new URL(encodedName, location.href).href;
+    } else {
       finalUrl = new URL(videoParam, location.href).href;
-    } catch {
-      finalUrl = videoParam;
     }
 
-    // ترميز إضافي للأسماء العربية التي تحتوي على مسافات وأقواس
-    try {
-      const urlObj = new URL(finalUrl);
-      const parts = urlObj.pathname.split("/").map(p => {
-        try { return encodeURIComponent(decodeURIComponent(p)); }
-        catch { return encodeURIComponent(p); }
-      });
-      urlObj.pathname = parts.join("/");
-      finalUrl = urlObj.href;
-    } catch (e) {}
+    console.log("Loading video from:", finalUrl); // للمساعدة في التشخيص
 
     shell.classList.add("loading");
     noVideoBox.hidden = true;
     player.style.display = "block";
-    player.src = finalUrl;
+    
+    // إزالة أي مصدر سابق
+    player.removeAttribute("src");
+    while (player.firstChild) player.removeChild(player.firstChild);
+    
+    // إضافة المصدر
+    const source = document.createElement("source");
+    source.src = finalUrl;
+    source.type = "video/mp4";
+    player.appendChild(source);
+    
     player.load();
 
-    player.onloadeddata = () => {
+    player.onloadeddata = function() {
       shell.classList.remove("loading");
       noVideoBox.hidden = true;
+      player.style.display = "block";
     };
 
-    player.onerror = () => {
+    player.onerror = function(e) {
+      console.error("Video error:", e, finalUrl);
       shell.classList.remove("loading");
       player.style.display = "none";
       noVideoBox.hidden = false;
       document.getElementById("no-video-title").textContent = tr().loadErrorTitle;
       document.getElementById("no-video-text").textContent = tr().loadFail + "\n" + finalUrl;
     };
+
+    // محاولة إضافية بعد ثانيتين
+    setTimeout(() => {
+      if (player.readyState === 0) {
+        player.load();
+      }
+    }, 1500);
+
   } catch (err) {
+    console.error(err);
     shell.classList.remove("loading");
     player.style.display = "none";
     noVideoBox.hidden = false;
@@ -305,9 +334,11 @@ function loadVideo() {
   }
 }
 
+// تعيين العنوان
 titleEl.textContent = titleParam || tr().defaultTitle;
 if (descParam) document.getElementById("video-description").textContent = descParam;
 
+// عداد المشاهدات
 if (!sessionStorage.getItem(storagePrefix + "_counted")) {
   localStorage.setItem(storagePrefix + "_views", String(getNumber(storagePrefix + "_views") + 1));
   sessionStorage.setItem(storagePrefix + "_counted", "1");
