@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06101f">
+<title>Gemalot — Alislamiah AI</title>
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+:root{--bg:#050b16;--panel:#0a1729;--panel2:#0e2038;--line:#1c3555;--text:#edf5ff;--muted:#9bb0cb;--blue:#398dff;--blue2:#164f91;--green:#5ce1b9}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -20%,#153765 0,#081629 36%,#050b16 75%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+body{min-height:100dvh;display:flex;flex-direction:column}.app{width:100%;max-width:920px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 14px}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:14px 4px;background:rgba(5,11,22,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(100,160,230,.15)}
+.logo{width:43px;height:43px;object-fit:contain;border-radius:13px;background:#102642;border:1px solid #244a75;flex-shrink:0}.brand{flex:1;min-width:0}.brand strong{font-size:1.08rem;display:block}.brand small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}.header-btn,.icon-btn{border:1px solid var(--line);background:#0c1d32;color:var(--text);border-radius:12px;padding:9px 11px;cursor:pointer}
+main{flex:1;display:flex;flex-direction:column;padding:20px 0 12px}.welcome{text-align:center;padding:25px 10px 18px}.orb{width:74px;height:74px;border-radius:24px;display:grid;place-items:center;margin:0 auto 15px;background:linear-gradient(145deg,#1e64a9,#102748);border:1px solid #3b8de1;box-shadow:0 0 34px #277be333;font-size:2.3rem;color:#a7d8ff}.welcome h1{font-size:clamp(1.45rem,5vw,2rem);margin:0 0 8px}.welcome p{color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
+.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:10px 0 18px}.suggestion{background:linear-gradient(135deg,#0b1c30,#0a1424);border:1px solid var(--line);border-radius:15px;padding:13px;text-align:start;color:var(--text);cursor:pointer;min-height:62px}.suggestion:hover{border-color:#397ec0}.suggestion span{display:block;color:#8fc9ff;font-size:1.1rem;margin-bottom:5px}.chat{display:flex;flex-direction:column;gap:13px;padding:6px 0 20px}.message{max-width:90%;border:1px solid var(--line);border-radius:18px;padding:13px 15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.message.user{align-self:flex-start;background:linear-gradient(135deg,#12365d,#0d2745);border-color:#245789}.message.ai{align-self:flex-end;background:linear-gradient(135deg,#0c1b2d,#091522)}.message .source{font-size:.72rem;color:#8db5df;border-top:1px solid #1a304b;margin-top:9px;padding-top:6px}.message img,.message video{max-width:100%;height:auto;border-radius:12px;display:block}.typing{color:var(--muted);font-size:.88rem}
+.composer-wrap{position:sticky;bottom:0;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(5,11,22,.96) 20%);z-index:4}.composer{display:flex;align-items:flex-end;gap:8px;padding:9px;background:#0a1728;border:1px solid #294668;border-radius:20px;box-shadow:0 12px 35px #0005}.composer textarea{flex:1;resize:none;min-height:42px;max-height:150px;background:transparent;border:0;outline:0;color:var(--text);font:inherit;line-height:1.5;padding:9px 5px}.composer textarea::placeholder{color:#8298b4}.send{width:43px;height:43px;border:0;border-radius:14px;background:#14365b;color:white;font-size:1.5rem;cursor:pointer;flex-shrink:0}.send.active{background:linear-gradient(135deg,#277de0,#164f91)}.tool-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.75rem;padding:8px 5px 0}.tool-row button{background:none;border:0;color:#9bcaff;cursor:pointer}.language{background:#0b1c30;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:5px}
+.status{color:var(--muted);font-size:.78rem;text-align:center;padding:5px 0 16px}.pill{display:inline-block;border:1px solid #264667;border-radius:999px;padding:3px 8px;color:#a9d6ff;font-size:.72rem;margin:0 3px}
+@media(max-width:520px){.app{padding:0 10px}.suggestions{grid-template-columns:1fr}.welcome{padding-top:20px}.message{max-width:96%}.brand small{font-size:.7rem}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <img class="logo" src="icon.png" alt="Gemalot" onerror="this.style.display='none'">
+  <div class="brand"><strong>Gemalot</strong><small>Alislamiah AI · مساعدك الذكي</small></div>
+  <select class="language" id="replyLanguage" aria-label="لغة الإجابة">
+    <option value="auto">Auto</option><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="tr">Türkçe</option><option value="it">Italiano</option><option value="pt">Português</option><option value="id">Bahasa Indonesia</option><option value="ur">اردو</option>
+  </select>
+</header>
+<main>
+  <section class="welcome" id="welcome">
+    <div class="orb">✦</div>
+    <h1>مرحبًا بك في Gemalot</h1>
+    <p>اسأل، ابحث، حلّ المسائل، أو جهّز طلبًا لتلخيص فيديو. يمكنك اختيار لغة الملخص من القائمة أعلاه.</p>
+  </section>
+  <section class="suggestions" id="suggestions">
+    <button class="suggestion" onclick="sendSuggestion('اشرح لي أهمية الوقت')"><span>◈</span>اشرح لي موضوعًا</button>
+    <button class="suggestion" onclick="sendSuggestion('نواقض الوضوء')"><span>☾</span>اسأل عن الفقه</button>
+    <button class="suggestion" onclick="sendSuggestion('صورة: مسجد جميل عند الغروب')"><span>✧</span>إنشاء صورة</button>
+    <button class="suggestion" onclick="sendSuggestion('حل المعادلة: 2*x+3=11')"><span>∑</span>حل مسألة رياضية</button>
+  </section>
+  <section class="chat" id="chatContainer" aria-live="polite"></section>
+  <div class="status">Gemalot يعمل بقدرات الواجهة والبحث المتاحة؛ قد يحتاج محتوى الفيديو إلى تفريغ نصي.</div>
+</main>
+<div class="composer-wrap">
+  <div class="composer">
+    <textarea id="userInput" rows="1" placeholder="اسأل Gemalot" aria-label="اكتب رسالتك"></textarea>
+    <button class="send" id="sendBtn" aria-label="إرسال"><span id="sendIcon">↑</span></button>
+  </div>
+  <div class="tool-row"><span id="usageLabel">اكتب سؤالك ثم اضغط إرسال</span><button type="button" onclick="clearChat()">مسح المحادثة</button></div>
+</div>
+</div>
+<script>
+const userInput=document.getElementById("userInput");
+const sendBtn=document.getElementById("sendBtn");
+const chatContainer=document.getElementById("chatContainer");
+const replyLanguage=document.getElementById("replyLanguage");
+const usageLabel=document.getElementById("usageLabel");
+let currentLang="ar";
+const translations={
+ ar:{placeholder:"اسأل Gemalot",searching:"جارٍ البحث عن معلومات موثوقة…",noAnswer:"لم أجد إجابة موثوقة في مصادر البحث المتاحة. إذا كان طلبك متعلقًا بفيديو، أرسل التفريغ النصي أو أهم المقاطع لأساعدك في تلخيصها.",usage:"اكتب سؤالك ثم اضغط إرسال"},
+ en:{placeholder:"Ask Gemalot",searching:"Searching available sources…",noAnswer:"I couldn't find a reliable answer in the available search sources. For a video summary, provide its transcript or key excerpts.",usage:"Type a question and press send"},
+ fr:{placeholder:"Posez votre question à Gemalot",searching:"Recherche dans les sources disponibles…",noAnswer:"Je n’ai pas trouvé de réponse fiable dans les sources disponibles. Pour résumer une vidéo, fournissez sa transcription ou des extraits.",usage:"Écrivez une question puis envoyez-la"},
+ es:{placeholder:"Pregunta a Gemalot",searching:"Buscando en las fuentes disponibles…",noAnswer:"No encontré una respuesta fiable en las fuentes disponibles. Para resumir un vídeo, comparte su transcripción o fragmentos.",usage:"Escribe una pregunta y envíala"}
+};
+let t=translations.ar;
+function detectLang(s){if(replyLanguage.value!=="auto")return replyLanguage.value;if(/[اأإء-ي]/.test(s))return"ar";if(/[àâçéèêëîïôûùüÿœ]/i.test(s))return"fr";if(/\b(the|what|how|summarize|summary|video|please|explain)\b/i.test(s))return"en";if(/\b(el|la|qué|como|resumen|vídeo|por favor)\b/i.test(s))return"es";return"en";}
+function setDirection(){document.documentElement.dir=(currentLang==="ar"||currentLang==="ur")?"rtl":"ltr";document.documentElement.lang=currentLang;t=translations[currentLang]||translations.en;userInput.placeholder=t.placeholder;usageLabel.textContent=t.usage;}
+function appendMessage(text,role="ai",withSource=false,source="",html=""){
+ const el=document.createElement("div");el.className="message "+(role==="user"?"user":"ai");
+ if(html)el.innerHTML=html;else el.textContent=text||"";
+ if(withSource&&source){const s=document.createElement("div");s.className="source";s.textContent=source;el.appendChild(s);}
+ chatContainer.appendChild(el);el.scrollIntoView({behavior:"smooth",block:"end"});return el;
+}
+function canSendMessage(){return{allowed:true};}
+function triggerFullGlow(){}
+function updateSendIcon(){const active=!!userInput.value.trim();document.getElementById("sendIcon").textContent=active?"↑":"◍";sendBtn.classList.toggle("active",active);}
+function updateLimitUI(){}
+function incrementCount(){}
+function updatePlaceholder(){userInput.placeholder=t.placeholder||"Ask Gemalot";}
+function renderChatList(){}
+function renderSuggestions(){}
+function clearChat(){chatContainer.innerHTML="";document.getElementById("welcome").style.display="";document.getElementById("suggestions").style.display="";}
+function sendSuggestion(txt){userInput.value=txt;updateSendIcon();processMessage();}
+function safeText(s){return String(s??"");}
+function solveMathPro(text){
+ try{
+  let expr=text.replace("حل المعادلة:","").replace("حل:","").replace("solve:","").trim();
+  expr=expr.replace(/×/g,"*").replace(/÷/g,"/");
+  if(!expr)return null;
+  if(expr.includes("=")&&expr.toLowerCase().includes("x")){
+   const parts=expr.split("=");if(parts.length===2){
+    const left=parts[0].trim(),right=parts[1].trim();
+    const normalized=left.replace(/(\d)(x)/gi,"$1*$2").replace(/x/gi,"(0)");
+    const at0=Function('"use strict";return ('+normalized.replace(/\^/g,"**")+')')();
+    const at1=Function('"use strict";return ('+left.replace(/(\d)(x)/gi,"$1*$2").replace(/x/gi,"(1)").replace(/\^/g,"**")+')')();
+    const c=Function('"use strict";return ('+right.replace(/\^/g,"**")+')')();
+    const a=at1-at0;if(a!==0)return `x = ${(c-at0)/a}`;
+   }
+  }
+  if(/^[0-9x+\-*/^().=\s]+$/i.test(expr)&&!expr.includes("x")){
+   const result=Function('"use strict";return ('+expr.replace(/\^/g,"**").replace(/=/g,"")+')')();if(Number.isFinite(result))return String(result);
+  }
+ }catch{}return null;
+}
+async function safeFetch(url){try{const r=await fetch(url);return r.ok?r:null;}catch{return null;}}
+async function searchWikipediaLang(q,lang){
+ try{
+  let res=await safeFetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
+  if(res){const d=await res.json();if(d.extract&&d.extract.length>40)return{text:d.extract,source:`Wikipedia · ${lang.toUpperCase()}`};}
+  res=await safeFetch(`https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`);
+  if(res){const d=await res.json();const first=d.query?.search?.[0]?.title;if(first){res=await safeFetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(first)}`);if(res){const dd=await res.json();if(dd.extract)return{text:dd.extract,source:`Wikipedia · ${lang.toUpperCase()}`};}}}
+ }catch{}return null;
+}
+async function searchAllSources(q,preferredLang){
+ const langs=[preferredLang,...["ar","en","fr","es","tr","de","id","ur","fa"].filter(l=>l!==preferredLang)];
+ for(const l of langs){const r=await searchWikipediaLang(q,l);if(r)return r;}return null;
+}
+const chatKnowledge=[
+ {roots:["السلام عليكم","مرحبا","أهلا"],reply:{ar:"وعليكم السلام! أنا Gemalot، مساعدك من شبكة Alislamiah. كيف أساعدك؟",en:"Hello! I'm Gemalot, your assistant from Alislamiah. How can I help?",fr:"Bonjour ! Je suis Gemalot, votre assistant Alislamiah. Comment puis-je vous aider?"}},
+ {roots:["نواقض الوضوء"],reply:{ar:"من نواقض الوضوء: الخارج من السبيلين، وزوال العقل، والنوم المستغرق، وما اختلف فيه الفقهاء يُرجع فيه إلى المذهب أو العالم الموثوق الذي تتبعه.",en:"Common nullifiers of wudu include discharge from the private parts, loss of consciousness, and deep sleep. Some details differ among schools of Islamic jurisprudence.",fr:"Parmi les causes courantes d’annulation des ablutions : les excrétions, la perte de conscience et le sommeil profond. Certains détails varient selon les écoles juridiques."}},
+ {roots:["أحكام سجود السهو"],reply:{ar:"سجود السهو سجدتان لجبر بعض السهو في الصلاة، وتفاصيل موضعه وأحكامه تختلف باختلاف الحالة والمذهب.",en:"Sujood as-sahw consists of two prostrations to make up for certain mistakes in prayer; details depend on the situation and school of jurisprudence.",fr:"Le soujoud as-sahw consiste en deux prosternations pour compenser certaines erreurs dans la prière. Les détails dépendent du cas et de l’école juridique."}},
+ {roots:["من أنت","من انت","gemalot"],reply:{ar:"Gemalot مساعد رقمي من شبكة Alislamiah.",en:"Gemalot is a digital assistant from the Alislamiah network.",fr:"Gemalot est un assistant numérique du réseau Alislamiah."}}
+];
+function langReply(reply,lang){if(typeof reply==="string")return reply;return reply[lang]||reply.en||reply.ar;}
+async function processMessage(text){
+ text=(text??userInput.value).trim();if(!text)return;
+ document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";
+ currentLang=detectLang(text);setDirection();
+ appendMessage(text,"user");userInput.value="";userInput.style.height="auto";updateSendIcon();
+ const lower=text.toLowerCase();
+ if(lower.startsWith("صورة:")||lower.startsWith("image:")){
+  const p=text.replace(/^(صورة:|image:)/i,"").trim();
+  const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(p+", detailed, high quality")}?width=1024&height=1024&nologo=true`;
+  appendMessage("", "ai",true,"Image generation",`<div>${escapeHtml(p)}</div><img alt="Generated image" src="${url}">`);return;
+ }
+ if(lower.startsWith("فيديو:")||lower.startsWith("video:")){
+  const p=text.replace(/^(فيديو:|video:)/i,"").trim();
+  const canvas=document.createElement("canvas");canvas.width=640;canvas.height=360;const ctx=canvas.getContext("2d");let frame=0;
+  try{const stream=canvas.captureStream(24);const recorder=new MediaRecorder(stream,{mimeType:"video/webm"});const chunks=[];recorder.ondataavailable=e=>chunks.push(e.data);recorder.onstop=()=>{const url=URL.createObjectURL(new Blob(chunks,{type:"video/webm"}));appendMessage("", "ai",true,"Canvas video",`<div>${escapeHtml(p)}</div><video controls src="${url}"></video>`);};recorder.start();function draw(){ctx.fillStyle=`hsl(${frame*3%360},60%,25%)`;ctx.fillRect(0,0,640,360);ctx.fillStyle="#fff";ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText(p.slice(0,40),320,180);frame++;if(frame<60)requestAnimationFrame(draw);else setTimeout(()=>recorder.stop(),150);}draw();}catch{appendMessage("إنشاء الفيديو غير مدعوم في هذا المتصفح.","ai");}return;
+ }
+ if(lower.includes("حل")||/^[\d\s()+\-*/^=.x]+$/i.test(text)){const m=solveMathPro(text);if(m){appendMessage("🧮 "+m,"ai",true,"Math helper");return;}}
+ for(const item of chatKnowledge){if(item.roots.some(r=>lower.includes(r.toLowerCase()))){appendMessage(langReply(item.reply,currentLang),"ai",true,"Gemalot knowledge");return;}}
+ const waiting=appendMessage(t.searching,"ai");
+ const result=await searchAllSources(text,currentLang==="auto"?"en":currentLang);
+ waiting.remove();
+ if(result)appendMessage(result.text,"ai",true,result.source);
+ else appendMessage(t.noAnswer,"ai",true,"Gemalot");
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+userInput.addEventListener("input",()=>{updateSendIcon();userInput.style.height="auto";userInput.style.height=Math.min(userInput.scrollHeight,150)+"px";});
+userInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();processMessage();}});
+sendBtn.addEventListener("click",()=>processMessage());
+replyLanguage.addEventListener("change",()=>{if(replyLanguage.value!=="auto"){currentLang=replyLanguage.value;setDirection();}});
+setDirection();updateSendIcon();
+
+/* Receive video-summary request from Alislamiah-Tube.
+   The request is placed in the composer only; the user presses Send. */
+(function loadVideoSummaryRequest(){
+ const params=new URLSearchParams(location.search);
+ if(params.get("summarize")!=="1")return;
+ const title=params.get("title")||"Video";
+ const videoUrl=params.get("videoUrl")||"";
+ const outputLang=params.get("outputLang")||"auto";
+ if([...replyLanguage.options].some(o=>o.value===outputLang))replyLanguage.value=outputLang;
+ const promptByLang={
+  ar:`✦ لخّص محتوى هذا الفيديو باللغة التي أختارها من قائمة اللغات.\\nعنوان الفيديو: ${title}\\nرابط الفيديو: ${videoUrl}\\nقدّم الفكرة الرئيسية وأهم النقاط والتفاصيل. لا تخترع محتوى إذا لم تتمكن من مشاهدة الفيديو أو الوصول إلى نصه؛ اطلب مني التفريغ النصي.`,
+  en:`✦ Summarize this video's content in the output language selected above (or the video's language if Auto is selected).\\nVideo title: ${title}\\nVideo URL: ${videoUrl}\\nGive the main idea and key points. Do not invent details if you cannot access the video or its transcript; ask me to provide the transcript.`,
+  fr:`✦ Résume le contenu de cette vidéo dans la langue choisie ci-dessus (ou dans la langue de la vidéo si Auto est sélectionné).\\nTitre : ${title}\\nLien vidéo : ${videoUrl}\\nPrésente l’idée principale et les points essentiels. N’invente rien si tu ne peux pas accéder à la vidéo ou à sa transcription ; demande-moi la transcription.`,
+  es:`✦ Resume el contenido de este vídeo en el idioma seleccionado arriba (o en el idioma del vídeo si está en Auto).\\nTítulo: ${title}\\nEnlace: ${videoUrl}\\nExpón la idea principal y los puntos clave. No inventes contenido si no puedes acceder al vídeo o a su transcripción; pídeme la transcripción.`
+ };
+ const prompt=promptByLang[outputLang]||promptByLang.en;
+ userInput.value=prompt.replace(/\\n/g,"\n");
+ userInput.style.height="auto";userInput.style.height=Math.min(userInput.scrollHeight,150)+"px";
+ document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";
+ updateSendIcon();setTimeout(()=>{userInput.focus();userInput.scrollIntoView({behavior:"smooth",block:"center"});},500);
+})();
+</script>
+</body>
+</html>

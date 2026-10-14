@@ -1,215 +1,130 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عرض الفيديو - Alislamiah-Tube</title>
-  <link rel="icon" href="icon.png" type="image/png">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { font-family: Arial, Tahoma, sans-serif; background: #07111f; color: #fff; min-height: 100vh; padding-bottom: 100px; }
-    .header { background: #0a1728; padding: 12px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #18304b; display: flex; align-items: center; gap: 12px; }
-    .app-icon { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
-    .header h1 { font-size: 1.35rem; font-weight: 700; color: #6fb7ff; }
-    .main-content { padding: 20px 16px; max-width: 800px; margin: 0 auto; }
-    .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
-    .video-container video { width: 100%; height: 100%; object-fit: contain; }
-    .video-title { font-size: 1.25rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px; color: #ffffff; }
-    .video-meta { font-size: 0.85rem; color: #718ba6; margin-bottom: 15px; display: flex; gap: 15px; }
-    .actions-bar { display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 1px solid #152c45; padding-bottom: 15px; }
-    .action-btn { background: #0b1a2c; color: #fff; border: 1px solid #173553; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
-    .action-btn:active { background: #102640; }
-    .action-btn.liked { color: #6fb7ff; border-color: #1c4b76; background: #0d2946; }
-    .comments-section { margin-top: 20px; background: #0b1a2c; padding: 20px; border-radius: 16px; border: 1px solid #173553; box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
-    .comments-section h3 { font-size: 1.05rem; margin-bottom: 15px; color: #f5f9ff; }
-    .comment-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .comment-input { background: #07111f; border: 1px solid #152c45; color: #fff; padding: 12px; border-radius: 10px; font-size: 0.9rem; resize: none; outline: none; }
-    .comment-input:focus { border-color: #4da8ff; }
-    .comment-submit { background: #1678c9; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; align-self: flex-end; }
-    .comments-list { display: flex; flex-direction: column; gap: 12px; }
-    .comment-item { background: #07111f; padding: 12px; border-radius: 10px; border: 1px solid #152c45; }
-    .comment-user { font-weight: 700; font-size: 0.82rem; color: #6fb7ff; margin-bottom: 4px; }
-    .comment-text { font-size: 0.88rem; color: #dcecff; line-height: 1.4; }
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #081525; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #17304a; z-index: 100; }
-    .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #718096; font-size: 0.78rem; gap: 4px; min-width: 70px; }
-    .nav-item.active { color: #62b4ff; }
-    .nav-item .icon { font-size: 1.35rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050b18">
+<title>Alislamiah-Tube | مشاهدة الفيديو</title>
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+:root{--bg:#050b18;--panel:#0b1628;--panel2:#101f35;--line:#203754;--text:#eef5ff;--muted:#9eb0c9;--blue:#2479d5;--glow:#4da5ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#08162a,#050b18 42%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;padding-bottom:82px}
+header{height:62px;display:flex;align-items:center;gap:11px;padding:0 15px;border-bottom:1px solid #20334d;background:rgba(5,11,24,.92);position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.logo{width:37px;height:37px;border-radius:11px;object-fit:contain;background:#102541}.brand{font-weight:800;font-size:1.04rem;flex:1}.brand span{color:#6bb8ff}main{max-width:1000px;margin:0 auto;padding:16px 13px}.player-shell{overflow:hidden;border:1px solid #223c5d;border-radius:18px;background:#000;box-shadow:0 18px 45px #0005;aspect-ratio:16/9;display:grid;place-items:center}.player-shell video{width:100%;height:100%;max-height:70vh;background:#000;object-fit:contain}.no-video{color:#b6c7dc;text-align:center;padding:20px;line-height:1.7}.no-video b{display:block;color:#fff;font-size:1.1rem;margin-bottom:7px}
+h1{font-size:1.25rem;line-height:1.5;margin:16px 2px 8px}.meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:.85rem;margin:0 2px 15px}.pill{background:#0c1c30;border:1px solid var(--line);border-radius:999px;padding:5px 10px}
+.actions-bar{display:flex;gap:8px;flex-wrap:wrap;padding:12px 0 17px;border-bottom:1px solid #1b2d45}.action-btn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;border:1px solid var(--line);border-radius:12px;background:#0b1a2d;color:var(--text);padding:9px 13px;font:inherit;cursor:pointer}.action-btn:active{transform:scale(.98)}.action-btn.liked{color:#ff8eb0;border-color:#9e4765;background:#301426}.ai-summarize-btn{background:linear-gradient(135deg,#102d59,#164f91);border:1px solid #398dff;box-shadow:0 0 12px #398dff22}.ai-star{font-size:1.3rem;color:#80c7ff}.description{white-space:pre-wrap;color:#c6d5e8;line-height:1.75;background:linear-gradient(135deg,#0a1728,#091321);border:1px solid var(--line);border-radius:15px;padding:14px;margin:17px 0}
+.section-title{font-size:1.05rem;margin:20px 0 12px}.comment-form{display:flex;gap:8px}.comment-form input{min-width:0;flex:1;background:#0a1728;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);font:inherit;outline:none}.comment-form button{border:0;border-radius:12px;background:#17569a;color:white;padding:0 15px;font:inherit}.comment{background:#0a1728;border:1px solid #1b2d45;border-radius:12px;padding:11px 13px;margin-top:9px;white-space:pre-wrap;overflow-wrap:anywhere}.comment small{display:block;color:var(--muted);font-size:.72rem;margin-bottom:5px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:6;display:flex;justify-content:space-around;padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:rgba(5,11,24,.96);border-top:1px solid #203754;backdrop-filter:blur(14px)}.bottom-nav a{color:#aabbd1;text-decoration:none;text-align:center;font-size:.74rem;min-width:65px;padding:4px}.bottom-nav a b{display:block;font-size:1.2rem;margin-bottom:2px;color:#75baff}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:#142b46;border:1px solid #3b75ad;border-radius:12px;padding:10px 15px;z-index:10;display:none;max-width:90%;text-align:center}
+@media(max-width:520px){main{padding:12px 10px}.actions-bar{gap:7px}.action-btn{padding:8px 10px;font-size:.88rem;flex:1}.ai-summarize-btn{flex:1.3}h1{font-size:1.12rem}}
+</style>
 </head>
 <body>
-  <header class="header">
-    <img src="icon.png" class="app-icon" alt="Alislamiah">
-    <h1 id="header-title">Alislamiah-Tube</h1>
-  </header>
-  <main class="main-content">
-    <div class="video-container">
-      <video id="main-player" controls autoplay playsinline>
-        <source id="video-source" src="" type="video/mp4">
-      </video>
-    </div>
-
-    <h1 id="video-display-title" class="video-title">...</h1>
-    <div class="video-meta">
-      <span id="video-platform-text">Alislamiah-Tube</span>
-      <span>•</span>
-      <span>👁️ <span id="view-count">0</span> <span id="view-text-label">مشاهدة</span></span>
-    </div>
-
-    <div class="actions-bar">
-      <button class="action-btn" id="like-btn" onclick="toggleLike()">
-        <span>👍</span> <span id="like-text">إعجاب</span> (<span id="like-count">0</span>)
-      </button>
-      <button class="action-btn" onclick="shareVideo()">
-        <span>🔄</span> <span id="share-text-label">مشاركة</span> (<span id="share-count">0</span>)
-      </button>
-    </div>
-
-    <div class="comments-section">
-      <h3 id="comments-heading">التعليقات</h3>
-      <div class="comment-form">
-        <textarea id="comment-text-input" class="comment-input" rows="3" placeholder="اكتب تعليقاً طيباً..."></textarea>
-        <button class="comment-submit" onclick="addComment()">نشر</button>
-      </div>
-      <div class="comments-list" id="comments-box">
-        <div class="comment-item" id="empty-comment-msg">
-          <div class="comment-text" style="color:#55718d; text-align:center;">لا توجد تعليقات بعد.</div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <nav class="bottom-nav">
-    <a href="index.html" class="nav-item">
-      <span class="icon">🏠</span>
-      <span id="nav-home">الرئيسية</span>
-    </a>
-    <a href="search.html" class="nav-item">
-      <span class="icon">🔍</span>
-      <span id="nav-search">البحث</span>
-    </a>
-    <a href="Settings.html" class="nav-item">
-      <span class="icon">⚙️</span>
-      <span id="nav-settings">الإعدادات</span>
-    </a>
-  </nav>
-
-  <script>
-    const translations = {
-      ar: { home: "الرئيسية", search: "البحث", settings: "الإعدادات", view: "مشاهدة", platform: "منصة Alislamiah-Tube القياسية", like: "إعجاب", liked: "تم الإعجاب", share: "مشاركة", commentsTitle: "التعليقات", placeholder: "اكتب تعليقاً طيباً...", submitBtn: "نشر", alertComment: "فضلاً اكتب تعليقاً أولاً.", emptyComments: "لا توجد تعليقات بعد. كن أول من يعلق!", commentUser: "متابِع المنصة", copied: "تم نسخ الرابط!", dir: "rtl" },
-      fr: { home: "Accueil", search: "Recherche", settings: "Paramètres", view: "vues", platform: "Plateforme Alislamiah-Tube", like: "J'aime", liked: "Aimé", share: "Partager", commentsTitle: "Commentaires", placeholder: "Écrire un commentaire...", submitBtn: "Publier", alertComment: "Veuillez écrire un commentaire.", emptyComments: "Aucun commentaire. Soyez le premier!", commentUser: "Abonné", copied: "Lien copié!", dir: "ltr" },
-      en: { home: "Home", search: "Search", settings: "Settings", view: "views", platform: "Standard Alislamiah-Tube Platform", like: "Like", liked: "Liked", share: "Share", commentsTitle: "Comments", placeholder: "Write a comment...", submitBtn: "Post", alertComment: "Please write a comment.", emptyComments: "No comments yet. Be the first!", commentUser: "Follower", copied: "Link copied!", dir: "ltr" }
-    };
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const videoFile = urlParams.get('v') || 'default';
-    const videoTitle = urlParams.get('title');
-
-    const player = document.getElementById('main-player');
-    const source = document.getElementById('video-source');
-    const titleElement = document.getElementById('video-display-title');
-
-    const LIKE_KEY = `liked_${videoFile}`;
-    const LIKE_COUNT_KEY = `likes_count_${videoFile}`;
-    const COMMENT_KEY = `comments_${videoFile}`;
-    const VIEW_KEY = `views_${videoFile}`;
-    const SHARE_KEY = `shares_${videoFile}`;
-
-    let currentLang = localStorage.getItem("app_lang") || "ar";
-
-    function applyLanguage(lang) {
-      if (!translations[lang]) lang = "ar";
-      const t = translations[lang];
-
-      document.documentElement.setAttribute("lang", lang);
-      document.documentElement.setAttribute("dir", t.dir);
-
-      document.getElementById('nav-home').textContent = t.home;
-      document.getElementById('nav-search').textContent = t.search;
-      document.getElementById('nav-settings').textContent = t.settings;
-      document.getElementById('video-platform-text').textContent = t.platform;
-      document.getElementById('view-text-label').textContent = t.view;
-      document.getElementById('like-text').textContent = localStorage.getItem(LIKE_KEY) === 'true' ? t.liked : t.like;
-      document.getElementById('share-text-label').textContent = t.share;
-      document.getElementById('comments-heading').textContent = t.commentsTitle;
-      document.getElementById('comment-text-input').placeholder = t.placeholder;
-      document.querySelector('.comment-submit').textContent = t.submitBtn;
-      
-      const emptyMsg = document.getElementById('empty-comment-msg');
-      if (emptyMsg) emptyMsg.querySelector('.comment-text').textContent = t.emptyComments;
-    }
-
-    if (urlParams.get('v')) {
-      source.src = videoFile;
-      player.load();
-      player.play().catch(() => {});
-      
-      let currentViews = parseInt(localStorage.getItem(VIEW_KEY)) || 0;
-      currentViews++;
-      localStorage.setItem(VIEW_KEY, currentViews);
-      document.getElementById('view-count').innerText = currentViews;
-    }
-
-    if (videoTitle) { titleElement.innerText = decodeURIComponent(videoTitle); }
-
-    let isLiked = localStorage.getItem(LIKE_KEY) === 'true';
-    let likesCount = parseInt(localStorage.getItem(LIKE_COUNT_KEY)) || 0;
-    let sharesCount = parseInt(localStorage.getItem(SHARE_KEY)) || 0;
-
-    document.getElementById('like-count').innerText = likesCount;
-    document.getElementById('share-count').innerText = sharesCount;
-    if(isLiked) document.getElementById('like-btn').classList.add('liked');
-
-    const savedComments = JSON.parse(localStorage.getItem(COMMENT_KEY)) || [];
-    const commentsBox = document.getElementById('comments-box');
-    if (savedComments.length > 0) {
-      document.getElementById('empty-comment-msg').style.display = 'none';
-      savedComments.forEach(text => {
-        const commentItem = document.createElement('div');
-        commentItem.className = 'comment-item';
-        commentItem.style.marginBottom = '12px';
-        commentItem.innerHTML = `<div class="comment-user">${translations[currentLang].commentUser}</div><div class="comment-text">${text}</div>`;
-        commentsBox.appendChild(commentItem);
-      });
-    }
-
-    function toggleLike() {
-      const likeBtn = document.getElementById('like-btn');
-      const likeCountElement = document.getElementById('like-count');
-      const likeText = document.getElementById('like-text');
-      isLiked = !isLiked;
-      if(isLiked) { likesCount++; likeBtn.classList.add('liked'); likeText.innerText = translations[currentLang].liked; } 
-      else { likesCount--; likeBtn.classList.remove('liked'); likeText.innerText = translations[currentLang].like; }
-      likeCountElement.innerText = likesCount;
-      localStorage.setItem(LIKE_KEY, isLiked);
-      localStorage.setItem(LIKE_COUNT_KEY, likesCount);
-    }
-
-    function shareVideo() {
-      sharesCount++;
-      localStorage.setItem(SHARE_KEY, sharesCount);
-      document.getElementById('share-count').innerText = sharesCount;
-      if (navigator.share) { navigator.share({ title: document.title, url: window.location.href }).catch(() => {}); } 
-      else { navigator.clipboard.writeText(window.location.href); alert(translations[currentLang].copied); }
-    }
-
-    function addComment() {
-      const input = document.getElementById('comment-text-input');
-      const emptyMsg = document.getElementById('empty-comment-msg');
-      const commentText = input.value.trim();
-      if (commentText === "") { alert(translations[currentLang].alertComment); return; }
-      if (emptyMsg) emptyMsg.style.display = 'none';
-      const commentItem = document.createElement('div');
-      commentItem.className = 'comment-item';
-      commentItem.style.marginBottom = '12px';
-      const formattedText = commentText.replace(/\n/g, '<br>');
-      commentItem.innerHTML = `<div class="comment-user">${translations[currentLang].commentUser}</div><div class="comment-text">${formattedText}</div>`;
-      commentsBox.insertBefore(commentItem, commentsBox.firstChild);
-      savedComments.unshift(formattedText);
-      localStorage.setItem(COMMENT_KEY, JSON.stringify(savedComments));
-      input.value = ""; 
-    }
-
-    applyLanguage(currentLang);
-  </script>
+<header>
+  <img class="logo" src="icon.png" alt="Alislamiah" onerror="this.style.display='none'">
+  <div class="brand">Alislamiah<span>-Tube</span></div>
+</header>
+<main>
+  <div class="player-shell">
+    <video id="main-player" controls playsinline preload="metadata">
+      <source id="video-source" src="" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <div class="no-video" id="no-video" hidden><b id="no-video-title">لم يتم تحديد فيديو</b><span id="no-video-text">افتح صفحة المشاهدة مع رابط فيديو مباشر.</span></div>
+  </div>
+  <h1 id="video-display-title">فيديو من Alislamiah-Tube</h1>
+  <div class="meta"><span class="pill" id="views-label">◉ 0 مشاهدة</span><span class="pill" id="published-label">Alislamiah-Tube</span></div>
+  <div class="actions-bar" id="actions-bar">
+    <button class="action-btn" id="like-btn" type="button" onclick="toggleLike()">♡ <span id="like-label">إعجاب</span> <span id="like-count">0</span></button>
+    <button class="action-btn" id="share-btn" type="button" onclick="shareVideo()">↗ <span id="share-label">مشاركة</span></button>
+    <button class="action-btn ai-summarize-btn" id="ai-summarize-btn" type="button" onclick="summarizeVideo()"><span class="ai-star">✦</span><span id="summarize-label">Summarize</span></button>
+  </div>
+  <div class="description" id="video-description">شاهد الفيديو على Alislamiah-Tube.</div>
+  <h2 class="section-title" id="comments-title">التعليقات</h2>
+  <form class="comment-form" id="comment-form">
+    <input id="comment-input" maxlength="1000" autocomplete="off" placeholder="أضف تعليقًا..." aria-label="Comment">
+    <button type="submit" id="comment-submit">إرسال</button>
+  </form>
+  <div id="comments-box"></div>
+</main>
+<nav class="bottom-nav">
+  <a href="index.html"><b>⌂</b><span id="nav-home">الرئيسية</span></a>
+  <a href="search.html"><b>⌕</b><span id="nav-search">بحث</span></a>
+  <a href="Settings.html"><b>⚙</b><span id="nav-settings">الإعدادات</span></a>
+</nav>
+<div class="toast" id="toast"></div>
+<script>
+const params=new URLSearchParams(location.search);
+const videoParam=params.get("v")||params.get("video")||"";
+const titleParam=params.get("title")||"";
+const descParam=params.get("description")||"";
+const videoKey=videoParam||location.pathname+location.search;
+const storagePrefix="alislamiah_tube_video_"+btoa(unescape(encodeURIComponent(videoKey))).replace(/[^a-zA-Z0-9]/g,"").slice(0,80);
+const player=document.getElementById("main-player");
+const source=document.getElementById("video-source");
+const titleEl=document.getElementById("video-display-title");
+const translations={
+ ar:{views:"مشاهدة",like:"إعجاب",liked:"تم الإعجاب",share:"مشاركة",summarize:"الملخص",comments:"التعليقات",placeholder:"أضف تعليقًا...",send:"إرسال",home:"الرئيسية",search:"بحث",settings:"الإعدادات",noTitle:"لم يتم تحديد فيديو",noText:"افتح صفحة المشاهدة مع رابط فيديو مباشر.",defaultTitle:"فيديو من Alislamiah-Tube",description:"شاهد الفيديو على Alislamiah-Tube.",commentEmpty:"اكتب تعليقًا أولاً.",shareDone:"تم نسخ رابط الفيديو.",shareFail:"فشل النسخ. انسخ الرابط من شريط العنوان.",summaryLang:"لغة الملخص",needVideo:"لم يتم العثور على رابط فيديو مباشر. سيتم إرسال رابط الصفحة إلى Gemalot."},
+ en:{views:"views",like:"Like",liked:"Liked",share:"Share",summarize:"Summarize",comments:"Comments",placeholder:"Add a comment...",send:"Post",home:"Home",search:"Search",settings:"Settings",noTitle:"No video selected",noText:"Open this page with a direct MP4 or WebM video URL.",defaultTitle:"Video on Alislamiah-Tube",description:"Watch this video on Alislamiah-Tube.",commentEmpty:"Write a comment first.",shareDone:"Video link copied.",shareFail:"Copy failed. Copy the URL from the address bar.",summaryLang:"Summary language",needVideo:"No direct video URL was detected. The page URL will be sent to Gemalot."},
+ fr:{views:"vues",like:"J’aime",liked:"Aimé",share:"Partager",summarize:"Résumer",comments:"Commentaires",placeholder:"Ajouter un commentaire…",send:"Publier",home:"Accueil",search:"Recherche",settings:"Paramètres",noTitle:"Aucune vidéo sélectionnée",noText:"Ouvrez cette page avec un lien vidéo direct MP4 ou WebM.",defaultTitle:"Vidéo sur Alislamiah-Tube",description:"Regardez cette vidéo sur Alislamiah-Tube.",commentEmpty:"Écrivez d’abord un commentaire.",shareDone:"Lien vidéo copié.",shareFail:"Copie impossible. Copiez l’adresse depuis la barre d’adresse.",summaryLang:"Langue du résumé",needVideo:"Aucun lien vidéo direct détecté. Le lien de la page sera envoyé à Gemalot."}
+};
+let lang=localStorage.getItem("app_lang")||"ar";
+if(!["ar","en","fr"].includes(lang))lang="ar";
+function tr(){return translations[lang]||translations.ar;}
+function applyLanguage(){
+ const t=tr();document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.getElementById("like-label").textContent=t.like;
+ document.getElementById("share-label").textContent=t.share;
+ document.getElementById("summarize-label").textContent=t.summarize;
+ document.getElementById("comments-title").textContent=t.comments;
+ document.getElementById("comment-input").placeholder=t.placeholder;
+ document.getElementById("comment-submit").textContent=t.send;
+ document.getElementById("nav-home").textContent=t.home;
+ document.getElementById("nav-search").textContent=t.search;
+ document.getElementById("nav-settings").textContent=t.settings;
+ if(!titleParam)titleEl.textContent=t.defaultTitle;
+ if(!descParam)document.getElementById("video-description").textContent=t.description;
+ document.title=(titleParam||t.defaultTitle)+" | Alislamiah-Tube";
+ renderLike();renderViews();
+}
+function showToast(message){const el=document.getElementById("toast");el.textContent=message;el.style.display="block";clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>el.style.display="none",2600);}
+function getNumber(key){return Number(localStorage.getItem(key)||0)||0;}
+function renderViews(){document.getElementById("views-label").textContent="◉ "+getNumber(storagePrefix+"_views")+" "+tr().views;}
+function renderLike(){const liked=localStorage.getItem(storagePrefix+"_liked")==="1";document.getElementById("like-btn").classList.toggle("liked",liked);document.getElementById("like-btn").firstChild.textContent=liked?"♥ ":"♡ ";document.getElementById("like-label").textContent=liked?tr().liked:tr().like;document.getElementById("like-count").textContent=getNumber(storagePrefix+"_likes");}
+function toggleLike(){let likes=getNumber(storagePrefix+"_likes");if(localStorage.getItem(storagePrefix+"_liked")==="1"){localStorage.removeItem(storagePrefix+"_liked");likes=Math.max(0,likes-1);}else{localStorage.setItem(storagePrefix+"_liked","1");likes++;}localStorage.setItem(storagePrefix+"_likes",String(likes));renderLike();}
+async function shareVideo(){try{if(navigator.share){await navigator.share({title:titleEl.textContent,url:location.href});return;}await navigator.clipboard.writeText(location.href);showToast(tr().shareDone);}catch(e){showToast(tr().shareFail);}}
+function summarizeVideo(){
+ const outputLang=lang==="ar"?"ar":lang==="fr"?"fr":"en";
+ const title=titleEl.textContent.trim();
+ const actualSource=source.src||videoParam||"";
+ const videoUrl=actualSource||location.href;
+ const url=new URL("sumarize.html", location.href);
+ url.searchParams.set("summarize","1");
+ url.searchParams.set("title",title);
+ url.searchParams.set("videoUrl",videoUrl);
+ url.searchParams.set("outputLang",outputLang);
+ location.href = url.href;
+}
+function getComments(){try{return JSON.parse(localStorage.getItem(storagePrefix+"_comments")||"[]");}catch{return[];}}
+function renderComments(){
+ const box=document.getElementById("comments-box");box.innerHTML="";
+ const comments=getComments();
+ if(!comments.length){const empty=document.createElement("div");empty.className="comment";empty.style.color="var(--muted)";empty.textContent=lang==="ar"?"لا توجد تعليقات بعد.":lang==="fr"?"Aucun commentaire pour le moment.":"No comments yet.";box.appendChild(empty);return;}
+ comments.slice().reverse().forEach(c=>{const el=document.createElement("div");el.className="comment";const date=document.createElement("small");date.textContent=new Date(c.time).toLocaleString(lang==="ar"?"ar-DZ":lang==="fr"?"fr-FR":"en-US");const body=document.createElement("div");body.textContent=c.text;el.append(date,body);box.appendChild(el);});
+}
+document.getElementById("comment-form").addEventListener("submit",e=>{e.preventDefault();const input=document.getElementById("comment-input");const text=input.value.trim();if(!text){showToast(tr().commentEmpty);return;}const comments=getComments();comments.push({text,time:Date.now()});localStorage.setItem(storagePrefix+"_comments",JSON.stringify(comments.slice(-200)));input.value="";renderComments();});
+titleEl.textContent=titleParam||tr().defaultTitle;
+if(descParam)document.getElementById("video-description").textContent=descParam;
+if(videoParam){
+ try{source.src=new URL(videoParam,location.href).href;player.load();document.getElementById("no-video").hidden=true;player.style.display="block";}
+ catch{player.style.display="none";document.getElementById("no-video").hidden=false;}
+}else{
+ player.style.display="none";document.getElementById("no-video").hidden=false;
+ document.getElementById("no-video-title").textContent=tr().noTitle;
+ document.getElementById("no-video-text").textContent=tr().noText;
+}
+if(!sessionStorage.getItem(storagePrefix+"_counted")){localStorage.setItem(storagePrefix+"_views",String(getNumber(storagePrefix+"_views")+1));sessionStorage.setItem(storagePrefix+"_counted","1");}
+applyLanguage();renderComments();
+</script>
 </body>
 </html>
