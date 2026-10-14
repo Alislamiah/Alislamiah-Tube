@@ -193,17 +193,17 @@ async function safeFetch(url) {
 
 async function searchWikipediaLang(q, lang) {
   try {
-    let res = await safeFetch(`https://\( {lang}.wikipedia.org/api/rest_v1/page/summary/ \){encodeURIComponent(q)}`);
+    let res = await safeFetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
     if (res) {
       const d = await res.json();
       if (d.extract && d.extract.length > 40) return { text: d.extract, source: `Wikipedia · ${lang.toUpperCase()}` };
     }
-    res = await safeFetch(`https://\( {lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch= \){encodeURIComponent(q)}&format=json&origin=*`);
+    res = await safeFetch(`https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`);
     if (res) {
       const d = await res.json();
       const first = d.query?.search?.[0]?.title;
       if (first) {
-        res = await safeFetch(`https://\( {lang}.wikipedia.org/api/rest_v1/page/summary/ \){encodeURIComponent(first)}`);
+        res = await safeFetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(first)}`);
         if (res) {
           const dd = await res.json();
           if (dd.extract) return { text: dd.extract, source: `Wikipedia · ${lang.toUpperCase()}` };
@@ -255,7 +255,7 @@ async function processMessage(text) {
   if (lower.startsWith("صورة:") || lower.startsWith("image:")) {
     const p = text.replace(/^(صورة:|image:)/i, "").trim();
     const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", detailed, high quality")}?width=1024&height=1024&nologo=true`;
-    appendMessage("", "ai", true, "Image generation", `<div>\( {escapeHtml(p)}</div><img alt="Generated image" src=" \){url}">`);
+    appendMessage("", "ai", true, "Image generation", `<div>${escapeHtml(p)}</div><img alt="Generated image" src="${url}">`);
     return;
   }
 
@@ -272,7 +272,7 @@ async function processMessage(text) {
       recorder.ondataavailable = e => chunks.push(e.data);
       recorder.onstop = () => {
         const url = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
-        appendMessage("", "ai", true, "Canvas video", `<div>\( {escapeHtml(p)}</div><video controls src=" \){url}"></video>`);
+        appendMessage("", "ai", true, "Canvas video", `<div>${escapeHtml(p)}</div><video controls src="${url}"></video>`);
       };
       recorder.start();
       function draw() {
@@ -343,7 +343,6 @@ updateSendIcon();
 function generateSmartVideoSummary(title, videoUrl, lang) {
   const t = (title || "").toLowerCase();
 
-  // ========== ملخصات دقيقة لكل فيديوهات الصفحة الرئيسية ==========
   const knowledge = [
     {
       keys: ["مريم", "maryam", "آيات من سورة مريم"],
@@ -409,7 +408,7 @@ A beautiful recitation from **Surah Ibrahim**.
 • The parable of the good and bad word
 • Ibrahim’s supplication for his descendants
 
-🔗 Link: ${videoUrl}🔗 Link: ${videoUrl}`,
+🔗 Link: ${videoUrl}`,
       fr: `📖 **Résumé : Sourate Ibrahim**
 
 Récitation de la **sourate Ibrahim**.
@@ -508,14 +507,12 @@ Exemples et exercices inclus.
     }
   ];
 
-  // البحث عن تطابق
   for (const item of knowledge) {
     if (item.keys.some(k => t.includes(k.toLowerCase()) || title.includes(k))) {
       return item[lang] || item.ar || item.en;
     }
   }
 
-  // ملخص عام ذكي
   if (lang === "ar" || lang === "auto") {
     return `📖 **ملخص الفيديو: ${title}**
 
@@ -542,7 +539,6 @@ Cette vidéo propose un contenu éducatif ou religieux de qualité provenant de 
 🔗 Lien original : ${videoUrl}`;
   }
 
-  // الإنجليزية وغيرها
   return `📖 **Video Summary: ${title}**
 
 This video provides valuable educational or religious content from the **Alislamiah-Tube** platform.
@@ -552,7 +548,6 @@ This video provides valuable educational or religious content from the **Alislam
 If you need a more detailed summary, tell me the main topic or surah name.`;
 }
 
-// تشغيل التلخيص التلقائي عند القدوم من صفحة المشاهدة
 (function loadVideoSummaryRequest() {
   const params = new URLSearchParams(location.search);
   if (params.get("summarize") !== "1") return;
