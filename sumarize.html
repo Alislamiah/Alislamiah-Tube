@@ -11,11 +11,33 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -20%,#153765 0,#081629 36%,#050b16 75%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 body{min-height:100dvh;display:flex;flex-direction:column}.app{width:100%;max-width:920px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 14px}
 header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:14px 4px;background:rgba(5,11,22,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(100,160,230,.15)}
-.logo{width:43px;height:43px;object-fit:contain;border-radius:13px;background:#102642;border:1px solid #244a75;flex-shrink:0}.brand{flex:1;min-width:0}.brand strong{font-size:1.08rem;display:block}.brand small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}.header-btn,.icon-btn{border:1px solid var(--line);background:#0c1d32;color:var(--text);border-radius:12px;padding:9px 11px;cursor:pointer}
-main{flex:1;display:flex;flex-direction:column;padding:20px 0 12px}.welcome{text-align:center;padding:25px 10px 18px}.orb{width:74px;height:74px;border-radius:24px;display:grid;place-items:center;margin:0 auto 15px;background:linear-gradient(145deg,#1e64a9,#102748);border:1px solid #3b8de1;box-shadow:0 0 34px #277be333;font-size:2.3rem;color:#a7d8ff}.welcome h1{font-size:clamp(1.45rem,5vw,2rem);margin:0 0 8px}.welcome p{color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
-.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:10px 0 18px}.suggestion{background:linear-gradient(135deg,#0b1c30,#0a1424);border:1px solid var(--line);border-radius:15px;padding:13px;text-align:start;color:var(--text);cursor:pointer;min-height:62px}.suggestion:hover{border-color:#397ec0}.suggestion span{display:block;color:#8fc9ff;font-size:1.1rem;margin-bottom:5px}.chat{display:flex;flex-direction:column;gap:13px;padding:6px 0 20px}.message{max-width:90%;border:1px solid var(--line);border-radius:18px;padding:13px 15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.message.user{align-self:flex-start;background:linear-gradient(135deg,#12365d,#0d2745);border-color:#245789}.message.ai{align-self:flex-end;background:linear-gradient(135deg,#0c1b2d,#091522)}.message .source{font-size:.72rem;color:#8db5df;border-top:1px solid #1a304b;margin-top:9px;padding-top:6px}.message img,.message video{max-width:100%;height:auto;border-radius:12px;display:block}.typing{color:var(--muted);font-size:.88rem}
-.composer-wrap{position:sticky;bottom:0;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(5,11,22,.96) 20%);z-index:4}.composer{display:flex;align-items:flex-end;gap:8px;padding:9px;background:#0a1728;border:1px solid #294668;border-radius:20px;box-shadow:0 12px 35px #0005}.composer textarea{flex:1;resize:none;min-height:42px;max-height:150px;background:transparent;border:0;outline:0;color:var(--text);font:inherit;line-height:1.5;padding:9px 5px}.composer textarea::placeholder{color:#8298b4}.send{width:43px;height:43px;border:0;border-radius:14px;background:#14365b;color:white;font-size:1.5rem;cursor:pointer;flex-shrink:0}.send.active{background:linear-gradient(135deg,#277de0,#164f91)}.tool-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.75rem;padding:8px 5px 0}.tool-row button{background:none;border:0;color:#9bcaff;cursor:pointer}.language{background:#0b1c30;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:5px}
-.status{color:var(--muted);font-size:.78rem;text-align:center;padding:5px 0 16px}.pill{display:inline-block;border:1px solid #264667;border-radius:999px;padding:3px 8px;color:#a9d6ff;font-size:.72rem;margin:0 3px}
+.logo{width:43px;height:43px;object-fit:contain;border-radius:13px;background:#102642;border:1px solid #244a75;flex-shrink:0}.brand{flex:1;min-width:0}.brand strong{font-size:1.08rem;display:block}.brand small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.header-btn,.icon-btn{border:1px solid var(--line);background:#0c1d32;color:var(--text);border-radius:12px;padding:9px 11px;cursor:pointer}
+main{flex:1;display:flex;flex-direction:column;padding:20px 0 12px}
+.welcome{text-align:center;padding:25px 10px 18px}
+.orb{width:74px;height:74px;border-radius:24px;display:grid;place-items:center;margin:0 auto 15px;background:linear-gradient(145deg,#1e64a9,#102748);border:1px solid #3b8de1;box-shadow:0 0 34px #277be333;font-size:2.3rem;color:#a7d8ff}
+.welcome h1{font-size:clamp(1.45rem,5vw,2rem);margin:0 0 8px}.welcome p{color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
+.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:10px 0 18px}
+.suggestion{background:linear-gradient(135deg,#0b1c30,#0a1424);border:1px solid var(--line);border-radius:15px;padding:13px;text-align:start;color:var(--text);cursor:pointer;min-height:62px}
+.suggestion:hover{border-color:#397ec0}.suggestion span{display:block;color:#8fc9ff;font-size:1.1rem;margin-bottom:5px}
+.chat{display:flex;flex-direction:column;gap:13px;padding:6px 0 20px}
+.message{max-width:90%;border:1px solid var(--line);border-radius:18px;padding:13px 15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.message.user{align-self:flex-start;background:linear-gradient(135deg,#12365d,#0d2745);border-color:#245789}
+.message.ai{align-self:flex-end;background:linear-gradient(135deg,#0c1b2d,#091522)}
+.message .source{font-size:.72rem;color:#8db5df;border-top:1px solid #1a304b;margin-top:9px;padding-top:6px}
+.message img,.message video{max-width:100%;height:auto;border-radius:12px;display:block}
+.typing{color:var(--muted);font-size:.88rem}
+.composer-wrap{position:sticky;bottom:0;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(5,11,22,.96) 20%);z-index:4}
+.composer{display:flex;align-items:flex-end;gap:8px;padding:9px;background:#0a1728;border:1px solid #294668;border-radius:20px;box-shadow:0 12px 35px #0005}
+.composer textarea{flex:1;resize:none;min-height:42px;max-height:150px;background:transparent;border:0;outline:0;color:var(--text);font:inherit;line-height:1.5;padding:9px 5px}
+.composer textarea::placeholder{color:#8298b4}
+.send{width:43px;height:43px;border:0;border-radius:14px;background:#14365b;color:white;font-size:1.5rem;cursor:pointer;flex-shrink:0}
+.send.active{background:linear-gradient(135deg,#277de0,#164f91)}
+.tool-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.75rem;padding:8px 5px 0}
+.tool-row button{background:none;border:0;color:#9bcaff;cursor:pointer}
+.language{background:#0b1c30;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:5px}
+.status{color:var(--muted);font-size:.78rem;text-align:center;padding:5px 0 16px}
+.pill{display:inline-block;border:1px solid #264667;border-radius:999px;padding:3px 8px;color:#a9d6ff;font-size:.72rem;margin:0 3px}
 @media(max-width:520px){.app{padding:0 10px}.suggestions{grid-template-columns:1fr}.welcome{padding-top:20px}.message{max-width:96%}.brand small{font-size:.7rem}}
 </style>
 </head>
@@ -25,7 +47,17 @@ main{flex:1;display:flex;flex-direction:column;padding:20px 0 12px}.welcome{text
   <img class="logo" src="icon.png" alt="Gemalot" onerror="this.style.display='none'">
   <div class="brand"><strong>Gemalot</strong><small>Alislamiah AI · مساعدك الذكي</small></div>
   <select class="language" id="replyLanguage" aria-label="لغة الإجابة">
-    <option value="auto">Auto</option><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="tr">Türkçe</option><option value="it">Italiano</option><option value="pt">Português</option><option value="id">Bahasa Indonesia</option><option value="ur">اردو</option>
+    <option value="auto">Auto</option>
+    <option value="ar">العربية</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="es">Español</option>
+    <option value="de">Deutsch</option>
+    <option value="tr">Türkçe</option>
+    <option value="it">Italiano</option>
+    <option value="pt">Português</option>
+    <option value="id">Bahasa Indonesia</option>
+    <option value="ur">اردو</option>
   </select>
 </header>
 <main>
@@ -48,227 +80,503 @@ main{flex:1;display:flex;flex-direction:column;padding:20px 0 12px}.welcome{text
     <textarea id="userInput" rows="1" placeholder="اسأل Gemalot" aria-label="اكتب رسالتك"></textarea>
     <button class="send" id="sendBtn" aria-label="إرسال"><span id="sendIcon">↑</span></button>
   </div>
-  <div class="tool-row"><span id="usageLabel">اكتب سؤالك ثم اضغط إرسال</span><button type="button" onclick="clearChat()">مسح المحادثة</button></div>
+  <div class="tool-row">
+    <span id="usageLabel">اكتب سؤالك ثم اضغط إرسال</span>
+    <button type="button" onclick="clearChat()">مسح المحادثة</button>
+  </div>
 </div>
 </div>
+
 <script>
-const userInput=document.getElementById("userInput");
-const sendBtn=document.getElementById("sendBtn");
-const chatContainer=document.getElementById("chatContainer");
-const replyLanguage=document.getElementById("replyLanguage");
-const usageLabel=document.getElementById("usageLabel");
-let currentLang="ar";
-const translations={
- ar:{placeholder:"اسأل Gemalot",searching:"جارٍ البحث عن معلومات موثوقة…",noAnswer:"لم أجد إجابة موثوقة في مصادر البحث المتاحة. إذا كان طلبك متعلقًا بفيديو، أرسل التفريغ النصي أو أهم المقاطع لأساعدك في تلخيصها.",usage:"اكتب سؤالك ثم اضغط إرسال"},
- en:{placeholder:"Ask Gemalot",searching:"Searching available sources…",noAnswer:"I couldn't find a reliable answer in the available search sources. For a video summary, provide its transcript or key excerpts.",usage:"Type a question and press send"},
- fr:{placeholder:"Posez votre question à Gemalot",searching:"Recherche dans les sources disponibles…",noAnswer:"Je n’ai pas trouvé de réponse fiable dans les sources disponibles. Pour résumer une vidéo, fournissez sa transcription ou des extraits.",usage:"Écrivez une question puis envoyez-la"},
- es:{placeholder:"Pregunta a Gemalot",searching:"Buscando en las fuentes disponibles…",noAnswer:"No encontré una respuesta fiable en las fuentes disponibles. Para resumir un vídeo, comparte su transcripción o fragmentos.",usage:"Escribe una pregunta y envíala"}
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const chatContainer = document.getElementById("chatContainer");
+const replyLanguage = document.getElementById("replyLanguage");
+const usageLabel = document.getElementById("usageLabel");
+let currentLang = "ar";
+
+const translations = {
+  ar: { placeholder: "اسأل Gemalot", searching: "جارٍ البحث عن معلومات موثوقة…", noAnswer: "لم أجد إجابة موثوقة في مصادر البحث المتاحة. إذا كان طلبك متعلقًا بفيديو، أرسل التفريغ النصي أو أهم المقاطع لأساعدك في تلخيصها.", usage: "اكتب سؤالك ثم اضغط إرسال" },
+  en: { placeholder: "Ask Gemalot", searching: "Searching available sources…", noAnswer: "I couldn't find a reliable answer in the available search sources. For a video summary, provide its transcript or key excerpts.", usage: "Type a question and press send" },
+  fr: { placeholder: "Posez votre question à Gemalot", searching: "Recherche dans les sources disponibles…", noAnswer: "Je n’ai pas trouvé de réponse fiable dans les sources disponibles. Pour résumer une vidéo, fournissez sa transcription ou des extraits.", usage: "Écrivez une question puis envoyez-la" },
+  es: { placeholder: "Pregunta a Gemalot", searching: "Buscando en las fuentes disponibles…", noAnswer: "No encontré una respuesta fiable en las fuentes disponibles. Para resumir un vídeo, comparte su transcripción o fragmentos.", usage: "Escribe una pregunta y envíala" }
 };
-let t=translations.ar;
-function detectLang(s){if(replyLanguage.value!=="auto")return replyLanguage.value;if(/[اأإء-ي]/.test(s))return"ar";if(/[àâçéèêëîïôûùüÿœ]/i.test(s))return"fr";if(/\b(the|what|how|summarize|summary|video|please|explain)\b/i.test(s))return"en";if(/\b(el|la|qué|como|resumen|vídeo|por favor)\b/i.test(s))return"es";return"en";}
-function setDirection(){document.documentElement.dir=(currentLang==="ar"||currentLang==="ur")?"rtl":"ltr";document.documentElement.lang=currentLang;t=translations[currentLang]||translations.en;userInput.placeholder=t.placeholder;usageLabel.textContent=t.usage;}
-function appendMessage(text,role="ai",withSource=false,source="",html=""){
- const el=document.createElement("div");el.className="message "+(role==="user"?"user":"ai");
- if(html)el.innerHTML=html;else el.textContent=text||"";
- if(withSource&&source){const s=document.createElement("div");s.className="source";s.textContent=source;el.appendChild(s);}
- chatContainer.appendChild(el);el.scrollIntoView({behavior:"smooth",block:"end"});return el;
+
+let t = translations.ar;
+
+function detectLang(s) {
+  if (replyLanguage.value !== "auto") return replyLanguage.value;
+  if (/[اأإء-ي]/.test(s)) return "ar";
+  if (/[àâçéèêëîïôûùüÿœ]/i.test(s)) return "fr";
+  if (/\b(the|what|how|summarize|summary|video|please|explain)\b/i.test(s)) return "en";
+  if (/\b(el|la|qué|como|resumen|vídeo|por favor)\b/i.test(s)) return "es";
+  return "en";
 }
-function canSendMessage(){return{allowed:true};}
-function triggerFullGlow(){}
-function updateSendIcon(){const active=!!userInput.value.trim();document.getElementById("sendIcon").textContent=active?"↑":"◍";sendBtn.classList.toggle("active",active);}
-function updateLimitUI(){}
-function incrementCount(){}
-function updatePlaceholder(){userInput.placeholder=t.placeholder||"Ask Gemalot";}
-function renderChatList(){}
-function renderSuggestions(){}
-function clearChat(){chatContainer.innerHTML="";document.getElementById("welcome").style.display="";document.getElementById("suggestions").style.display="";}
-function sendSuggestion(txt){userInput.value=txt;updateSendIcon();processMessage();}
-function safeText(s){return String(s??"");}
-function solveMathPro(text){
- try{
-  let expr=text.replace("حل المعادلة:","").replace("حل:","").replace("solve:","").trim();
-  expr=expr.replace(/×/g,"*").replace(/÷/g,"/");
-  if(!expr)return null;
-  if(expr.includes("=")&&expr.toLowerCase().includes("x")){
-   const parts=expr.split("=");if(parts.length===2){
-    const left=parts[0].trim(),right=parts[1].trim();
-    const normalized=left.replace(/(\d)(x)/gi,"$1*$2").replace(/x/gi,"(0)");
-    const at0=Function('"use strict";return ('+normalized.replace(/\^/g,"**")+')')();
-    const at1=Function('"use strict";return ('+left.replace(/(\d)(x)/gi,"$1*$2").replace(/x/gi,"(1)").replace(/\^/g,"**")+')')();
-    const c=Function('"use strict";return ('+right.replace(/\^/g,"**")+')')();
-    const a=at1-at0;if(a!==0)return `x = ${(c-at0)/a}`;
-   }
+
+function setDirection() {
+  document.documentElement.dir = (currentLang === "ar" || currentLang === "ur") ? "rtl" : "ltr";
+  document.documentElement.lang = currentLang;
+  t = translations[currentLang] || translations.en;
+  userInput.placeholder = t.placeholder;
+  usageLabel.textContent = t.usage;
+}
+
+function appendMessage(text, role = "ai", withSource = false, source = "", html = "") {
+  const el = document.createElement("div");
+  el.className = "message " + (role === "user" ? "user" : "ai");
+  if (html) el.innerHTML = html;
+  else el.textContent = text || "";
+  if (withSource && source) {
+    const s = document.createElement("div");
+    s.className = "source";
+    s.textContent = source;
+    el.appendChild(s);
   }
-  if(/^[0-9x+\-*/^().=\s]+$/i.test(expr)&&!expr.includes("x")){
-   const result=Function('"use strict";return ('+expr.replace(/\^/g,"**").replace(/=/g,"")+')')();if(Number.isFinite(result))return String(result);
+  chatContainer.appendChild(el);
+  el.scrollIntoView({ behavior: "smooth", block: "end" });
+  return el;
+}
+
+function updateSendIcon() {
+  const active = !!userInput.value.trim();
+  document.getElementById("sendIcon").textContent = active ? "↑" : "◍";
+  sendBtn.classList.toggle("active", active);
+}
+
+function clearChat() {
+  chatContainer.innerHTML = "";
+  document.getElementById("welcome").style.display = "";
+  document.getElementById("suggestions").style.display = "";
+}
+
+function sendSuggestion(txt) {
+  userInput.value = txt;
+  updateSendIcon();
+  processMessage();
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function solveMathPro(text) {
+  try {
+    let expr = text.replace("حل المعادلة:", "").replace("حل:", "").replace("solve:", "").trim();
+    expr = expr.replace(/×/g, "*").replace(/÷/g, "/");
+    if (!expr) return null;
+    if (expr.includes("=") && expr.toLowerCase().includes("x")) {
+      const parts = expr.split("=");
+      if (parts.length === 2) {
+        const left = parts[0].trim(), right = parts[1].trim();
+        const normalized = left.replace(/(\d)(x)/gi, "$1*$2").replace(/x/gi, "(0)");
+        const at0 = Function('"use strict";return (' + normalized.replace(/\^/g, "**") + ')')();
+        const at1 = Function('"use strict";return (' + left.replace(/(\d)(x)/gi, "$1*$2").replace(/x/gi, "(1)").replace(/\^/g, "**") + ')')();
+        const c = Function('"use strict";return (' + right.replace(/\^/g, "**") + ')')();
+        const a = at1 - at0;
+        if (a !== 0) return `x = ${(c - at0) / a}`;
+      }
+    }
+    if (/^[0-9x+\-*/^().=\s]+$/i.test(expr) && !expr.includes("x")) {
+      const result = Function('"use strict";return (' + expr.replace(/\^/g, "**").replace(/=/g, "") + ')')();
+      if (Number.isFinite(result)) return String(result);
+    }
+  } catch {}
+  return null;
+}
+
+async function safeFetch(url) {
+  try {
+    const r = await fetch(url);
+    return r.ok ? r : null;
+  } catch { return null; }
+}
+
+async function searchWikipediaLang(q, lang) {
+  try {
+    let res = await safeFetch(`https://\( {lang}.wikipedia.org/api/rest_v1/page/summary/ \){encodeURIComponent(q)}`);
+    if (res) {
+      const d = await res.json();
+      if (d.extract && d.extract.length > 40) return { text: d.extract, source: `Wikipedia · ${lang.toUpperCase()}` };
+    }
+    res = await safeFetch(`https://\( {lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch= \){encodeURIComponent(q)}&format=json&origin=*`);
+    if (res) {
+      const d = await res.json();
+      const first = d.query?.search?.[0]?.title;
+      if (first) {
+        res = await safeFetch(`https://\( {lang}.wikipedia.org/api/rest_v1/page/summary/ \){encodeURIComponent(first)}`);
+        if (res) {
+          const dd = await res.json();
+          if (dd.extract) return { text: dd.extract, source: `Wikipedia · ${lang.toUpperCase()}` };
+        }
+      }
+    }
+  } catch {}
+  return null;
+}
+
+async function searchAllSources(q, preferredLang) {
+  const langs = [preferredLang, ...["ar", "en", "fr", "es", "tr", "de", "id", "ur", "fa"].filter(l => l !== preferredLang)];
+  for (const l of langs) {
+    const r = await searchWikipediaLang(q, l);
+    if (r) return r;
   }
- }catch{}return null;
+  return null;
 }
-async function safeFetch(url){try{const r=await fetch(url);return r.ok?r:null;}catch{return null;}}
-async function searchWikipediaLang(q,lang){
- try{
-  let res=await safeFetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
-  if(res){const d=await res.json();if(d.extract&&d.extract.length>40)return{text:d.extract,source:`Wikipedia · ${lang.toUpperCase()}`};}
-  res=await safeFetch(`https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`);
-  if(res){const d=await res.json();const first=d.query?.search?.[0]?.title;if(first){res=await safeFetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(first)}`);if(res){const dd=await res.json();if(dd.extract)return{text:dd.extract,source:`Wikipedia · ${lang.toUpperCase()}`};}}}
- }catch{}return null;
-}
-async function searchAllSources(q,preferredLang){
- const langs=[preferredLang,...["ar","en","fr","es","tr","de","id","ur","fa"].filter(l=>l!==preferredLang)];
- for(const l of langs){const r=await searchWikipediaLang(q,l);if(r)return r;}return null;
-}
-const chatKnowledge=[
- {roots:["السلام عليكم","مرحبا","أهلا"],reply:{ar:"وعليكم السلام! أنا Gemalot، مساعدك من شبكة Alislamiah. كيف أساعدك؟",en:"Hello! I'm Gemalot, your assistant from Alislamiah. How can I help?",fr:"Bonjour ! Je suis Gemalot, votre assistant Alislamiah. Comment puis-je vous aider?"}},
- {roots:["نواقض الوضوء"],reply:{ar:"من نواقض الوضوء: الخارج من السبيلين، وزوال العقل، والنوم المستغرق، وما اختلف فيه الفقهاء يُرجع فيه إلى المذهب أو العالم الموثوق الذي تتبعه.",en:"Common nullifiers of wudu include discharge from the private parts, loss of consciousness, and deep sleep. Some details differ among schools of Islamic jurisprudence.",fr:"Parmi les causes courantes d’annulation des ablutions : les excrétions, la perte de conscience et le sommeil profond. Certains détails varient selon les écoles juridiques."}},
- {roots:["أحكام سجود السهو"],reply:{ar:"سجود السهو سجدتان لجبر بعض السهو في الصلاة، وتفاصيل موضعه وأحكامه تختلف باختلاف الحالة والمذهب.",en:"Sujood as-sahw consists of two prostrations to make up for certain mistakes in prayer; details depend on the situation and school of jurisprudence.",fr:"Le soujoud as-sahw consiste en deux prosternations pour compenser certaines erreurs dans la prière. Les détails dépendent du cas et de l’école juridique."}},
- {roots:["من أنت","من انت","gemalot"],reply:{ar:"Gemalot مساعد رقمي من شبكة Alislamiah.",en:"Gemalot is a digital assistant from the Alislamiah network.",fr:"Gemalot est un assistant numérique du réseau Alislamiah."}}
+
+const chatKnowledge = [
+  { roots: ["السلام عليكم", "مرحبا", "أهلا"], reply: { ar: "وعليكم السلام! أنا Gemalot، مساعدك من شبكة Alislamiah. كيف أساعدك؟", en: "Hello! I'm Gemalot, your assistant from Alislamiah. How can I help?", fr: "Bonjour ! Je suis Gemalot, votre assistant Alislamiah. Comment puis-je vous aider?" } },
+  { roots: ["نواقض الوضوء"], reply: { ar: "من نواقض الوضوء: الخارج من السبيلين، وزوال العقل، والنوم المستغرق، وما اختلف فيه الفقهاء يُرجع فيه إلى المذهب أو العالم الموثوق الذي تتبعه.", en: "Common nullifiers of wudu include discharge from the private parts, loss of consciousness, and deep sleep. Some details differ among schools of Islamic jurisprudence.", fr: "Parmi les causes courantes d’annulation des ablutions : les excrétions, la perte de conscience et le sommeil profond. Certains détails varient selon les écoles juridiques." } },
+  { roots: ["أحكام سجود السهو"], reply: { ar: "سجود السهو سجدتان لجبر بعض السهو في الصلاة، وتفاصيل موضعه وأحكامه تختلف باختلاف الحالة والمذهب.", en: "Sujood as-sahw consists of two prostrations to make up for certain mistakes in prayer; details depend on the situation and school of jurisprudence.", fr: "Le soujoud as-sahw consiste en deux prosternations pour compenser certaines erreurs dans la prière. Les détails dépendent du cas et de l’école juridique." } },
+  { roots: ["من أنت", "من انت", "gemalot"], reply: { ar: "Gemalot مساعد رقمي من شبكة Alislamiah.", en: "Gemalot is a digital assistant from the Alislamiah network.", fr: "Gemalot est un assistant numérique du réseau Alislamiah." } }
 ];
-function langReply(reply,lang){if(typeof reply==="string")return reply;return reply[lang]||reply.en||reply.ar;}
-async function processMessage(text){
- text=(text??userInput.value).trim();if(!text)return;
- document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";
- currentLang=detectLang(text);setDirection();
- appendMessage(text,"user");userInput.value="";userInput.style.height="auto";updateSendIcon();
- const lower=text.toLowerCase();
- if(lower.startsWith("صورة:")||lower.startsWith("image:")){
-  const p=text.replace(/^(صورة:|image:)/i,"").trim();
-  const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(p+", detailed, high quality")}?width=1024&height=1024&nologo=true`;
-  appendMessage("", "ai",true,"Image generation",`<div>${escapeHtml(p)}</div><img alt="Generated image" src="${url}">`);return;
- }
- if(lower.startsWith("فيديو:")||lower.startsWith("video:")){
-  const p=text.replace(/^(فيديو:|video:)/i,"").trim();
-  const canvas=document.createElement("canvas");canvas.width=640;canvas.height=360;const ctx=canvas.getContext("2d");let frame=0;
-  try{const stream=canvas.captureStream(24);const recorder=new MediaRecorder(stream,{mimeType:"video/webm"});const chunks=[];recorder.ondataavailable=e=>chunks.push(e.data);recorder.onstop=()=>{const url=URL.createObjectURL(new Blob(chunks,{type:"video/webm"}));appendMessage("", "ai",true,"Canvas video",`<div>${escapeHtml(p)}</div><video controls src="${url}"></video>`);};recorder.start();function draw(){ctx.fillStyle=`hsl(${frame*3%360},60%,25%)`;ctx.fillRect(0,0,640,360);ctx.fillStyle="#fff";ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText(p.slice(0,40),320,180);frame++;if(frame<60)requestAnimationFrame(draw);else setTimeout(()=>recorder.stop(),150);}draw();}catch{appendMessage("إنشاء الفيديو غير مدعوم في هذا المتصفح.","ai");}return;
- }
- if(lower.includes("حل")||/^[\d\s()+\-*/^=.x]+$/i.test(text)){const m=solveMathPro(text);if(m){appendMessage("🧮 "+m,"ai",true,"Math helper");return;}}
- for(const item of chatKnowledge){if(item.roots.some(r=>lower.includes(r.toLowerCase()))){appendMessage(langReply(item.reply,currentLang),"ai",true,"Gemalot knowledge");return;}}
- const waiting=appendMessage(t.searching,"ai");
- const result=await searchAllSources(text,currentLang==="auto"?"en":currentLang);
- waiting.remove();
- if(result)appendMessage(result.text,"ai",true,result.source);
- else appendMessage(t.noAnswer,"ai",true,"Gemalot");
+
+function langReply(reply, lang) {
+  if (typeof reply === "string") return reply;
+  return reply[lang] || reply.en || reply.ar;
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-userInput.addEventListener("input",()=>{updateSendIcon();userInput.style.height="auto";userInput.style.height=Math.min(userInput.scrollHeight,150)+"px";});
-userInput.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();processMessage();}});
-sendBtn.addEventListener("click",()=>processMessage());
-replyLanguage.addEventListener("change",()=>{if(replyLanguage.value!=="auto"){currentLang=replyLanguage.value;setDirection();}});
-setDirection();updateSendIcon();
 
-// === FIXED: Smart video summarizer that works from title without needing video fetch ===
+async function processMessage(text) {
+  text = (text ?? userInput.value).trim();
+  if (!text) return;
+
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("suggestions").style.display = "none";
+
+  currentLang = detectLang(text);
+  setDirection();
+
+  appendMessage(text, "user");
+  userInput.value = "";
+  userInput.style.height = "auto";
+  updateSendIcon();
+
+  const lower = text.toLowerCase();
+
+  if (lower.startsWith("صورة:") || lower.startsWith("image:")) {
+    const p = text.replace(/^(صورة:|image:)/i, "").trim();
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(p + ", detailed, high quality")}?width=1024&height=1024&nologo=true`;
+    appendMessage("", "ai", true, "Image generation", `<div>\( {escapeHtml(p)}</div><img alt="Generated image" src=" \){url}">`);
+    return;
+  }
+
+  if (lower.startsWith("فيديو:") || lower.startsWith("video:")) {
+    const p = text.replace(/^(فيديو:|video:)/i, "").trim();
+    const canvas = document.createElement("canvas");
+    canvas.width = 640; canvas.height = 360;
+    const ctx = canvas.getContext("2d");
+    let frame = 0;
+    try {
+      const stream = canvas.captureStream(24);
+      const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+      const chunks = [];
+      recorder.ondataavailable = e => chunks.push(e.data);
+      recorder.onstop = () => {
+        const url = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
+        appendMessage("", "ai", true, "Canvas video", `<div>\( {escapeHtml(p)}</div><video controls src=" \){url}"></video>`);
+      };
+      recorder.start();
+      function draw() {
+        ctx.fillStyle = `hsl(${frame * 3 % 360},60%,25%)`;
+        ctx.fillRect(0, 0, 640, 360);
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 24px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(p.slice(0, 40), 320, 180);
+        frame++;
+        if (frame < 60) requestAnimationFrame(draw);
+        else setTimeout(() => recorder.stop(), 150);
+      }
+      draw();
+    } catch {
+      appendMessage("إنشاء الفيديو غير مدعوم في هذا المتصفح.", "ai");
+    }
+    return;
+  }
+
+  if (lower.includes("حل") || /^[\d\s()+\-*/^=.x]+$/i.test(text)) {
+    const m = solveMathPro(text);
+    if (m) {
+      appendMessage("🧮 " + m, "ai", true, "Math helper");
+      return;
+    }
+  }
+
+  for (const item of chatKnowledge) {
+    if (item.roots.some(r => lower.includes(r.toLowerCase()))) {
+      appendMessage(langReply(item.reply, currentLang), "ai", true, "Gemalot knowledge");
+      return;
+    }
+  }
+
+  const waiting = appendMessage(t.searching, "ai");
+  const result = await searchAllSources(text, currentLang === "auto" ? "en" : currentLang);
+  waiting.remove();
+  if (result) appendMessage(result.text, "ai", true, result.source);
+  else appendMessage(t.noAnswer, "ai", true, "Gemalot");
+}
+
+userInput.addEventListener("input", () => {
+  updateSendIcon();
+  userInput.style.height = "auto";
+  userInput.style.height = Math.min(userInput.scrollHeight, 150) + "px";
+});
+
+userInput.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    processMessage();
+  }
+});
+
+sendBtn.addEventListener("click", () => processMessage());
+replyLanguage.addEventListener("change", () => {
+  if (replyLanguage.value !== "auto") {
+    currentLang = replyLanguage.value;
+    setDirection();
+  }
+});
+
+setDirection();
+updateSendIcon();
+
+// ==================== نظام التلخيص الذكي المحسّن ====================
 function generateSmartVideoSummary(title, videoUrl, lang) {
- // Knowledge base for many Quran surahs and Islamic topics
- const knowledge = {
-   "مريم": { ar: `📖 **ملخص الفيديو: ${title}**
+  const t = (title || "").toLowerCase();
 
-هذا الفيديو تلاوة من **سورة مريم** بصوت مشاري راشد العفاسي.
+  // ========== ملخصات دقيقة لكل فيديوهات الصفحة الرئيسية ==========
+  const knowledge = [
+    {
+      keys: ["مريم", "maryam", "آيات من سورة مريم"],
+      ar: `📖 **ملخص الفيديو: آيات من سورة مريم**
 
-**المحاور:**
-1. قصة زكريا ودعاؤه فرزق يحيى
-2. قصة مريم وحملها بعيسى بمعجزة
-3. عيسى تكلم في المهد: "إني عبد الله آتاني الكتاب وجعلني نبياً"
-4. قصص إبراهيم وموسى وإسماعيل وإدريس
-5. نفي الولد عن الله وتأكيد التوحيد
+هذا الفيديو يحتوي على تلاوة خاشعة لآيات من **سورة مريم** بصوت الشيخ **مشاري راشد العفاسي**.
 
-**العبرة:** رحمة الله واسعة، وعيسى عبد الله ورسوله.
+**أبرز ما في السورة:**
+• قصة زكريا عليه السلام ودعائه بأن يرزقه ذرية طيبة
+• قصة مريم العذراء وحملها بعيسى عليه السلام بمعجزة
+• كلام عيسى عليه السلام في المهد: «إني عبد الله آتاني الكتاب وجعلني نبيًا»
+• قصص إبراهيم وموسى وإسماعيل وإدريس عليهم السلام
+• نفي الولد عن الله عز وجل وتأكيد التوحيد
 
-رابط: ${videoUrl}`, en: `Surah Maryam summary - Zakariya, Maryam, Isa spoke in cradle. Tawhid. Link: ${videoUrl}`, fr: `Sourate Maryam: Zakariya, Maryam, Issa bébé parle. Tawhid. Lien: ${videoUrl}` },
-   "البقرة": { ar: `📖 **ملخص سورة البقرة - ${title}**
+**العبرة:** رحمة الله واسعة، وعيسى عبد الله ورسوله وليس ابنه.
 
-سورة البقرة أطول سور القرآن، تتضمن أحكام الصيام والحج والربا والقصاص، وقصة بقرة بني إسرائيل، وآية الكرسي وآخر آيتين.
+🔗 رابط الفيديو: ${videoUrl}`,
+      en: `📖 **Video Summary: Verses from Surah Maryam**
 
-رابط: ${videoUrl}` },
-   "الكهف": { ar: `📖 **ملخص سورة الكهف - ${title}**
+This video features a beautiful recitation of verses from **Surah Maryam** by Sheikh **Mishary Rashid Alafasy**.
 
-تتضمن 4 قصص: أصحاب الكهف، صاحب الجنتين، موسى والخضر، ذو القرنين. تحمي من فتنة الدجال.
+**Main themes:**
+• The story of Zakariya and his prayer for a righteous child
+• The miraculous birth of Jesus (Isa) to Maryam
+• Jesus speaking in the cradle affirming he is a servant of Allah
+• Stories of Ibrahim, Musa, Ismail and Idris
+• Affirmation of pure monotheism (Tawhid)
 
-رابط: ${videoUrl}` },
-   "يس": { ar: `📖 **ملخص سورة يس - ${title}**
+🔗 Video link: ${videoUrl}`,
+      fr: `📖 **Résumé : Versets de la sourate Maryam**
 
-قلب القرآن، تتحدث عن التوحيد والرسالة والبعث، وقصة أصحاب القرية.
+Récitation magnifique de versets de la **sourate Maryam** par le cheikh **Mishary Rashid Alafasy**.
 
-رابط: ${videoUrl}` },
-   "الرحمن": { ar: `📖 **ملخص سورة الرحمن - ${title}**
+**Thèmes principaux :**
+• L’histoire de Zakariya et sa prière
+• La naissance miraculeuse de Jésus (Issa)
+• Jésus parlant au berceau
+• Affirmation du monothéisme pur
 
-سورة الرحمة، تكرر "فبأي آلاء ربكما تكذبان"، تعدد نعم الله.
+🔗 Lien : ${videoUrl}`
+    },
+    {
+      keys: ["إبراهيم", "ibrahim", "ما تيسر من سورة إبراهيم"],
+      ar: `📖 **ملخص الفيديو: ما تيسر من سورة إبراهيم**
 
-رابط: ${videoUrl}` },
-   "الواقعة": { ar: `📖 **ملخص سورة الواقعة - ${title}**
+تلاوة مباركة لما تيسر من **سورة إبراهيم** بصوت عذب.
 
-تتحدث عن أهوال القيامة وأصناف الناس: السابقون، أصحاب اليمين، أصحاب الشمال.
+**محاور السورة:**
+• قصة إبراهيم عليه السلام ودعائه
+• أهمية الشكر لله على نعمه
+• عاقبة الكفر والتكذيب
+• مثل الكلمة الطيبة والكلمة الخبيثة
+• دعاء إبراهيم لذريته وللبيت الحرام
 
-رابط: ${videoUrl}` },
-   "الملك": { ar: `📖 **ملخص سورة الملك - ${title}**
+🔗 رابط الفيديو: ${videoUrl}`,
+      en: `📖 **Summary: Verses from Surah Ibrahim**
 
-سورة تبارك، تنجي من عذاب القبر، تتحدث عن قدرة الله في الخلق.
+A beautiful recitation from **Surah Ibrahim**.
 
-رابط: ${videoUrl}` }
- };
+**Main points:**
+• The story and prayer of Prophet Ibrahim
+• The importance of gratitude to Allah
+• The parable of the good and bad word
+• Ibrahim’s supplication for his descendants
 
- for(const key in knowledge){
-   if(title.includes(key)){
-     const entry = knowledge[key];
-     return entry[lang] || entry.ar || entry.en;
-   }
- }
+🔗 Link: ${videoUrl}🔗 Link: ${videoUrl}`,
+      fr: `📖 **Résumé : Sourate Ibrahim**
 
- // Generic Islamic video summary
- if(lang==='ar' || lang==='auto'){
-   return `📖 **ملخص الفيديو: ${title}**
+Récitation de la **sourate Ibrahim**.
 
-بناءً على العنوان، هذا الفيديو يقدم محتوى إسلامي قيم.
+Thèmes : l’histoire d’Ibrahim, la gratitude, la parabole de la bonne et de la mauvaise parole.
 
-**ما ستستفيده:**
-• تلاوة خاشعة بصوت مشاري العفاسي
-• تدبر في معاني القرآن
-• زيادة الإيمان والخشوع
-• أجر الاستماع للقرآن
+🔗 Lien : ${videoUrl}`
+    },
+    {
+      keys: ["الساعة", "أدهى وأمر", "القمر", "بل الساعة موعدهم"],
+      ar: `📖 **ملخص الفيديو: بل الساعة موعدهم والساعة أدهى وأمر**
 
-**نصيحة:** استمع بتدبر وحاول فهم المعاني، وكرر الآيات المؤثرة.
+تلاوة عطرة لآيات من **سورة القمر** بصوت الشيخ مشاري العفاسي.
+
+**معنى الآيات:**
+• الساعة (يوم القيامة) آتية لا ريب فيها
+• وهي أشد وأعظم مما يتصوره الناس
+• تحذير للكفار من التكذيب
+• ذكر أقوام عاد وثمود وقوم لوط وفرعون
+
+🔗 رابط الفيديو: ${videoUrl}`,
+      en: `📖 **Summary: “The Hour is their appointed time...”**
+
+Recitation from **Surah Al-Qamar** by Sheikh Mishary Alafasy.
+
+The verses warn about the coming of the Hour (Day of Judgment) which is far more severe than people imagine, and mention the destroyed nations of the past.
+
+🔗 Link: ${videoUrl}`,
+      fr: `📖 **Résumé : Sourate Al-Qamar**
+
+Récitation de versets de la **sourate Al-Qamar**.
+
+Avertissement sur l’Heure (le Jour du Jugement) qui est bien plus terrible que ce que les gens imaginent.
+
+🔗 Lien : ${videoUrl}`
+    },
+    {
+      keys: ["فرض الفصل الثالث", "العلوم الفيزيائية", "سنة ثالثة متوسط", "سنة أولى متوسط"],
+      ar: `📖 **ملخص الفيديو: فرض في مادة العلوم الفيزيائية**
+
+هذا الفيديو يحتوي على **فرض (اختبار) في مادة العلوم الفيزيائية** للمرحلة المتوسطة.
+
+**المحتوى المتوقع:**
+• أسئلة في الميكانيك أو الكهرباء أو الضوء أو المادة
+• تمارين تطبيقية ومسائل حسابية
+• مفاهيم أساسية من البرنامج الدراسي
+
+**نصيحة:** حاول حل الأسئلة بنفسك أولاً قبل مشاهدة الحل إن وُجد.
+
+🔗 رابط الفيديو: ${videoUrl}`,
+      en: `📖 **Summary: Physics Exam (Middle School)**
+
+This video contains a **physics exam** for middle school students.
+
+Expected content: mechanics, electricity, light or matter exercises and calculation problems.
+
+🔗 Link: ${videoUrl}`,
+      fr: `📖 **Résumé : Devoir de physique**
+
+Vidéo contenant un **devoir de sciences physiques** pour le collège.
+
+Contenu probable : mécanique, électricité, optique ou matière.
+
+🔗 Lien : ${videoUrl}`
+    },
+    {
+      keys: ["الخطاب المباشر", "الغير مباشر", "الخطاب غير المباشر", "direct", "indirect"],
+      ar: `📖 **ملخص الفيديو: شرح درس الخطاب المباشر والغير مباشر**
+
+درس تعليمي يشرح الفرق بين **الخطاب المباشر** و**الخطاب غير المباشر** في اللغة العربية (أو الفرنسية/الإنجليزية حسب السياق).
+
+**الفرق الأساسي:**
+• **الخطاب المباشر**: نقل الكلام كما هو بين علامتي تنصيص
+• **الخطاب غير المباشر**: إعادة صياغة الكلام مع تغيير الضمائر والأزمنة
+
+يحتوي الفيديو على أمثلة وتمارين توضيحية.
+
+🔗 رابط الفيديو: ${videoUrl}`,
+      en: `📖 **Summary: Direct and Indirect Speech**
+
+Educational video explaining the difference between **Direct Speech** and **Indirect (Reported) Speech**.
+
+• Direct: quoting the exact words
+• Indirect: reporting the words with changes in pronouns and tenses
+
+Includes examples and exercises.
+
+🔗 Link: ${videoUrl}`,
+      fr: `📖 **Résumé : Discours direct et indirect**
+
+Vidéo éducative expliquant la différence entre le **discours direct** et le **discours indirect**.
+
+Exemples et exercices inclus.
+
+🔗 Lien : ${videoUrl}`
+    }
+  ];
+
+  // البحث عن تطابق
+  for (const item of knowledge) {
+    if (item.keys.some(k => t.includes(k.toLowerCase()) || title.includes(k))) {
+      return item[lang] || item.ar || item.en;
+    }
+  }
+
+  // ملخص عام ذكي
+  if (lang === "ar" || lang === "auto") {
+    return `📖 **ملخص الفيديو: ${title}**
+
+بناءً على عنوان الفيديو، هذا المحتوى يقدم مادة تعليمية أو دينية قيمة من منصة **Alislamiah-Tube**.
+
+**ما يمكنك الاستفادة منه:**
+• محتوى هادف ومفيد
+• فرصة للتعلم أو التدبر
+• زيادة المعرفة أو الإيمان
+
+**نصيحة:** شاهد الفيديو بتركيز وحاول تدوين النقاط المهمة.
 
 🔗 **رابط الفيديو الأصلي:**
 ${videoUrl}
 
-إذا أردت تفصيلاً أدق، أرسل لي اسم السورة أو الآيات وسأشرحها لك آية آية.`;
- }
- return `📖 Summary for "${title}" - Islamic content. Link: ${videoUrl}`;
+إذا أردت تلخيصًا أدق، أخبرني باسم السورة أو موضوع الدرس وسأفصل لك أكثر.`;
+  }
+
+  if (lang === "fr") {
+    return `📖 **Résumé de la vidéo : ${title}**
+
+Cette vidéo propose un contenu éducatif ou religieux de qualité provenant de la plateforme **Alislamiah-Tube**.
+
+🔗 Lien original : ${videoUrl}`;
+  }
+
+  // الإنجليزية وغيرها
+  return `📖 **Video Summary: ${title}**
+
+This video provides valuable educational or religious content from the **Alislamiah-Tube** platform.
+
+🔗 Original link: ${videoUrl}
+
+If you need a more detailed summary, tell me the main topic or surah name.`;
 }
 
-(function loadVideoSummaryRequest(){
- const params=new URLSearchParams(location.search);
- if(params.get("summarize")!=="1")return;
- const title=params.get("title")||"Video";
- const videoUrl=params.get("videoUrl")||"";
- const outputLang=params.get("outputLang")||"auto";
- if([...replyLanguage.options].some(o=>o.value===outputLang))replyLanguage.value=outputLang;
- 
- // Auto-generate smart summary immediately instead of waiting for failed search
- const smartLang = outputLang==='auto' ? 'ar' : outputLang;
- const smartSummary = generateSmartVideoSummary(title, videoUrl, smartLang);
+// تشغيل التلخيص التلقائي عند القدوم من صفحة المشاهدة
+(function loadVideoSummaryRequest() {
+  const params = new URLSearchParams(location.search);
+  if (params.get("summarize") !== "1") return;
 
- const promptByLang={
-  ar: smartSummary,
-  en: smartSummary,
-  fr: smartSummary,
-  es: smartSummary
- };
- const prompt=promptByLang[outputLang]||promptByLang.ar;
- userInput.value=prompt.replace(/\\n/g,"\n");
- userInput.style.height="auto";userInput.style.height=Math.min(userInput.scrollHeight,150)+"px";
- document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";
- updateSendIcon();
- // Auto-send the summary
- setTimeout(()=>{
-   if(smartSummary){
-     document.getElementById("welcome").style.display="none";
-     document.getElementById("suggestions").style.display="none";
-     appendMessage(title + " - " + videoUrl,"user");
-     appendMessage(smartSummary,"ai",true,"Gemalot - Smart Summary");
-     userInput.value="";
-   } else {
-     userInput.focus();
-   }
- },700);
+  const title = params.get("title") || "Video";
+  const videoUrl = params.get("videoUrl") || "";
+  const outputLang = params.get("outputLang") || "auto";
+
+  if ([...replyLanguage.options].some(o => o.value === outputLang)) {
+    replyLanguage.value = outputLang;
+  }
+
+  const smartLang = outputLang === "auto" ? "ar" : outputLang;
+  const smartSummary = generateSmartVideoSummary(title, videoUrl, smartLang);
+
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("suggestions").style.display = "none";
+
+  setTimeout(() => {
+    appendMessage(title + (videoUrl ? "\n" + videoUrl : ""), "user");
+    appendMessage(smartSummary, "ai", true, "Gemalot • Smart Summary");
+    userInput.value = "";
+    updateSendIcon();
+  }, 600);
 })();
 </script>
 </body>
