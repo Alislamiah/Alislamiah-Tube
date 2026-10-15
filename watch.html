@@ -20,6 +20,15 @@
     .action-btn { background: #0b1a2c; color: #fff; border: 1px solid #173553; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
     .action-btn:active { background: #102640; }
     .action-btn.liked { color: #6fb7ff; border-color: #1c4b76; background: #0d2946; }
+    .ai-summarize-btn {
+      background: linear-gradient(135deg, #102d59, #164f91);
+      border: 1px solid #398dff;
+      box-shadow: 0 0 12px #398dff33;
+      min-width: 48px;
+      padding: 10px 14px;
+      font-size: 1.35rem;
+      justify-content: center;
+    }
     .comments-section { margin-top: 20px; background: #0b1a2c; padding: 20px; border-radius: 16px; border: 1px solid #173553; box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
     .comments-section h3 { font-size: 1.05rem; margin-bottom: 15px; color: #f5f9ff; }
     .comment-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
@@ -61,6 +70,10 @@
       </button>
       <button class="action-btn" onclick="shareVideo()">
         <span>🔄</span> <span id="share-text-label">مشاركة</span> (<span id="share-count">0</span>)
+      </button>
+      <!-- زر التلخيص: فقط نجمة الذكاء الاصطناعي -->
+      <button class="action-btn ai-summarize-btn" id="ai-summarize-btn" type="button" onclick="summarizeVideo()" title="تلخيص الفيديو">
+        ✦
       </button>
     </div>
 
@@ -207,6 +220,22 @@
       savedComments.unshift(formattedText);
       localStorage.setItem(COMMENT_KEY, JSON.stringify(savedComments));
       input.value = ""; 
+    }
+
+    // دالة زر التلخيص (النجمة فقط)
+    function summarizeVideo() {
+      const outputLang = localStorage.getItem("app_lang") || "ar";
+      const title = document.getElementById("video-display-title")?.textContent?.trim() || "فيديو";
+      const playerEl = document.getElementById("main-player");
+      const videoUrl = playerEl?.currentSrc || playerEl?.src || videoFile || location.href;
+
+      const url = new URL("sumarize.html", location.href);
+      url.searchParams.set("summarize", "1");
+      url.searchParams.set("title", title);
+      url.searchParams.set("videoUrl", videoUrl);
+      url.searchParams.set("outputLang", outputLang);
+
+      location.href = url.href;
     }
 
     applyLanguage(currentLang);
