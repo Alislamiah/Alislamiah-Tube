@@ -194,7 +194,7 @@
 
     <!-- ==================== البطاقات الإعلانية ==================== -->
     <!-- البطاقة 1 -->
-    <a href="https://mohamedmadoui5195.github.io/Alislamia-_net/" class="promo-card active" id="promo0" target="_blank">
+    <a href="https://mohamedmadoui5195.github.io/Alislamiah-_net/" class="promo-card active" id="promo0" target="_blank">
       <img src="Alislamiah.net.png" class="promo-media" alt="Alislamiah.net">
       <div class="promo-overlay"></div>
       <div class="promo-content">
