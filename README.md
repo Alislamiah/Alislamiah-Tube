@@ -194,7 +194,7 @@
 
     <!-- ==================== البطاقات الإعلانية ==================== -->
     <!-- البطاقة 1 -->
-    <a href="https://mohamedmadoui5195.github.io/Alislamiah-_net/" class="promo-card active" id="promo0" target="_blank">
+    <a href="https://Alislamiah.github.io/Alislamiah-_net/" class="promo-card active" id="promo0" target="_blank">
       <img src="Alislamiah.net.png" class="promo-media" alt="Alislamiah.net">
       <div class="promo-overlay"></div>
       <div class="promo-content">
@@ -206,7 +206,7 @@
     </a>
 
     <!-- البطاقة 2 -->
-    <a href="https://mohamedmadoui5195.github.io/outhub/" class="promo-card" id="promo1" target="_blank">
+    <a href="https://Alislamiah.github.io/outhub/" class="promo-card" id="promo1" target="_blank">
       <video class="promo-media" muted autoplay loop playsinline>
         <source src="outhub.mp4" type="video/mp4">
       </video>
@@ -220,7 +220,7 @@
     </a>
 
     <!-- البطاقة 3 -->
-    <a href="https://mohamedmadoui5195.github.io/Gemalot/" class="promo-card" id="promo2" target="_blank">
+    <a href="https://Alislamiah.github.io/Gemalot/" class="promo-card" id="promo2" target="_blank">
       <img src="Gemalot.png" class="promo-media" alt="Gemalot">
       <div class="promo-overlay"></div>
       <div class="promo-content">
