@@ -378,16 +378,17 @@
     <a href="search.html" class="nav-item">
       <span class="icon">🔍</span>
       <span id="nav-search">البحث</span>
-    </a>
-    <a href="Settings.html" class="nav-item">
-      <span class="icon">⚙️</span>
-      <span id="nav-settings">الإعدادات</span>
-    </a>
+</a>
     <a href="create.html" class="nav-item">
       <span class="icon">➕</span>
       <span id="nav-create">إنشاء</span>
     </a>
 
+    </a>
+    <a href="Settings.html" class="nav-item">
+      <span class="icon">⚙️</span>
+      <span id="nav-settings">الإعدادات</span>
+    
   </nav>
 
   <script>
