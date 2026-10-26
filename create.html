@@ -35,13 +35,8 @@ body{
     padding:20px;
 }
 
-button,input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
+button,input{font:inherit}
+button{cursor:pointer}
 
 .app{
     width:100%;
@@ -101,9 +96,7 @@ button{
     transition:background .25s;
 }
 
-.progress span.active{
-    background:var(--cyan);
-}
+.progress span.active{background:var(--cyan)}
 
 .card{
     background:linear-gradient(155deg,#101d31,#0a1221);
@@ -147,9 +140,7 @@ h2{
     transition:.2s;
 }
 
-.upload-zone:active{
-    border-color:var(--cyan);
-}
+.upload-zone:active{border-color:var(--cyan)}
 
 .upload-icon{
     width:67px;
@@ -211,9 +202,7 @@ h2{
     font-size:17px;
 }
 
-.hidden{
-    display:none!important;
-}
+.hidden{display:none!important}
 
 .preview-wrap{
     overflow:hidden;
@@ -264,13 +253,8 @@ input[type="text"]{
     transition:border .2s;
 }
 
-input[type="text"]:focus{
-    border-color:var(--cyan);
-}
-
-input::placeholder{
-    color:#71839c;
-}
+input[type="text"]:focus{border-color:var(--cyan)}
+input::placeholder{color:#71839c}
 
 .counter{
     text-align:left;
@@ -317,9 +301,7 @@ input::placeholder{
     transition:.2s;
 }
 
-.contact-option:active{
-    transform:scale(.985);
-}
+.contact-option:active{transform:scale(.985)}
 
 .contact-icon{
     flex-shrink:0;
@@ -342,9 +324,7 @@ input::placeholder{
     color:#ff9ad5;
 }
 
-.contact-text{
-    flex:1;
-}
+.contact-text{flex:1}
 
 .contact-text strong{
     display:block;
@@ -398,10 +378,63 @@ input::placeholder{
     h2{font-size:21px}
 }
 </style>
+
+<script type="module">
+import {
+    initializeApp,
+    getApps,
+    getApp
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB6Xn8I6pGBQjEuaFflKCxmQezpHP9D9Kk",
+    authDomain: "alislamiah-tube.firebaseapp.com",
+    projectId: "alislamiah-tube",
+    storageBucket: "alislamiah-tube.firebasestorage.app",
+    messagingSenderId: "63719640725",
+    appId: "1:63719640725:web:62b71660a6c9da8d55959c",
+    measurementId: "G-Q9B70NKKCJ"
+};
+
+try {
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            document.body.style.display = "";
+            document.documentElement.dataset.authenticated = "true";
+            return;
+        }
+
+        window.location.replace(
+            "signin.html?returnUrl=" + encodeURIComponent("create.html")
+        );
+    }, (error) => {
+        console.error("تعذر التحقق من جلسة المستخدم:", error);
+        document.body.style.display = "";
+        const notice = document.createElement("div");
+        notice.style.cssText = "max-width:560px;margin:16px auto;padding:14px;border:1px solid #793043;border-radius:12px;background:#391a24;color:#ffb8c5;font:14px/1.8 Arial,sans-serif";
+        notice.textContent = "تعذر التحقق من الجلسة. تحقق من اتصال الإنترنت وإعدادات Firebase ثم أعد تحميل الصفحة.";
+        document.body.prepend(notice);
+    });
+} catch (error) {
+    console.error("خطأ في تهيئة Firebase:", error);
+    document.body.style.display = "";
+    const notice = document.createElement("div");
+    notice.style.cssText = "max-width:560px;margin:16px auto;padding:14px;border:1px solid #793043;border-radius:12px;background:#391a24;color:#ffb8c5;font:14px/1.8 Arial,sans-serif";
+    notice.textContent = "تعذر التحقق من تسجيل الدخول. تأكد من إعدادات Firebase واتصال الإنترنت ثم أعد تحميل الصفحة.";
+    document.body.prepend(notice);
+}
+</script>
 </head>
 
 <body>
-
 <main class="app">
 
     <header class="header">
@@ -419,14 +452,9 @@ input::placeholder{
         <span id="progress3"></span>
     </div>
 
-    <!-- STEP 1: UPLOAD -->
-
     <section class="card" id="uploadStep">
-
         <div class="step-label">الخطوة 01 / 03</div>
-
         <h2>اختر الفيديو الخاص بك</h2>
-
         <p class="description">
             ارفع الفيديو الذي تريد إرساله إلى إدارة الإسلامية.
             يجب ألا تتجاوز مدة الفيديو 50 ثانية.
@@ -441,13 +469,7 @@ input::placeholder{
             </small>
         </label>
 
-        <input
-            type="file"
-            id="videoInput"
-            accept="video/*"
-            hidden
-        >
-
+        <input type="file" id="videoInput" accept="video/*" hidden>
         <div id="uploadError" class="error hidden"></div>
 
         <div class="note">
@@ -457,17 +479,11 @@ input::placeholder{
                 تأكد من اختيار الفيديو الصحيح قبل المتابعة.
             </div>
         </div>
-
     </section>
 
-    <!-- STEP 2: TITLE -->
-
     <section class="card hidden" id="titleStep">
-
         <div class="step-label">الخطوة 02 / 03</div>
-
         <h2>أضف عنوان الفيديو</h2>
-
         <p class="description">
             شاهد الفيديو، واكتب عنوانًا واضحًا يعبّر عن محتواه.
         </p>
@@ -480,42 +496,20 @@ input::placeholder{
             </div>
         </div>
 
-        <label for="videoTitle" class="field-label">
-            عنوان الفيديو
-        </label>
+        <label for="videoTitle" class="field-label">عنوان الفيديو</label>
+        <input type="text" id="videoTitle" maxlength="100"
+               placeholder="اكتب عنوان الفيديو هنا..." autocomplete="off">
 
-        <input
-            type="text"
-            id="videoTitle"
-            maxlength="100"
-            placeholder="اكتب عنوان الفيديو هنا..."
-            autocomplete="off"
-        >
+        <div class="counter"><span id="titleCount">0</span> / 100</div>
 
-        <div class="counter">
-            <span id="titleCount">0</span> / 100
-        </div>
-
-        <button class="primary-btn" id="continueBtn">
-            متابعة وإرسال الفيديو ←
-        </button>
-
-        <button class="secondary-btn" id="changeVideoBtn">
-            اختيار فيديو آخر
-        </button>
-
+        <button class="primary-btn" id="continueBtn">متابعة وإرسال الفيديو ←</button>
+        <button class="secondary-btn" id="changeVideoBtn">اختيار فيديو آخر</button>
         <div id="titleError" class="error hidden"></div>
-
     </section>
 
-    <!-- STEP 3: CONTACT ADMIN -->
-
     <section class="card hidden" id="contactStep">
-
         <div class="step-label">الخطوة 03 / 03</div>
-
         <h2 class="contact-title">بقيت خطوة واحدة!</h2>
-
         <p class="contact-description">
             تم تجهيز بيانات الفيديو. لاستكمال العملية،
             اختر وسيلة التواصل مع الإدارة وأرفق ملف الفيديو
@@ -560,10 +554,7 @@ input::placeholder{
             </div>
         </div>
 
-        <button class="secondary-btn" id="backToTitleBtn">
-            الرجوع إلى بيانات الفيديو
-        </button>
-
+        <button class="secondary-btn" id="backToTitleBtn">الرجوع إلى بيانات الفيديو</button>
     </section>
 
     <footer class="footer">
@@ -571,20 +562,16 @@ input::placeholder{
         <br>
         جميع الحقوق محفوظة لشبكة الإسلامية
     </footer>
-
 </main>
 
 <script>
 (function(){
-
 "use strict";
 
 const $ = id => document.getElementById(id);
-
 const uploadStep = $("uploadStep");
 const titleStep = $("titleStep");
 const contactStep = $("contactStep");
-
 const videoInput = $("videoInput");
 const videoPreview = $("videoPreview");
 const videoTitle = $("videoTitle");
@@ -596,37 +583,24 @@ let durationSeconds = 0;
 const MAX_DURATION = 50;
 const MAX_TITLE_LENGTH = 100;
 
-/*
- * بيانات التواصل مخفية عن واجهة المستخدم.
- * ملاحظة: لا يمكن ضمان سرية البيانات الموجودة داخل
- * JavaScript في صفحة ويب عامة.
- */
-
 const getWhatsAppURL = () => {
-    const parts = ["213", "777", "543", "015"];
-    const phone = parts.join("");
+    const phone = ["213", "777", "543", "015"].join("");
     const message =
         "السلام عليكم، أريد إرسال فيديو إلى إدارة الإسلامية.\n" +
         "عنوان الفيديو: " + videoTitle.value.trim() +
         "\nمدة الفيديو: " + durationSeconds + " ثانية." +
         "\nسأرفق ملف الفيديو في هذه المحادثة لاستكمال العملية.";
 
-    return "https://wa.me/" + phone +
-        "?text=" + encodeURIComponent(message);
+    return "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
 };
 
-const getInstagramURL = () => {
-    const parts = [
-        "https://www.instagram.com/",
-        "alislamiahbusines",
-        "/?vrfl=dnNzbHF5cnJobzZo"
-    ];
-
-    return parts.join("");
-};
+const getInstagramURL = () => [
+    "https://www.instagram.com/",
+    "alislamiahbusines",
+    "/?vrfl=dnNzbHF5cnJobzZo"
+].join("");
 
 function showStep(step){
-
     uploadStep.classList.toggle("hidden",step !== 1);
     titleStep.classList.toggle("hidden",step !== 2);
     contactStep.classList.toggle("hidden",step !== 3);
@@ -635,10 +609,7 @@ function showStep(step){
     $("progress2").classList.toggle("active",step >= 2);
     $("progress3").classList.toggle("active",step >= 3);
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function showError(id,message){
@@ -652,8 +623,7 @@ function hideError(id){
 }
 
 function formatDuration(seconds){
-    const total = Math.ceil(seconds);
-    return total + (total === 1 ? " ثانية" : " ثانية");
+    return Math.ceil(seconds) + " ثانية";
 }
 
 function releasePreview(){
@@ -668,12 +638,10 @@ function releasePreview(){
 }
 
 videoInput.addEventListener("change",function(){
-
     hideError("uploadError");
     hideError("titleError");
 
     const file = this.files && this.files[0];
-
     if(!file) return;
 
     if(!file.type.startsWith("video/")){
@@ -682,37 +650,24 @@ videoInput.addEventListener("change",function(){
         return;
     }
 
-    /*
-     * فحص المدة من بيانات الفيديو نفسها.
-     */
-
     const testURL = URL.createObjectURL(file);
     const probe = document.createElement("video");
-
     probe.preload = "metadata";
     probe.muted = true;
     probe.playsInline = true;
 
     probe.onloadedmetadata = function(){
-
         const duration = probe.duration;
-
         URL.revokeObjectURL(testURL);
 
         if(!Number.isFinite(duration) || duration <= 0){
-            showError(
-                "uploadError",
-                "تعذر قراءة مدة الفيديو. جرّب ملف فيديو آخر."
-            );
+            showError("uploadError","تعذر قراءة مدة الفيديو. جرّب ملف فيديو آخر.");
             videoInput.value = "";
             return;
         }
 
         if(duration > MAX_DURATION + 0.01){
-            showError(
-                "uploadError",
-                "الفيديو أطول من 50 ثانية. اختر فيديو لا تتجاوز مدته 50 ثانية."
-            );
+            showError("uploadError","الفيديو أطول من 50 ثانية. اختر فيديو لا تتجاوز مدته 50 ثانية.");
             videoInput.value = "";
             return;
         }
@@ -721,29 +676,19 @@ videoInput.addEventListener("change",function(){
         durationSeconds = Math.ceil(duration);
 
         releasePreview();
-
         previewURL = URL.createObjectURL(selectedFile);
         videoPreview.src = previewURL;
 
         $("fileName").textContent = selectedFile.name;
-        $("videoDuration").textContent =
-            formatDuration(durationSeconds);
-
+        $("videoDuration").textContent = formatDuration(durationSeconds);
         videoTitle.value = "";
         $("titleCount").textContent = "0";
-
         showStep(2);
     };
 
     probe.onerror = function(){
-
         URL.revokeObjectURL(testURL);
-
-        showError(
-            "uploadError",
-            "لم نتمكن من قراءة هذا الفيديو. جرّب صيغة أخرى."
-        );
-
+        showError("uploadError","لم نتمكن من قراءة هذا الفيديو. جرّب صيغة أخرى.");
         videoInput.value = "";
     };
 
@@ -755,7 +700,6 @@ videoTitle.addEventListener("input",function(){
 });
 
 $("continueBtn").addEventListener("click",function(){
-
     hideError("titleError");
 
     if(!selectedFile){
@@ -777,10 +721,7 @@ $("continueBtn").addEventListener("click",function(){
     }
 
     $("finalTitle").textContent = title;
-
-    $("finalDuration").textContent =
-        formatDuration(durationSeconds);
-
+    $("finalDuration").textContent = formatDuration(durationSeconds);
     showStep(3);
 });
 
@@ -798,31 +739,18 @@ $("backToTitleBtn").addEventListener("click",function(){
 });
 
 $("whatsappBtn").addEventListener("click",function(){
-
     if(!selectedFile) return;
-
-    const url = getWhatsAppURL();
-
-    window.open(url,"_blank","noopener,noreferrer");
+    window.open(getWhatsAppURL(),"_blank","noopener,noreferrer");
 });
 
 $("instagramBtn").addEventListener("click",function(){
-
     if(!selectedFile) return;
-
-    window.open(
-        getInstagramURL(),
-        "_blank",
-        "noopener,noreferrer"
-    );
+    window.open(getInstagramURL(),"_blank","noopener,noreferrer");
 });
 
 window.addEventListener("beforeunload",function(){
-    if(previewURL){
-        URL.revokeObjectURL(previewURL);
-    }
+    if(previewURL) URL.revokeObjectURL(previewURL);
 });
-
 })();
 </script>
 
