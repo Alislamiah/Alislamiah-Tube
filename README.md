@@ -338,6 +338,36 @@
           <div class="video-meta">Alislamiah-Tube</div>
         </div>
       </a>
+
+
+<!-- فيديو 9 -->
+<a href="watch.html?v=lv_0_20260824111719.mp4&title=شرح درس Despite and in spite of" class="video-card">
+  <div class="video-thumbnail">
+    <video preload="metadata" muted autoplay loop playsinline>
+      <source src="lv_0_20260824111719.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-info">
+    <div class="video-title">شرح درس Despite and in spite of[span_0](start_span)[span_0](end_span)</div>
+    <div class="video-meta">Alislamiah-Tube</div>
+  </div>
+</a>
+
+<!-- فيديو 10 -->
+<a href="watch.html?v=lv_0_20260824111719.mp4&title=شرح درس Linking words" class="video-card">
+  <div class="video-thumbnail">
+    <video preload="metadata" muted autoplay loop playsinline>
+      <source src="lv_0_20260824111719.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-info">
+    <div class="video-title">شرح درس Linking words[span_1](start_span)[span_1](end_span)</div>
+    <div class="video-meta">Alislamiah-Tube</div>
+  </div>
+</a>
+
+
+
     </div>
   </main>
 
