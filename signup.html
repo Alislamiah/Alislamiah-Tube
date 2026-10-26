@@ -1,203 +1,217 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>إنشاء حساب - Alislamiah Tube</title>
+<meta name="theme-color" content="#07111f">
+<title>Sign up — Alislamiah Tube</title>
 <link rel="icon" href="icon.png">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
-body{background:#07111f;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;position:relative;padding:20px 0}
-.bg{position:fixed;inset:0;background:
-  radial-gradient(circle at 15% 20%,rgba(111,183,255,.22),transparent 38%),
-  radial-gradient(circle at 85% 30%,rgba(8,120,255,.18),transparent 35%),
-  #07111f;z-index:0}
-.container{position:relative;z-index:1;width:92%;max-width:400px;background:rgba(11,26,44,.9);border:1px solid #173553;border-radius:24px;padding:36px 28px 30px;box-shadow:0 25px 50px rgba(0,0,0,.45);text-align:center}
-.logo{width:72px;height:72px;margin:0 auto 18px;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#087fff,#6fb7ff);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(8,127,255,.4)}
-.logo img{width:100%;height:100%;object-fit:cover}
-h1{font-size:22px;font-weight:700;margin-bottom:6px}
-.subtitle{color:#718ba6;font-size:14px;margin-bottom:20px}
-.input-group{margin-bottom:12px;text-align:right}
-.input-group label{display:block;font-size:13px;color:#8aa4c0;margin-bottom:6px}
-.input-group input{width:100%;padding:13px 15px;background:rgba(255,255,255,.06);border:1.5px solid #1e3a55;border-radius:12px;color:#fff;font-size:15px;outline:none}
-.input-group input:focus{border-color:#6fb7ff;box-shadow:0 0 0 3px rgba(111,183,255,.15)}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#087fff,#3d9cff);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:6px}
-.divider{display:flex;align-items:center;gap:12px;margin:20px 0 16px;color:#5a7390;font-size:13px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:#1e3a55}
-
-/* زر Alislamiah AI */
-.btn-ai{
-  width:100%;
-  padding:14px;
-  border:1.5px solid rgba(111,183,255,.5);
-  border-radius:12px;
-  background:rgba(111,183,255,.1);
-  color:#6fb7ff;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  transition:.25s;
-}
-.btn-ai:hover{background:rgba(111,183,255,.18);border-color:#6fb7ff}
-.btn-ai .badge{
-  background:linear-gradient(135deg,#087fff,#00c3ff);
-  color:#fff;
-  font-size:11px;
-  font-weight:800;
-  padding:4px 9px;
-  border-radius:7px;
-}
-
-.message{margin-top:14px;font-size:14px;min-height:22px}
-.message.error{color:#ff6b6b}
-.message.success{color:#4ade80}
-.links{margin-top:20px;font-size:14px;color:#718ba6}
-.links a{color:#6fb7ff;text-decoration:none;font-weight:600}
+*{box-sizing:border-box}
+:root{--bg:#07111f;--panel:#0e1b2d;--border:#20344c;--blue:#3979f6;--text:#f4f7ff;--muted:#9aabc2}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#142b49 0%,#07111f 58%);font-family:Arial,sans-serif;color:var(--text);display:flex;align-items:center;justify-content:center;padding:22px}
+.container{width:100%;max-width:420px}
+.language{display:flex;justify-content:flex-end;margin-bottom:14px}
+select{background:#101e31;color:white;border:1px solid var(--border);border-radius:10px;padding:9px 12px;outline:none}
+.card{background:rgba(14,27,45,.96);border:1px solid var(--border);border-radius:23px;padding:30px 25px;box-shadow:0 22px 70px #0005}
+.brand{text-align:center;margin-bottom:27px}
+.brand img{width:76px;height:76px;object-fit:contain;border-radius:18px}
+.brand h1{font-size:25px;margin:14px 0 7px}
+.brand p{font-size:14px;color:var(--muted);margin:0}
+label{display:block;font-size:13px;color:#dce6f5;margin:18px 0 8px}
+input{width:100%;padding:14px 13px;background:#081321;border:1px solid var(--border);border-radius:11px;color:white;font-size:15px;outline:none}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3979f622}
+.password-wrap{position:relative}
+.password-wrap input{padding-inline-end:66px}
+.show{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#9db9ee;cursor:pointer}
+[dir="rtl"] .show{right:auto;left:10px}
+button.primary{width:100%;border:0;border-radius:11px;padding:14px;background:linear-gradient(100deg,#3979f6,#2458d7);color:white;font-size:15px;font-weight:bold;cursor:pointer;margin-top:24px}
+button:disabled{opacity:.6;cursor:wait}
+.message{display:none;padding:11px;border-radius:10px;margin-top:14px;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.message.error{display:block;background:#4a1d29;color:#ffc5ce}
+.message.success{display:block;background:#123c31;color:#b8f7d9}
+.bottom{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
+a{color:#83adff;text-decoration:none;font-size:13px}
+a:hover{text-decoration:underline}
+.support{text-align:center;margin-top:21px}
+.support a{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:10px}
+.footer{text-align:center;color:#657993;font-size:11px;margin-top:20px}
 </style>
 </head>
 <body>
-<div class="bg"></div>
-
 <div class="container">
-  <div class="logo">
-    <img src="icon.png" alt="Tube" onerror="this.parentElement.innerHTML='▶️'">
-  </div>
-  <h1>إنشاء حساب جديد</h1>
-  <p class="subtitle">انضم إلى Alislamiah Tube</p>
+  <div class="language">
+    <select id="language" aria-label="Language">
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+      <option value="fr">Français</option>
+    </select>
+  </div>  <main class="card">
+    <div class="brand">
+      <img src="icon.png" alt="Alislamiah Tube" onerror="this.style.display='none'">
+      <h1>Alislamiah Tube</h1>
+      <p data-i="subtitle">Create your account</p>
+    </div><form id="signupForm">
+  <label for="email" data-i="emailLabel">Email address</label>
+  <input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
 
-  <div class="input-group">
-    <label>الاسم الكامل</label>
-    <input type="text" id="fullname" placeholder="الاسم الشخصي">
-  </div>
-  <div class="input-group">
-    <label>البريد الإلكتروني</label>
-    <input type="email" id="email" placeholder="example@email.com">
-  </div>
-  <div class="input-group">
-    <label>كلمة المرور</label>
-    <input type="password" id="password" placeholder="••••••••">
+  <label for="password" data-i="passwordLabel">Password</label>
+  <div class="password-wrap">
+    <input id="password" type="password" autocomplete="new-password" minlength="6" required>
+    <button type="button" class="show" id="showPassword" data-i="show">Show</button>
   </div>
 
-  <button class="btn" onclick="signup()">إنشاء الحساب</button>
-  <div class="message" id="msg"></div>
-
-  <div class="divider">أو</div>
-
-  <button type="button" class="btn-ai" onclick="signupWithAI()">
-    <span class="badge">AI</span>
-    التسجيل بواسطة Alislamiah AI
-  </button>
-
-  <div class="links">
-    لديك حساب بالفعل؟ <a href="signin.html">تسجيل الدخول</a>
+  <label for="confirmPassword" data-i="confirmLabel">Confirm password</label>
+  <div class="password-wrap">
+    <input id="confirmPassword" type="password" autocomplete="new-password" minlength="6" required>
+    <button type="button" class="show" id="showConfirm" data-i="show">Show</button>
   </div>
+
+  <button class="primary" id="signupButton" type="submit" data-i="signup">Create account</button>
+  <div id="message" class="message" role="status"></div>
+</form>
+
+<div class="bottom">
+  <span data-i="haveAccount">Already have an account?</span>
+  <a href="signin.html" data-i="signin">Sign in</a>
 </div>
 
-<script>
-  const USERS_KEY = "alislamiah_users";
-  const CURRENT_KEY = "alislamiah_current_user";
-  const AI_SIGNIN_PAGE = "signin-ai.html";
+<div class="support">
+  <a href="https://wa.me/213777543015" target="_blank" rel="noopener noreferrer" data-i="support">Contact administration</a>
+</div>
 
-  function getUsers() {
-    try { return JSON.parse(localStorage.getItem(USERS_KEY) || "[]"); }
-    catch { return []; }
+  </main>
+  <div class="footer">© Alislamiah Tube</div>
+</div><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB6Xn8I6pGBQjEuaFflKCxmQezpHP9D9D9Kk",
+  authDomain: "alislamiah-tube.firebaseapp.com",
+  projectId: "alislamiah-tube",
+  storageBucket: "alislamiah-tube.firebasestorage.app",
+  messagingSenderId: "63719640725",
+  appId: "1:63719640725:web:62b71660a6c9da8d55959c",
+  measurementId: "G-Q9B70NKKCJ"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+
+const translations={
+  en:{
+    subtitle:"Create your account",emailLabel:"Email address",
+    passwordLabel:"Password",confirmLabel:"Confirm password",
+    show:"Show",hide:"Hide",signup:"Create account",
+    haveAccount:"Already have an account?",signin:"Sign in",
+    support:"Contact administration",mismatch:"Passwords do not match.",
+    "auth/email-already-in-use":"This email is already registered. Please sign in.",
+    "auth/invalid-email":"Enter a valid email address.",
+    "auth/weak-password":"Choose a stronger password with at least 6 characters.",
+    "auth/network-request-failed":"Network error. Check your internet connection.",
+    generic:"Account creation failed. Please try again."
+  },
+  ar:{
+    subtitle:"أنشئ حسابك",emailLabel:"البريد الإلكتروني",
+    passwordLabel:"كلمة المرور",confirmLabel:"تأكيد كلمة المرور",
+    show:"إظهار",hide:"إخفاء",signup:"إنشاء حساب",
+    haveAccount:"لديك حساب بالفعل؟",signin:"تسجيل الدخول",
+    support:"تواصل مع الإدارة",mismatch:"كلمتا المرور غير متطابقتين.",
+    "auth/email-already-in-use":"هذا البريد مسجل بالفعل. سجّل الدخول.",
+    "auth/invalid-email":"أدخل بريدًا إلكترونيًا صحيحًا.",
+    "auth/weak-password":"اختر كلمة مرور أقوى، من 6 أحرف على الأقل.",
+    "auth/network-request-failed":"تعذر الاتصال. تحقق من الإنترنت.",
+    generic:"تعذر إنشاء الحساب. حاول مرة أخرى."
+  },
+  fr:{
+    subtitle:"Créez votre compte",emailLabel:"Adresse e-mail",
+    passwordLabel:"Mot de passe",confirmLabel:"Confirmer le mot de passe",
+    show:"Afficher",hide:"Masquer",signup:"Créer un compte",
+    haveAccount:"Vous avez déjà un compte ?",signin:"Se connecter",
+    support:"Contacter l'administration",mismatch:"Les mots de passe ne correspondent pas.",
+    "auth/email-already-in-use":"Cet e-mail est déjà enregistré. Connectez-vous.",
+    "auth/invalid-email":"Saisissez une adresse e-mail valide.",
+    "auth/weak-password":"Choisissez un mot de passe plus fort d'au moins 6 caractères.",
+    "auth/network-request-failed":"Erreur réseau. Vérifiez votre connexion.",
+    generic:"Échec de création du compte. Réessayez."
   }
+};
 
-  function getCurrentUser() {
-    try { return JSON.parse(localStorage.getItem(CURRENT_KEY) || "null"); }
-    catch { return null; }
-  }
+let lang=localStorage.getItem("tube_language")||"en";
+if(!translations[lang])lang="en";
+const languageSelect=document.getElementById("language");
+languageSelect.value=lang;
 
-  function setCurrentUser(user) {
-    localStorage.setItem(CURRENT_KEY, JSON.stringify(user));
-  }
-
-  // التوجيه المباشر للرئيسية إذا كان مسجلاً
-  if (getCurrentUser()) {
-    window.location.href = "index.html";
-  }
-
-  // ========== إنشاء حساب جديد ==========
-  function signup() {
-    const fullname = document.getElementById("fullname").value.trim();
-    const email = document.getElementById("email").value.trim().toLowerCase();
-    const password = document.getElementById("password").value;
-    const msg = document.getElementById("msg");
-
-    msg.className = "message";
-    msg.textContent = "";
-
-    if (!fullname || !email || !password) {
-      msg.className = "message error";
-      msg.textContent = "يرجى ملء جميع الحقول المطلوبة";
-      return;
-    }
-
-    if (password.length < 6) {
-      msg.className = "message error";
-      msg.textContent = "كلمة المرور يجب أن تكون 6 أحرف على الأقل";
-      return;
-    }
-
-    const users = getUsers();
-    if (users.some(u => u.email === email)) {
-      msg.className = "message error";
-      msg.textContent = "هذا البريد الإلكتروني مستخدم بالفعل";
-      return;
-    }
-
-    const newUser = {
-      id: Date.now().toString(),
-      name: fullname,
-      email: email,
-      password: password,
-      createdAt: new Date().toISOString()
-    };
-
-    users.push(newUser);
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-
-    // تسجيل الدخول والتحويل الفوري للرئيسية
-    setCurrentUser({ id: newUser.id, name: newUser.name, email: newUser.email });
-
-    msg.className = "message success";
-    msg.textContent = "تم إنشاء الحساب بنجاح! جارٍ التحويل...";
-
-    setTimeout(function () {
-      window.location.href = "index.html";
-    }, 600);
-  }
-
-  // ========== التسجيل بواسطة AI ==========
-  function signupWithAI() {
-    const msg = document.getElementById("msg");
-    msg.className = "message";
-    msg.textContent = "";
-
-    const user = getCurrentUser();
-    if (user && user.email) {
-      msg.className = "message success";
-      msg.textContent = "تم التعرف على حساب Alislamiah AI...";
-      setTimeout(function () {
-        window.location.href = "index.html";
-      }, 600);
-      return;
-    }
-
-    msg.className = "message error";
-    msg.textContent = "جارٍ التحويل إلى صفحة Alislamiah AI...";
-    setTimeout(function () {
-      window.location.href = AI_SIGNIN_PAGE;
-    }, 800);
-  }
-
-  document.getElementById("password").addEventListener("keypress", function (e) {
-    if (e.key === "Enter") signup();
+function t(key){return translations[lang][key]||translations.en[key]||key;}
+function applyLanguage(){
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-i]").forEach(el=>{
+    const key=el.dataset.i;
+    if(translations[lang][key])el.textContent=translations[lang][key];
   });
-</script>
-</body>
+  document.getElementById("email").placeholder=
+    lang==="ar"?"example@email.com":"you@example.com";
+}
+languageSelect.addEventListener("change",()=>{
+  lang=languageSelect.value;
+  localStorage.setItem("tube_language",lang);
+  applyLanguage();
+});
+applyLanguage();
+
+const message=document.getElementById("message");
+function showMessage(text,type="error"){
+  message.textContent=text;
+  message.className="message "+type;
+}
+function clearMessage(){
+  message.textContent="";
+  message.className="message";
+}
+
+function togglePassword(inputId,buttonId){
+  const input=document.getElementById(inputId);
+  const visible=input.type==="password";
+  input.type=visible?"text":"password";
+  document.getElementById(buttonId).textContent=t(visible?"hide":"show");
+}
+document.getElementById("showPassword").addEventListener("click",()=>{
+  togglePassword("password","showPassword");
+});
+document.getElementById("showConfirm").addEventListener("click",()=>{
+  togglePassword("confirmPassword","showConfirm");
+});
+
+document.getElementById("signupForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  clearMessage();
+
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  const confirmPassword=document.getElementById("confirmPassword").value;
+  const button=document.getElementById("signupButton");
+
+  if(password!==confirmPassword){
+    showMessage(t("mismatch"));
+    return;
+  }
+
+  button.disabled=true;
+  try{
+    await setPersistence(auth,browserLocalPersistence);
+    await createUserWithEmailAndPassword(auth,email,password);
+    window.location.replace("index.html");
+  }catch(error){
+    showMessage(t(error.code)||t("generic"));
+  }finally{
+    button.disabled=false;
+  }
+});
+</script></body>
 </html>
