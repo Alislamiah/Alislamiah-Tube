@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -57,18 +58,18 @@
       font-size: 1.45rem;
       font-weight: 700;
       margin-bottom: 7px;
-      color: #ffffff;
+      color: #fff;
     }
 
     .page-description {
       color: #7890aa;
-      font-size: 0.88rem;
+      font-size: .88rem;
       margin-bottom: 25px;
     }
 
     .section-title {
       color: #7090b0;
-      font-size: 0.82rem;
+      font-size: .82rem;
       font-weight: 700;
       margin: 0 6px 9px;
     }
@@ -79,7 +80,7 @@
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 24px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 25px rgba(0,0,0,.25);
     }
 
     .setting-item {
@@ -131,14 +132,14 @@
     }
 
     .setting-title {
-      font-size: 0.98rem;
+      font-size: .98rem;
       font-weight: 700;
       color: #f5f9ff;
       margin-bottom: 5px;
     }
 
     .setting-description {
-      font-size: 0.78rem;
+      font-size: .78rem;
       color: #718ba6;
       line-height: 1.5;
     }
@@ -186,7 +187,7 @@
     }
 
     .language-name {
-      font-size: 0.9rem;
+      font-size: .9rem;
       color: #dcecff;
     }
 
@@ -213,6 +214,105 @@
       border-radius: 50%;
     }
 
+    /* بطاقة تسجيل الدخول أسفل الصفحة */
+    .login-card {
+      position: relative;
+      margin: 30px 0 24px;
+      padding: 20px;
+      border: 1px solid #25466d;
+      border-radius: 19px;
+      background:
+        radial-gradient(circle at 100% 0%, #1b3760 0%, transparent 58%),
+        linear-gradient(135deg, #111f35, #0b1323);
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+      color: #fff;
+    }
+
+    .login-card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-left: 20px;
+    }
+
+    .login-icon {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #15324b;
+      border: 1px solid #24516a;
+      color: #36d9e8;
+      font-size: 25px;
+    }
+
+    .login-card h3 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .login-card p {
+      margin: 0;
+      color: #9aacc5;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .login-close {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ffffff18;
+      border-radius: 50%;
+      background: #ffffff0b;
+      color: #a9bbd2;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .login-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(110deg, #367cff, #315fe9);
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-button:active {
+      opacity: .85;
+    }
+
+    .login-arrow {
+      font-size: 19px;
+    }
+
+    html[dir="ltr"] .login-card-top {
+      padding-left: 0;
+      padding-right: 20px;
+    }
+
+    html[dir="ltr"] .login-close {
+      left: auto;
+      right: 10px;
+    }
+
+    html[dir="ltr"] .login-arrow {
+      transform: rotate(180deg);
+    }
+
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -233,7 +333,7 @@
       justify-content: center;
       text-decoration: none;
       color: #718096;
-      font-size: 0.78rem;
+      font-size: .78rem;
       gap: 4px;
       min-width: 70px;
     }
@@ -249,7 +349,7 @@
     .footer {
       text-align: center;
       color: #526b84;
-      font-size: 0.72rem;
+      font-size: .72rem;
       line-height: 1.8;
       margin-top: 32px;
     }
@@ -265,8 +365,8 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <header class="header">
     <img src="icon.png" class="app-icon" alt="Alislamiah">
     <h1 id="header-title">Alislamiah-Tube</h1>
@@ -284,11 +384,11 @@
     </div>
 
     <div class="settings-card">
-
-      <!-- عن Alislamiah -->
-      <a href="https://Alislamiah.github.io/Alislamiah-_net/about.html" class="setting-item">
+      <a href="https://Alislamiah.github.io/Alislamiah-_net/about.html"
+         class="setting-item">
         <div class="setting-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9"></circle>
             <line x1="12" y1="10" x2="12" y2="16"></line>
             <circle cx="12" cy="7" r="1" fill="currentColor"></circle>
@@ -296,15 +396,18 @@
         </div>
         <div class="setting-content">
           <div class="setting-title" id="about-title">عن Alislamiah</div>
-          <div class="setting-description" id="about-description">تعرف على Alislamiah ومعلومات عنها</div>
+          <div class="setting-description" id="about-description">
+            تعرف على Alislamiah ومعلومات عنها
+          </div>
         </div>
         <span class="arrow">›</span>
       </a>
 
-      <!-- خدمات الإسلامية الرقمية -->
-      <a href="https://Alislamiah.github.io/Alislamiah-services/" class="setting-item">
+      <a href="https://Alislamiah.github.io/Alislamiah-services/"
+         class="setting-item">
         <div class="setting-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="7" height="7" rx="1"></rect>
             <rect x="14" y="3" width="7" height="7" rx="1"></rect>
             <rect x="3" y="14" width="7" height="7" rx="1"></rect>
@@ -312,23 +415,24 @@
           </svg>
         </div>
         <div class="setting-content">
-          <div class="setting-title" id="services-title">خدمات الإسلامية الرقمية</div>
-          <div class="setting-description" id="services-description">الوصول إلى خدمات ومنصات الإسلامية الرقمية</div>
+          <div class="setting-title" id="services-title">
+            خدمات الإسلامية الرقمية
+          </div>
+          <div class="setting-description" id="services-description">
+            الوصول إلى خدمات ومنصات الإسلامية الرقمية
+          </div>
         </div>
         <span class="arrow">›</span>
       </a>
-
     </div>
 
-    <div class="section-title" id="app-section">
-      التطبيق
-    </div>
+    <div class="section-title" id="app-section">التطبيق</div>
 
     <div class="settings-card">
-
       <div class="setting-item language-header" onclick="toggleLanguages()">
         <div class="setting-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9"></circle>
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <path d="M12 3c-2.4 2.4-3.7 5.5-3.7 9s1.3 6.6 3.7 9"></path>
@@ -343,20 +447,22 @@
       </div>
 
       <div class="language-options" id="language-options">
-        <div class="language-option" data-lang="ar" onclick="selectLanguage('ar')">
+        <div class="language-option" data-lang="ar"
+             onclick="selectLanguage('ar')">
           <span class="language-name">العربية</span>
           <span class="language-check"></span>
         </div>
-        <div class="language-option" data-lang="fr" onclick="selectLanguage('fr')">
+        <div class="language-option" data-lang="fr"
+             onclick="selectLanguage('fr')">
           <span class="language-name">Français</span>
           <span class="language-check"></span>
         </div>
-        <div class="language-option" data-lang="en" onclick="selectLanguage('en')">
+        <div class="language-option" data-lang="en"
+             onclick="selectLanguage('en')">
           <span class="language-name">English</span>
           <span class="language-check"></span>
         </div>
       </div>
-
     </div>
 
     <div class="footer">
@@ -364,6 +470,26 @@
       <span id="footer-text">الإسلامية دائماً الأفضل</span>
     </div>
 
+    <!-- بطاقة تسجيل الدخول: أسفل محتوى الإعدادات -->
+    <div id="loginCard" class="login-card" style="display:none">
+      <button type="button" id="closeLoginCard"
+              class="login-close" aria-label="إغلاق">×</button>
+
+      <div class="login-card-top">
+        <div class="login-icon">✦</div>
+        <div>
+          <h3 id="login-card-title">تسجيل الدخول!</h3>
+          <p id="login-card-description">
+            سجل دخولك لاكتساب ميزات أفضل
+          </p>
+        </div>
+      </div>
+
+      <button type="button" id="loginButton" class="login-button">
+        <span id="login-button-text">تسجيل الدخول</span>
+        <span class="login-arrow">←</span>
+      </button>
+    </div>
   </main>
 
   <nav class="bottom-nav">
@@ -399,7 +525,10 @@
         search: "البحث",
         settings: "الإعدادات",
         footer: "الإسلامية دائماً الأفضل",
-        selectedLanguage: "العربية"
+        selectedLanguage: "العربية",
+        loginTitle: "تسجيل الدخول!",
+        loginDescription: "سجل دخولك لاكتساب ميزات أفضل",
+        loginButton: "تسجيل الدخول"
       },
       fr: {
         dir: "ltr",
@@ -417,7 +546,10 @@
         search: "Recherche",
         settings: "Paramètres",
         footer: "Alislamiah, toujours le meilleur",
-        selectedLanguage: "Français"
+        selectedLanguage: "Français",
+        loginTitle: "Connectez-vous !",
+        loginDescription: "Connectez-vous pour profiter de plus de fonctionnalités",
+        loginButton: "Se connecter"
       },
       en: {
         dir: "ltr",
@@ -435,7 +567,10 @@
         search: "Search",
         settings: "Settings",
         footer: "Alislamiah, always the best",
-        selectedLanguage: "English"
+        selectedLanguage: "English",
+        loginTitle: "Sign in!",
+        loginDescription: "Sign in to unlock more features",
+        loginButton: "Sign in"
       }
     };
 
@@ -452,38 +587,31 @@
       document.getElementById("header-title").textContent = t.header;
       document.getElementById("page-title").textContent = t.pageTitle;
       document.getElementById("page-description").textContent = t.pageDescription;
-
       document.getElementById("info-section").textContent = t.infoSection;
       document.getElementById("about-title").textContent = t.aboutTitle;
       document.getElementById("about-description").textContent = t.aboutDescription;
-
       document.getElementById("services-title").textContent = t.servicesTitle;
       document.getElementById("services-description").textContent = t.servicesDescription;
-
       document.getElementById("app-section").textContent = t.appSection;
       document.getElementById("language-title").textContent = t.languageTitle;
-
       document.getElementById("selected-language").textContent = t.selectedLanguage;
-
       document.getElementById("nav-home").textContent = t.home;
       document.getElementById("nav-search").textContent = t.search;
       document.getElementById("nav-settings").textContent = t.settings;
-
       document.getElementById("footer-text").textContent = t.footer;
 
+      document.getElementById("login-card-title").textContent = t.loginTitle;
+      document.getElementById("login-card-description").textContent = t.loginDescription;
+      document.getElementById("login-button-text").textContent = t.loginButton;
+
       document.querySelectorAll(".language-option").forEach(function(option) {
-        if (option.dataset.lang === lang) {
-          option.classList.add("active");
-        } else {
-          option.classList.remove("active");
-        }
+        option.classList.toggle("active", option.dataset.lang === lang);
       });
     }
 
     function toggleLanguages() {
       const options = document.getElementById("language-options");
       const arrow = document.getElementById("language-arrow");
-
       options.classList.toggle("show");
       arrow.textContent = options.classList.contains("show") ? "⌄" : "›";
     }
@@ -496,6 +624,53 @@
     }
 
     applyLanguage(currentLang);
+
+    // إغلاق مؤقت: لا نحفظ الإغلاق، لذلك تعود البطاقة بعد إعادة التحميل.
+    document.getElementById("closeLoginCard").addEventListener("click", function() {
+      document.getElementById("loginCard").style.display = "none";
+    });
+
+    document.getElementById("loginButton").addEventListener("click", function() {
+      location.href = "signin.html?returnUrl=" + encodeURIComponent("Settings.html");
+    });
+  </script>
+
+  <script type="module">
+    import {
+      initializeApp,
+      getApps,
+      getApp
+    } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+
+    import {
+      getAuth,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6Xn8I6pGBQjEuaFflKCxmQezpHP9D9Dk",
+      authDomain: "alislamiah-tube.firebaseapp.com",
+      projectId: "alislamiah-tube",
+      storageBucket: "alislamiah-tube.firebasestorage.app",
+      messagingSenderId: "63719640725",
+      appId: "1:63719640725:web:62b71660a6c9da8d55959c",
+      measurementId: "G-Q9B70NKKCJ"
+    };
+
+    const app = getApps().length
+      ? getApp()
+      : initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+    const loginCard = document.getElementById("loginCard");
+
+    onAuthStateChanged(auth, function(user) {
+      loginCard.style.display = user ? "none" : "block";
+    }, function(error) {
+      // عند فشل التحقق لا نعرض البطاقة بناءً على تخمين.
+      loginCard.style.display = "none";
+      console.error("تعذر التحقق من جلسة Firebase:", error);
+    });
   </script>
 </body>
 </html>
