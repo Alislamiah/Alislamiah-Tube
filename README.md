@@ -341,27 +341,27 @@
 
 
 <!-- فيديو 9 -->
-<a href="watch.html?v=Despite and in spite ofشرح درس.mp4&title=Despite and in spite of شرح درس" class="video-card">
+<a href="watch.html?v=شرح درس Despite and in spite of.mp4&title=شرح درس Despite and in spite of" class="video-card">
   <div class="video-thumbnail">
     <video preload="metadata" muted autoplay loop playsinline>
-      <source src="Despite and in spite ofشرح درس.mp4" type="video/mp4">
+      <source src="شرح درس Despite and in spite of.mp4" type="video/mp4">
     </video>
   </div>
   <div class="video-info">
-    <div class="video-title">Despite and in spite of شرح درس</div>
+    <div class="video-title">شرح درس Despite and in spite of</div>
     <div class="video-meta">Alislamiah-Tube</div>
   </div>
 </a>
 
 <!-- فيديو 10 -->
-<a href="watch.html?v=Linking wordsشرح درس.mp4&title=Linking words شرح درس" class="video-card">
+<a href="watch.html?v=شرح درس Linking words.mp4&title=شرح درس Linking words" class="video-card">
   <div class="video-thumbnail">
     <video preload="metadata" muted autoplay loop playsinline>
-      <source src="Linking wordsشرح درس.mp4" type="video/mp4">
+      <source src="شرح درس Linking words.mp4" type="video/mp4">
     </video>
   </div>
   <div class="video-info">
-    <div class="video-title">Linking words شرح درس</div>
+    <div class="video-title">شرح درس Linking words</div>
     <div class="video-meta">Alislamiah-Tube</div>
   </div>
 </a>
