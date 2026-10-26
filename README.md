@@ -442,6 +442,41 @@
       // حفظ البطاقة التالية
       localStorage.setItem("promo_index", (index + 1) % 3);
     })();
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB6Xn8I6pGBQjEuaFflKCxmQezpHP9D9Kk",
+  authDomain: "alislamiah-tube.firebaseapp.com",
+  projectId: "alislamiah-tube",
+  storageBucket: "alislamiah-tube.firebasestorage.app",
+  messagingSenderId: "63719640725",
+  appId: "1:63719640725:web:62b71660a6c9da8d55959c",
+  measurementId: "G-Q9B70NKKCJ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.documentElement.style.visibility = "hidden";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.documentElement.style.visibility = "visible";
+
+    const emailElement = document.getElementById("userEmail");
+    if (emailElement) {
+      emailElement.textContent = user.email || "";
+    }
+  } else {
+    window.location.replace("signin.html");
+  }
+});
+
   </script>
 </body>
 </html>
