@@ -393,28 +393,16 @@
     </a>
   </nav>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
 
-/* Firebase Authentication — Alislamiah Tube */
-const firebaseConfig = {
-  apiKey: "AIzaSyB6Xn8I6pGBQjEuaFflKCxmQezpHP9D9Kk",
-  authDomain: "alislamiah-tube.firebaseapp.com",
-  projectId: "alislamiah-tube",
-  storageBucket: "alislamiah-tube.firebasestorage.app",
-  messagingSenderId: "63719640725",
-  appId: "1:63719640725:web:62b71660a6c9da8d55959c",
-  measurementId: "G-Q9B70NKKCJ"
-};
+<script>
+/* شاشة الترحيب */
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    document.getElementById("splash")?.classList.add("hidden");
+  }, 4000);
+});
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-/* الترجمة — دون تغيير التصميم */
+/* الترجمة */
 const translations = {
   ar: {
     dir: "rtl",
@@ -445,8 +433,8 @@ const translations = {
   }
 };
 
-const currentLang = localStorage.getItem("app_lang") || "ar";
-const lang = translations[currentLang] ? currentLang : "ar";
+const savedLanguage = localStorage.getItem("app_lang") || "ar";
+const lang = translations[savedLanguage] ? savedLanguage : "ar";
 const t = translations[lang];
 
 document.documentElement.lang = lang;
@@ -486,45 +474,6 @@ localStorage.setItem(
   "promo_index",
   String((promoIndex + 1) % promoCards.length)
 );
-
-/* التحقق من جلسة Firebase المحفوظة */
-const splash = document.getElementById("splash");
-let authChecked = false;
-
-onAuthStateChanged(
-  auth,
-  (user) => {
-    authChecked = true;
-
-    if (!user) {
-      window.location.replace("signin.html");
-      return;
-    }
-
-    // المستخدم مسجل الدخول: أبقِ الرئيسية كما هي
-    const emailElement = document.getElementById("userEmail");
-    if (emailElement) {
-      emailElement.textContent = user.email || "";
-    }
-
-    // إخفاء شاشة الترحيب بعد التأكد من الجلسة
-    setTimeout(() => {
-      splash?.classList.add("hidden");
-    }, 500);
-  },
-  (error) => {
-    console.error("Firebase Auth error:", error);
-    window.location.replace("signin.html");
-  }
-);
-
-// حماية من بقاء شاشة الترحيب إلى الأبد عند تعطل التحقق
-setTimeout(() => {
-  if (!authChecked) {
-    console.error("Firebase session check is taking too long.");
-  }
-}, 10000);
-
 </script>
 </body>
 </html>
