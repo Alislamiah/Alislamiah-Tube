@@ -383,6 +383,11 @@
       <span class="icon">⚙️</span>
       <span id="nav-settings">الإعدادات</span>
     </a>
+    <a href="create.html" class="nav-item">
+      <span class="icon">➕</span>
+      <span id="nav-create">إنشاء</span>
+    </a>
+
   </nav>
 
   <script>
