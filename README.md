@@ -393,62 +393,14 @@
     </a>
   </nav>
 
-  <script>
-    // إخفاء شاشة الترحيب
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.getElementById("splash")?.classList.add("hidden");
-      }, 5000);
-    });
-
-    // الترجمة
-    const translations = {
-      ar: { dir: "rtl", header: "Alislamiah-Tube", title: "أحدث الفيديوهات", home: "الرئيسية", search: "البحث", settings: "الإعدادات" },
-      fr: { dir: "ltr", header: "Alislamiah-Tube", title: "Dernières Vidéos", home: "Accueil", search: "Recherche", settings: "Paramètres" },
-      en: { dir: "ltr", header: "Alislamiah-Tube", title: "Latest Videos", home: "Home", search: "Search", settings: "Settings" }
-    };
-    let currentLang = localStorage.getItem("app_lang") || "ar";
-    function applyLanguage(lang) {
-      if (!translations[lang]) lang = "ar";
-      const t = translations[lang];
-      document.documentElement.setAttribute("lang", lang);
-      document.documentElement.setAttribute("dir", t.dir);
-      document.getElementById("header-title").textContent = t.header;
-      document.getElementById("main-section-title").textContent = t.title;
-      document.getElementById("nav-home").textContent = t.home;
-      document.getElementById("nav-search").textContent = t.search;
-      document.getElementById("nav-settings").textContent = t.settings;
-    }
-    applyLanguage(currentLang);
-
-    // ========== تبديل البطاقة بالدور ==========
-    (function () {
-      const cards = [
-        document.getElementById("promo0"),
-        document.getElementById("promo1"),
-        document.getElementById("promo2")
-      ];
-
-      // قراءة آخر بطاقة ظهرت
-      let index = parseInt(localStorage.getItem("promo_index") || "0");
-      if (isNaN(index) || index < 0 || index > 2) index = 0;
-
-      // إخفاء الكل ثم إظهار البطاقة الحالية
-      cards.forEach(c => c && c.classList.remove("active"));
-      if (cards[index]) {
-        cards[index].classList.add("active");
-      }
-
-      // حفظ البطاقة التالية
-      localStorage.setItem("promo_index", (index + 1) % 3);
-    })();
-
+<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
 import {
   getAuth,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
 
+/* Firebase Authentication — Alislamiah Tube */
 const firebaseConfig = {
   apiKey: "AIzaSyB6Xn8I6pGBQjEuaFflKCxmQezpHP9D9Kk",
   authDomain: "alislamiah-tube.firebaseapp.com",
@@ -462,21 +414,117 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-document.documentElement.style.visibility = "hidden";
+/* الترجمة — دون تغيير التصميم */
+const translations = {
+  ar: {
+    dir: "rtl",
+    header: "Alislamiah-Tube",
+    title: "أحدث الفيديوهات",
+    home: "الرئيسية",
+    search: "البحث",
+    create: "إنشاء",
+    settings: "الإعدادات"
+  },
+  fr: {
+    dir: "ltr",
+    header: "Alislamiah-Tube",
+    title: "Dernières vidéos",
+    home: "Accueil",
+    search: "Recherche",
+    create: "Créer",
+    settings: "Paramètres"
+  },
+  en: {
+    dir: "ltr",
+    header: "Alislamiah-Tube",
+    title: "Latest Videos",
+    home: "Home",
+    search: "Search",
+    create: "Create",
+    settings: "Settings"
+  }
+};
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    document.documentElement.style.visibility = "visible";
+const currentLang = localStorage.getItem("app_lang") || "ar";
+const lang = translations[currentLang] ? currentLang : "ar";
+const t = translations[lang];
 
+document.documentElement.lang = lang;
+document.documentElement.dir = t.dir;
+
+document.getElementById("header-title").textContent = t.header;
+document.getElementById("main-section-title").textContent = t.title;
+document.getElementById("nav-home").textContent = t.home;
+document.getElementById("nav-search").textContent = t.search;
+document.getElementById("nav-create").textContent = t.create;
+document.getElementById("nav-settings").textContent = t.settings;
+
+/* تبديل البطاقات الإعلانية */
+const promoCards = [
+  document.getElementById("promo0"),
+  document.getElementById("promo1"),
+  document.getElementById("promo2")
+];
+
+let promoIndex = parseInt(
+  localStorage.getItem("promo_index") || "0",
+  10
+);
+
+if (
+  !Number.isInteger(promoIndex) ||
+  promoIndex < 0 ||
+  promoIndex >= promoCards.length
+) {
+  promoIndex = 0;
+}
+
+promoCards.forEach(card => card?.classList.remove("active"));
+promoCards[promoIndex]?.classList.add("active");
+
+localStorage.setItem(
+  "promo_index",
+  String((promoIndex + 1) % promoCards.length)
+);
+
+/* التحقق من جلسة Firebase المحفوظة */
+const splash = document.getElementById("splash");
+let authChecked = false;
+
+onAuthStateChanged(
+  auth,
+  (user) => {
+    authChecked = true;
+
+    if (!user) {
+      window.location.replace("signin.html");
+      return;
+    }
+
+    // المستخدم مسجل الدخول: أبقِ الرئيسية كما هي
     const emailElement = document.getElementById("userEmail");
     if (emailElement) {
       emailElement.textContent = user.email || "";
     }
-  } else {
+
+    // إخفاء شاشة الترحيب بعد التأكد من الجلسة
+    setTimeout(() => {
+      splash?.classList.add("hidden");
+    }, 500);
+  },
+  (error) => {
+    console.error("Firebase Auth error:", error);
     window.location.replace("signin.html");
   }
-});
+);
 
-  </script>
+// حماية من بقاء شاشة الترحيب إلى الأبد عند تعطل التحقق
+setTimeout(() => {
+  if (!authChecked) {
+    console.error("Firebase session check is taking too long.");
+  }
+}, 10000);
+
+</script>
 </body>
 </html>
