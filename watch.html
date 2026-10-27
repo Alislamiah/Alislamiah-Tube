@@ -5,21 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>عرض الفيديو - Alislamiah-Tube</title>
   <link rel="icon" href="icon.png" type="image/png">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { font-family: Arial, Tahoma, sans-serif; background: #07111f; color: #fff; min-height: 100vh; padding-bottom: 100px; }
-    .header { background: #0a1728; padding: 12px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #18304b; display: flex; align-items: center; gap: 12px; }
-    .app-icon { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
-    .header h1 { font-size: 1.35rem; font-weight: 700; color: #6fb7ff; }
-    .main-content { padding: 20px 16px; max-width: 800px; margin: 0 auto; }
-    .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 16px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
-    .video-container video { width: 100%; height: 100%; object-fit: contain; }
-    .video-title { font-size: 1.25rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px; color: #ffffff; }
-    .video-meta { font-size: 0.85rem; color: #718ba6; margin-bottom: 15px; display: flex; gap: 15px; }
-    .actions-bar { display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 1px solid #152c45; padding-bottom: 15px; }
-    .action-btn { background: #0b1a2c; color: #fff; border: 1px solid #173553; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
-    .action-btn:active { background: #102640; }
-    .action-btn.liked { color: #6fb7ff; border-color: #1c4b76; background: #0d2946; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background: #07111f;
+      color: #fff;
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    .header {
+      background: #0a1728;
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #18304b;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .header h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #6fb7ff;
+    }
+
+    .main-content {
+      padding: 20px 16px 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .video-container {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .video-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      color: #fff;
+      overflow-wrap: anywhere;
+    }
+
+    .video-meta {
+      font-size: 0.85rem;
+      color: #718ba6;
+      margin-bottom: 15px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .actions-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #152c45;
+      padding-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: #0b1a2c;
+      color: #fff;
+      border: 1px solid #173553;
+      padding: 10px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn:active {
+      background: #102640;
+    }
+
+    .action-btn.liked {
+      color: #6fb7ff;
+      border-color: #1c4b76;
+      background: #0d2946;
+    }
+
     .ai-summarize-btn {
       background: linear-gradient(135deg, #102d59, #164f91);
       border: 1px solid #398dff;
@@ -29,28 +128,306 @@
       font-size: 1.35rem;
       justify-content: center;
     }
-    .comments-section { margin-top: 20px; background: #0b1a2c; padding: 20px; border-radius: 16px; border: 1px solid #173553; box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
-    .comments-section h3 { font-size: 1.05rem; margin-bottom: 15px; color: #f5f9ff; }
-    .comment-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .comment-input { background: #07111f; border: 1px solid #152c45; color: #fff; padding: 12px; border-radius: 10px; font-size: 0.9rem; resize: none; outline: none; }
-    .comment-input:focus { border-color: #4da8ff; }
-    .comment-submit { background: #1678c9; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; align-self: flex-end; }
-    .comments-list { display: flex; flex-direction: column; gap: 12px; }
-    .comment-item { background: #07111f; padding: 12px; border-radius: 10px; border: 1px solid #152c45; }
-    .comment-user { font-weight: 700; font-size: 0.82rem; color: #6fb7ff; margin-bottom: 4px; }
-    .comment-text { font-size: 0.88rem; color: #dcecff; line-height: 1.4; }
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #081525; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #17304a; z-index: 100; }
-    .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #718096; font-size: 0.78rem; gap: 4px; min-width: 70px; }
-    .nav-item.active { color: #62b4ff; }
-    .nav-item .icon { font-size: 1.35rem; }
+
+    .comments-section {
+      margin-top: 20px;
+      background: #0b1a2c;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #173553;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .comments-section h3 {
+      font-size: 1.05rem;
+      margin-bottom: 15px;
+      color: #f5f9ff;
+    }
+
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .comment-input {
+      background: #07111f;
+      border: 1px solid #152c45;
+      color: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    .comment-input:focus {
+      border-color: #4da8ff;
+    }
+
+    .comment-submit {
+      background: #1678c9;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      align-self: flex-end;
+    }
+
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comment-item {
+      background: #07111f;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #152c45;
+    }
+
+    .comment-user {
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #6fb7ff;
+      margin-bottom: 4px;
+    }
+
+    .comment-text {
+      font-size: 0.88rem;
+      color: #dcecff;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    /* الأقسام الموجودة أسفل التعليقات */
+    .recommendations {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    /* بطاقات الإعلان */
+    .promo-card {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 220px;
+      margin-bottom: 28px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #0d1f33;
+      border: 1px solid rgba(111,183,255,0.25);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .promo-media {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #0a1626;
+    }
+
+    .promo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(7,17,31,0.95) 0%,
+        rgba(7,17,31,0.6) 50%,
+        rgba(7,17,31,0.3) 100%
+      );
+      z-index: 1;
+    }
+
+    .promo-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 20px;
+    }
+
+    .promo-badge {
+      display: inline-block;
+      background: rgba(8,127,255,0.3);
+      color: #8ec8ff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: fit-content;
+      border: 1px solid rgba(111,183,255,0.3);
+    }
+
+    .promo-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .promo-desc {
+      font-size: 0.9rem;
+      color: #b0c8e0;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .promo-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #087fff, #3d9cff);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      width: fit-content;
+      box-shadow: 0 4px 15px rgba(8,127,255,0.45);
+    }
+
+    /* الفيديوهات المقترحة */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .video-card {
+      background: #0b1a2c;
+      border: 1px solid #173553;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease;
+      min-width: 0;
+    }
+
+    .video-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-thumbnail video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .video-info {
+      padding: 14px;
+    }
+
+    .video-card .video-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 6px;
+      color: #f5f9ff;
+    }
+
+    .video-card .video-meta {
+      font-size: 0.85rem;
+      color: #718ba6;
+      margin-bottom: 0;
+    }
+
+    /* الشريط السفلي */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #081525;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #17304a;
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #718096;
+      font-size: 0.78rem;
+      gap: 4px;
+      min-width: 70px;
+    }
+
+    .nav-item.active {
+      color: #62b4ff;
+    }
+
+    .nav-item .icon {
+      font-size: 1.35rem;
+    }
+
+    @media (max-width: 600px) {
+      .promo-card {
+        height: 240px;
+      }
+
+      .promo-title {
+        font-size: 1.15rem;
+      }
+
+      .videos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .actions-bar {
+        gap: 8px;
+      }
+
+      .action-btn {
+        padding: 10px 12px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header class="header">
     <img src="icon.png" class="app-icon" alt="Alislamiah">
     <h1 id="header-title">Alislamiah-Tube</h1>
   </header>
+
   <main class="main-content">
+
+    <!-- مشغل الفيديو الأصلي -->
     <div class="video-container">
       <video id="main-player" controls autoplay playsinline>
         <source id="video-source" src="" type="video/mp4">
@@ -58,49 +435,87 @@
     </div>
 
     <h1 id="video-display-title" class="video-title">...</h1>
+
     <div class="video-meta">
       <span id="video-platform-text">Alislamiah-Tube</span>
       <span>•</span>
-      <span>👁️ <span id="view-count">0</span> <span id="view-text-label">مشاهدة</span></span>
+      <span>
+        👁️ <span id="view-count">0</span>
+        <span id="view-text-label">مشاهدة</span>
+      </span>
     </div>
 
+    <!-- أزرار التفاعل -->
     <div class="actions-bar">
       <button class="action-btn" id="like-btn" onclick="toggleLike()">
-        <span>👍</span> <span id="like-text">إعجاب</span> (<span id="like-count">0</span>)
+        <span>👍</span>
+        <span id="like-text">إعجاب</span>
+        (<span id="like-count">0</span>)
       </button>
+
       <button class="action-btn" onclick="shareVideo()">
-        <span>🔄</span> <span id="share-text-label">مشاركة</span> (<span id="share-count">0</span>)
+        <span>🔄</span>
+        <span id="share-text-label">مشاركة</span>
+        (<span id="share-count">0</span>)
       </button>
-      <!-- زر التلخيص: فقط نجمة الذكاء الاصطناعي -->
-      <button class="action-btn ai-summarize-btn" id="ai-summarize-btn" type="button" onclick="summarizeVideo()" title="تلخيص الفيديو">
+
+      <button
+        class="action-btn ai-summarize-btn"
+        id="ai-summarize-btn"
+        type="button"
+        onclick="summarizeVideo()"
+        title="تلخيص الفيديو">
         ✦
       </button>
     </div>
 
+    <!-- التعليقات -->
     <div class="comments-section">
       <h3 id="comments-heading">التعليقات</h3>
+
       <div class="comment-form">
-        <textarea id="comment-text-input" class="comment-input" rows="3" placeholder="اكتب تعليقاً طيباً..."></textarea>
+        <textarea
+          id="comment-text-input"
+          class="comment-input"
+          rows="3"
+          placeholder="اكتب تعليقاً طيباً..."></textarea>
+
         <button class="comment-submit" onclick="addComment()">نشر</button>
       </div>
+
       <div class="comments-list" id="comments-box">
         <div class="comment-item" id="empty-comment-msg">
-          <div class="comment-text" style="color:#55718d; text-align:center;">لا توجد تعليقات بعد.</div>
+          <div class="comment-text" style="color:#55718d;text-align:center;">
+            لا توجد تعليقات بعد.
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- كل ما يلي التعليقات: إعلان واحد ثم 10 فيديوهات عشوائية -->
+    <section class="recommendations">
+
+      <h2 class="section-title" id="ads-heading">إعلان مقترح</h2>
+      <div id="random-promo-container"></div>
+
+      <h2 class="section-title" id="recommended-heading">فيديوهات مقترحة</h2>
+      <div class="videos-grid" id="random-videos-container"></div>
+
+    </section>
+
   </main>
 
-      
   <nav class="bottom-nav">
     <a href="index.html" class="nav-item">
       <span class="icon">🏠</span>
       <span id="nav-home">الرئيسية</span>
     </a>
+
     <a href="search.html" class="nav-item">
       <span class="icon">🔍</span>
       <span id="nav-search">البحث</span>
     </a>
+
     <a href="Settings.html" class="nav-item">
       <span class="icon">⚙️</span>
       <span id="nav-settings">الإعدادات</span>
@@ -108,19 +523,123 @@
   </nav>
 
   <script>
+    /* =========================================
+       الترجمة
+    ========================================= */
+
     const translations = {
-      ar: { home: "الرئيسية", search: "البحث", settings: "الإعدادات", view: "مشاهدة", platform: "Alislamiah Tube", like: "إعجاب", liked: "تم الإعجاب", share: "مشاركة", commentsTitle: "التعليقات", placeholder: "اكتب تعليقاً طيباً...", submitBtn: "نشر", alertComment: "فضلاً اكتب تعليقاً أولاً.", emptyComments: "لا توجد تعليقات بعد. كن أول من يعلق!", commentUser: "متابِع المنصة", copied: "تم نسخ الرابط!", dir: "rtl" },
-      fr: { home: "Accueil", search: "Recherche", settings: "Paramètres", view: "vues", platform: "Plateforme Alislamiah-Tube", like: "J'aime", liked: "Aimé", share: "Partager", commentsTitle: "Commentaires", placeholder: "Écrire un commentaire...", submitBtn: "Publier", alertComment: "Veuillez écrire un commentaire.", emptyComments: "Aucun commentaire. Soyez le premier!", commentUser: "Abonné", copied: "Lien copié!", dir: "ltr" },
-      en: { home: "Home", search: "Search", settings: "Settings", view: "views", platform: "Standard Alislamiah-Tube Platform", like: "Like", liked: "Liked", share: "Share", commentsTitle: "Comments", placeholder: "Write a comment...", submitBtn: "Post", alertComment: "Please write a comment.", emptyComments: "No comments yet. Be the first!", commentUser: "Follower", copied: "Link copied!", dir: "ltr" }
+      ar: {
+        home: "الرئيسية",
+        search: "البحث",
+        settings: "الإعدادات",
+        view: "مشاهدة",
+        platform: "Alislamiah Tube",
+        like: "إعجاب",
+        liked: "تم الإعجاب",
+        share: "مشاركة",
+        commentsTitle: "التعليقات",
+        placeholder: "اكتب تعليقاً طيباً...",
+        submitBtn: "نشر",
+        alertComment: "فضلاً اكتب تعليقاً أولاً.",
+        emptyComments: "لا توجد تعليقات بعد. كن أول من يعلق!",
+        commentUser: "متابِع المنصة",
+        copied: "تم نسخ الرابط!",
+        ads: "إعلان مقترح",
+        recommended: "فيديوهات مقترحة",
+        dir: "rtl"
+      },
+
+      fr: {
+        home: "Accueil",
+        search: "Recherche",
+        settings: "Paramètres",
+        view: "vues",
+        platform: "Plateforme Alislamiah-Tube",
+        like: "J'aime",
+        liked: "Aimé",
+        share: "Partager",
+        commentsTitle: "Commentaires",
+        placeholder: "Écrire un commentaire...",
+        submitBtn: "Publier",
+        alertComment: "Veuillez écrire un commentaire.",
+        emptyComments: "Aucun commentaire. Soyez le premier !",
+        commentUser: "Abonné",
+        copied: "Lien copié !",
+        ads: "Publicité suggérée",
+        recommended: "Vidéos suggérées",
+        dir: "ltr"
+      },
+
+      en: {
+        home: "Home",
+        search: "Search",
+        settings: "Settings",
+        view: "views",
+        platform: "Standard Alislamiah-Tube Platform",
+        like: "Like",
+        liked: "Liked",
+        share: "Share",
+        commentsTitle: "Comments",
+        placeholder: "Write a comment...",
+        submitBtn: "Post",
+        alertComment: "Please write a comment.",
+        emptyComments: "No comments yet. Be the first!",
+        commentUser: "Follower",
+        copied: "Link copied!",
+        ads: "Suggested advertisement",
+        recommended: "Recommended videos",
+        dir: "ltr"
+      }
     };
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const videoFile = urlParams.get('v') || 'default';
-    const videoTitle = urlParams.get('title');
+    const savedLanguage = localStorage.getItem("app_lang") || "ar";
+    let currentLang = translations[savedLanguage] ? savedLanguage : "ar";
 
-    const player = document.getElementById('main-player');
-    const source = document.getElementById('video-source');
-    const titleElement = document.getElementById('video-display-title');
+    function applyLanguage(lang) {
+      if (!translations[lang]) lang = "ar";
+
+      currentLang = lang;
+      const t = translations[lang];
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = t.dir;
+
+      document.getElementById("nav-home").textContent = t.home;
+      document.getElementById("nav-search").textContent = t.search;
+      document.getElementById("nav-settings").textContent = t.settings;
+      document.getElementById("video-platform-text").textContent = t.platform;
+      document.getElementById("view-text-label").textContent = t.view;
+      document.getElementById("like-text").textContent =
+        localStorage.getItem(LIKE_KEY) === "true" ? t.liked : t.like;
+
+      document.getElementById("share-text-label").textContent = t.share;
+      document.getElementById("comments-heading").textContent = t.commentsTitle;
+      document.getElementById("comment-text-input").placeholder = t.placeholder;
+      document.querySelector(".comment-submit").textContent = t.submitBtn;
+      document.getElementById("ads-heading").textContent = t.ads;
+      document.getElementById("recommended-heading").textContent = t.recommended;
+
+      const emptyMsg = document.getElementById("empty-comment-msg");
+      if (emptyMsg) {
+        emptyMsg.querySelector(".comment-text").textContent = t.emptyComments;
+      }
+
+      document.querySelectorAll(".comment-user").forEach(element => {
+        element.textContent = t.commentUser;
+      });
+    }
+
+    /* =========================================
+       معلومات الفيديو المشغّل
+    ========================================= */
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoFile = urlParams.get("v") || "default";
+    const videoTitle = urlParams.get("title");
+
+    const player = document.getElementById("main-player");
+    const source = document.getElementById("video-source");
+    const titleElement = document.getElementById("video-display-title");
 
     const LIKE_KEY = `liked_${videoFile}`;
     const LIKE_COUNT_KEY = `likes_count_${videoFile}`;
@@ -128,118 +647,367 @@
     const VIEW_KEY = `views_${videoFile}`;
     const SHARE_KEY = `shares_${videoFile}`;
 
-    let currentLang = localStorage.getItem("app_lang") || "ar";
-
-    function applyLanguage(lang) {
-      if (!translations[lang]) lang = "ar";
-      const t = translations[lang];
-
-      document.documentElement.setAttribute("lang", lang);
-      document.documentElement.setAttribute("dir", t.dir);
-
-      document.getElementById('nav-home').textContent = t.home;
-      document.getElementById('nav-search').textContent = t.search;
-      document.getElementById('nav-settings').textContent = t.settings;
-      document.getElementById('video-platform-text').textContent = t.platform;
-      document.getElementById('view-text-label').textContent = t.view;
-      document.getElementById('like-text').textContent = localStorage.getItem(LIKE_KEY) === 'true' ? t.liked : t.like;
-      document.getElementById('share-text-label').textContent = t.share;
-      document.getElementById('comments-heading').textContent = t.commentsTitle;
-      document.getElementById('comment-text-input').placeholder = t.placeholder;
-      document.querySelector('.comment-submit').textContent = t.submitBtn;
-
-      const emptyMsg = document.getElementById('empty-comment-msg');
-      if (emptyMsg) emptyMsg.querySelector('.comment-text').textContent = t.emptyComments;
-    }
-
-    if (urlParams.get('v')) {
+    if (urlParams.has("v")) {
       source.src = videoFile;
       player.load();
       player.play().catch(() => {});
 
-      let currentViews = parseInt(localStorage.getItem(VIEW_KEY)) || 0;
+      let currentViews = parseInt(localStorage.getItem(VIEW_KEY), 10) || 0;
       currentViews++;
-      localStorage.setItem(VIEW_KEY, currentViews);
-      document.getElementById('view-count').innerText = currentViews;
+
+      localStorage.setItem(VIEW_KEY, String(currentViews));
+      document.getElementById("view-count").textContent = currentViews;
     }
 
-    if (videoTitle) { titleElement.innerText = decodeURIComponent(videoTitle); }
+    if (videoTitle) {
+      titleElement.textContent = videoTitle;
+    } else {
+      titleElement.textContent = "Alislamiah-Tube";
+    }
 
-    let isLiked = localStorage.getItem(LIKE_KEY) === 'true';
-    let likesCount = parseInt(localStorage.getItem(LIKE_COUNT_KEY)) || 0;
-    let sharesCount = parseInt(localStorage.getItem(SHARE_KEY)) || 0;
+    /* =========================================
+       الإعجابات والمشاركات
+    ========================================= */
 
-    document.getElementById('like-count').innerText = likesCount;
-    document.getElementById('share-count').innerText = sharesCount;
-    if(isLiked) document.getElementById('like-btn').classList.add('liked');
+    let isLiked = localStorage.getItem(LIKE_KEY) === "true";
+    let likesCount = parseInt(localStorage.getItem(LIKE_COUNT_KEY), 10) || 0;
+    let sharesCount = parseInt(localStorage.getItem(SHARE_KEY), 10) || 0;
 
-    const savedComments = JSON.parse(localStorage.getItem(COMMENT_KEY)) || [];
-    const commentsBox = document.getElementById('comments-box');
-    if (savedComments.length > 0) {
-      document.getElementById('empty-comment-msg').style.display = 'none';
-      savedComments.forEach(text => {
-        const commentItem = document.createElement('div');
-        commentItem.className = 'comment-item';
-        commentItem.style.marginBottom = '12px';
-        commentItem.innerHTML = `<div class="comment-user">${translations[currentLang].commentUser}</div><div class="comment-text">${text}</div>`;
-        commentsBox.appendChild(commentItem);
-      });
+    document.getElementById("like-count").textContent = likesCount;
+    document.getElementById("share-count").textContent = sharesCount;
+
+    if (isLiked) {
+      document.getElementById("like-btn").classList.add("liked");
     }
 
     function toggleLike() {
-      const likeBtn = document.getElementById('like-btn');
-      const likeCountElement = document.getElementById('like-count');
-      const likeText = document.getElementById('like-text');
+      const likeBtn = document.getElementById("like-btn");
+      const likeCountElement = document.getElementById("like-count");
+      const likeText = document.getElementById("like-text");
+      const t = translations[currentLang];
+
       isLiked = !isLiked;
-      if(isLiked) { likesCount++; likeBtn.classList.add('liked'); likeText.innerText = translations[currentLang].liked; } 
-      else { likesCount--; likeBtn.classList.remove('liked'); likeText.innerText = translations[currentLang].like; }
-      likeCountElement.innerText = likesCount;
-      localStorage.setItem(LIKE_KEY, isLiked);
-      localStorage.setItem(LIKE_COUNT_KEY, likesCount);
+
+      if (isLiked) {
+        likesCount++;
+        likeBtn.classList.add("liked");
+        likeText.textContent = t.liked;
+      } else {
+        likesCount = Math.max(0, likesCount - 1);
+        likeBtn.classList.remove("liked");
+        likeText.textContent = t.like;
+      }
+
+      likeCountElement.textContent = likesCount;
+      localStorage.setItem(LIKE_KEY, String(isLiked));
+      localStorage.setItem(LIKE_COUNT_KEY, String(likesCount));
     }
 
-    function shareVideo() {
+    async function shareVideo() {
       sharesCount++;
-      localStorage.setItem(SHARE_KEY, sharesCount);
-      document.getElementById('share-count').innerText = sharesCount;
-      if (navigator.share) { navigator.share({ title: document.title, url: window.location.href }).catch(() => {}); } 
-      else { navigator.clipboard.writeText(window.location.href); alert(translations[currentLang].copied); }
+
+      localStorage.setItem(SHARE_KEY, String(sharesCount));
+      document.getElementById("share-count").textContent = sharesCount;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: document.title,
+            url: window.location.href
+          });
+        } catch (error) {
+          // ألغى المستخدم المشاركة أو لم يدعم المتصفح العملية.
+        }
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          alert(translations[currentLang].copied);
+        } catch (error) {
+          prompt("انسخ رابط الفيديو:", window.location.href);
+        }
+      }
     }
+
+    /* =========================================
+       التعليقات المحفوظة محلياً
+    ========================================= */
+
+    let savedComments = [];
+
+    try {
+      const parsedComments = JSON.parse(localStorage.getItem(COMMENT_KEY) || "[]");
+      savedComments = Array.isArray(parsedComments) ? parsedComments : [];
+    } catch (error) {
+      savedComments = [];
+    }
+
+    const commentsBox = document.getElementById("comments-box");
+
+    function renderComment(text, prepend = false) {
+      const emptyMsg = document.getElementById("empty-comment-msg");
+      if (emptyMsg) emptyMsg.style.display = "none";
+
+      const commentItem = document.createElement("div");
+      commentItem.className = "comment-item";
+
+      const user = document.createElement("div");
+      user.className = "comment-user";
+      user.textContent = translations[currentLang].commentUser;
+
+      const content = document.createElement("div");
+      content.className = "comment-text";
+      content.textContent = text;
+
+      commentItem.appendChild(user);
+      commentItem.appendChild(content);
+
+      if (prepend) {
+        commentsBox.insertBefore(commentItem, commentsBox.firstChild);
+      } else {
+        commentsBox.appendChild(commentItem);
+      }
+    }
+
+    savedComments.forEach(comment => renderComment(comment));
 
     function addComment() {
-      const input = document.getElementById('comment-text-input');
-      const emptyMsg = document.getElementById('empty-comment-msg');
+      const input = document.getElementById("comment-text-input");
       const commentText = input.value.trim();
-      if (commentText === "") { alert(translations[currentLang].alertComment); return; }
-      if (emptyMsg) emptyMsg.style.display = 'none';
-      const commentItem = document.createElement('div');
-      commentItem.className = 'comment-item';
-      commentItem.style.marginBottom = '12px';
-      const formattedText = commentText.replace(/\n/g, '<br>');
-      commentItem.innerHTML = `<div class="comment-user">${translations[currentLang].commentUser}</div><div class="comment-text">${formattedText}</div>`;
-      commentsBox.insertBefore(commentItem, commentsBox.firstChild);
-      savedComments.unshift(formattedText);
+
+      if (!commentText) {
+        alert(translations[currentLang].alertComment);
+        return;
+      }
+
+      savedComments.unshift(commentText);
       localStorage.setItem(COMMENT_KEY, JSON.stringify(savedComments));
-      input.value = ""; 
+
+      renderComment(commentText, true);
+      input.value = "";
     }
 
-    // دالة زر التلخيص (النجمة فقط)
+    /* =========================================
+       زر تلخيص الفيديو
+    ========================================= */
+
     function summarizeVideo() {
-      const outputLang = localStorage.getItem("app_lang") || "ar";
-      const title = document.getElementById("video-display-title")?.textContent?.trim() || "فيديو";
-      const playerEl = document.getElementById("main-player");
-      const videoUrl = playerEl?.currentSrc || playerEl?.src || videoFile || location.href;
+  const currentVideo = videoFile;
+  const currentTitle = videoTitle || "Alislamiah-Tube";
 
-      const url = new URL("sumarize.html", location.href);
-      url.searchParams.set("summarize", "1");
-      url.searchParams.set("title", title);
-      url.searchParams.set("videoUrl", videoUrl);
-      url.searchParams.set("outputLang", outputLang);
+  const summarizeUrl =
+    "sumarize.html?v=" + encodeURIComponent(currentVideo) +
+    "&title=" + encodeURIComponent(currentTitle);
 
-      location.href = url.href;
-    }
+  window.location.href = summarizeUrl;
+}
 
-    applyLanguage(currentLang);
-  </script>
+/* =========================================
+   الإعلانات العشوائية
+========================================= */
+
+const promoItems = [
+  {
+    title: "Alislamiah.net",
+    description: "منصة تعليمية متكاملة ومجانية من الإسلامية",
+    badge: "منصة تعليمية",
+    button: "اكتشف المنصة ←",
+    url: "https://mohamedmadoui5195.github.io/Alislamiah-_net/",
+    image: "Alislamiah.net.png",
+    type: "image"
+  },
+  {
+    title: "Outhub",
+    description: "منصة تطوير المواقع والتطبيقات من الإسلامية",
+    badge: "تطوير ويب",
+    button: "ابدأ التطوير ←",
+    url: "https://mohamedmadoui5195.github.io/outhub/",
+    image: "outhub.mp4",
+    type: "video"
+  },
+  {
+    title: "Gemalot",
+    description: "نموذج الذكاء الاصطناعي المطور بواسطة الإسلامية",
+    badge: "ذكاء اصطناعي",
+    button: "جرّب النموذج ←",
+    url: "https://mohamedmadoui5195.github.io/Gemalot/",
+    image: "Gemalot.png",
+    type: "image"
+  }
+];
+
+function renderRandomPromo() {
+  const container = document.getElementById("random-promo-container");
+
+  if (!promoItems.length) return;
+
+  const promo = promoItems[
+    Math.floor(Math.random() * promoItems.length)
+  ];
+
+  const card = document.createElement("a");
+  card.className = "promo-card";
+  card.href = promo.url;
+  card.target = "_blank";
+  card.rel = "noopener noreferrer";
+
+  let media;
+
+  if (promo.type === "video") {
+    media = document.createElement("video");
+    media.src = promo.image;
+    media.autoplay = true;
+    media.muted = true;
+    media.loop = true;
+    media.playsInline = true;
+  } else {
+    media = document.createElement("img");
+    media.src = promo.image;
+    media.alt = promo.title;
+  }
+
+  media.className = "promo-media";
+
+  const overlay = document.createElement("div");
+  overlay.className = "promo-overlay";
+
+  const content = document.createElement("div");
+  content.className = "promo-content";
+
+  const badge = document.createElement("span");
+  badge.className = "promo-badge";
+  badge.textContent = promo.badge;
+
+  const title = document.createElement("h3");
+  title.className = "promo-title";
+  title.textContent = promo.title;
+
+  const description = document.createElement("p");
+  description.className = "promo-desc";
+  description.textContent = promo.description;
+
+  const button = document.createElement("span");
+  button.className = "promo-btn";
+  button.textContent = promo.button;
+
+  content.append(badge, title, description, button);
+  card.append(media, overlay, content);
+  container.replaceChildren(card);
+}
+
+/* =========================================
+   جميع الفيديوهات المتاحة
+   أضف الفيديوهات الجديدة داخل هذه المصفوفة
+========================================= */
+
+const allVideos = [
+  {
+    file: "IMG_20260814_164242_861.mp4",
+    title: "ما تيسر من سورة إبراهيم"
+  },
+  {
+    file: "lv_0_20260824111719.mp4",
+    title: "آيات من سورة مريم بصوت مشاري راشد العفاسي"
+  },
+  {
+    file: "IMG_20260812_142700_033.mp4",
+    title: "بل الساعة موعدهم والساعة أدهى وأمر تلاوة عطرة بصوت الشيخ مشاري العفاسي"
+  },
+  {
+    file: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1).mp4",
+    title: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1)"
+  },
+  {
+    file: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية.mp4",
+    title: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية"
+  },
+  {
+    file: "فرض الفصل الثالث في ماده العلوم الفيزيائيه السنه اولى متوسط.mp4",
+    title: "فرض الفصل الثالث في مادة العلوم الفيزيائية السنة الأولى متوسط"
+  },
+  {
+    file: "نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط.mp4",
+    title: "نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط"
+  },
+  {
+    file: "شرح درس الخطاب المباشر والغير مباشر مكتوب.mp4",
+    title: "شرح درس الخطاب المباشر والغير مباشر"
+  },
+  {
+    file: "شرح درس Despite and in spite of.mp4",
+    title: "شرح درس Despite and in spite of"
+  },
+  {
+    file: "شرح درس Linking words.mp4",
+    title: "شرح درس Linking words"
+  }
+];
+
+/* =========================================
+   اختيار فيديوهات عشوائية دون تكرار
+========================================= */
+
+function getRandomVideos(videos, count) {
+  const shuffled = [...videos];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled.slice(0, Math.min(count, shuffled.length));
+}
+
+function renderRandomVideos() {
+  const container = document.getElementById("random-videos-container");
+  const selectedVideos = getRandomVideos(allVideos, 10);
+
+  container.replaceChildren();
+
+  selectedVideos.forEach(video => {
+    const card = document.createElement("a");
+    card.className = "video-card";
+
+    card.href =
+      "watch.html?v=" + encodeURIComponent(video.file) +
+      "&title=" + encodeURIComponent(video.title);
+
+    const thumbnail = document.createElement("div");
+    thumbnail.className = "video-thumbnail";
+
+    const preview = document.createElement("video");
+    preview.src = video.file;
+    preview.muted = true;
+    preview.preload = "metadata";
+    preview.playsInline = true;
+
+    thumbnail.appendChild(preview);
+
+    const info = document.createElement("div");
+    info.className = "video-info";
+
+    const title = document.createElement("h3");
+    title.className = "video-title";
+    title.textContent = video.title;
+
+    const meta = document.createElement("div");
+    meta.className = "video-meta";
+    meta.textContent = translations[currentLang].platform;
+
+    info.append(title, meta);
+    card.append(thumbnail, info);
+    container.appendChild(card);
+  });
+}
+
+/* =========================================
+   تطبيق اللغة وعرض الإعلان والفيديوهات
+========================================= */
+
+applyLanguage(currentLang);
+renderRandomPromo();
+renderRandomVideos();
+</script>
+
 </body>
 </html>
