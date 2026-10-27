@@ -1007,19 +1007,19 @@ function renderRandomVideos() {
 applyLanguage(currentLang);
 renderRandomPromo();
 renderRandomVideos();
-/* =========================================
-   زر تلخيص الفيديو
-========================================= */
 
 function summarizeVideo() {
   const currentVideo = videoFile;
   const currentTitle = videoTitle || "Alislamiah-Tube";
 
-  const summarizeUrl =
-    "sumarize.html?v=" + encodeURIComponent(currentVideo) +
-    "&title=" + encodeURIComponent(currentTitle);
+  const params = new URLSearchParams({
+    summarize: "1",
+    title: currentTitle,
+    videoUrl: currentVideo,
+    outputLang: localStorage.getItem("app_lang") || "ar"
+  });
 
-  window.location.href = summarizeUrl;
+  window.location.href = "sumarize.html?" + params.toString();
 }
 </script>
 
