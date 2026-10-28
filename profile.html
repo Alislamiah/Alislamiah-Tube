@@ -53,84 +53,145 @@ body{font-family:Arial,Tahoma,sans-serif;background:#07111f;color:#fff;min-heigh
   <a href="Settings.html" class="nav-item"><span class="icon">⚙️</span><span>الإعدادات</span></a>
 </nav>
 <script src="profiles.js"></script>
+
+
 <script>
-(function(){
+(function () {
+  "use strict";
+
   const params = new URLSearchParams(window.location.search);
   const requestedName = (params.get("name") || "").trim();
-  const normalize = value => String(value || "").trim().toLocaleLowerCase();
-  const profileUrlKey = value => {
-    try {
-      const u = new URL(value, window.location.href);
-      return (u.pathname.split("/").pop() || "profile.html") + "?name=" + (u.searchParams.get("name") || "");
-    } catch (_) { return String(value || "").trim(); }
-  };
-  const profiles = Array.isArray(window.ALISLAMIAH_PROFILES) ? window.ALISLAMIAH_PROFILES : [];
-  const allVideos = Array.isArray(window.ALISLAMIAH_VIDEOS) ? window.ALISLAMIAH_VIDEOS : [];
-  const profile = profiles.find(item => normalize(item.name) === normalize(requestedName)
-    || normalize(new URLSearchParams(String(item.url || "").split("?")[1] || "").get("name")) === normalize(requestedName));
+  const normalize = value => String(value || "").trim().toLowerCase();
+
   const card = document.getElementById("profile-card");
   const grid = document.getElementById("profile-videos");
   const empty = document.getElementById("profile-empty");
   const heading = document.getElementById("videos-heading");
 
-  if (!requestedName || !profile) {
+  function showError(message) {
     empty.hidden = false;
     heading.hidden = true;
-    empty.textContent = requestedName
-      ? 'لم يتم العثور على بروفايل باسم "' + requestedName + '". تأكد من إضافته في profiles.js.'
-      : 'لم يُحدَّد اسم البروفايل في الرابط.';
+    empty.textContent = message;
+  }
+
+  // اكتشاف ما إذا كان profiles.js قد حُمّل بالفعل.
+  if (!Array.isArray(window.ALISLAMIAH_PROFILES)) {
+    showError("لم يتم تحميل profiles.js أو أن الملف لا يعرّف ALISLAMIAH_PROFILES. تحقق من اسم الملف ومكانه.");
     return;
   }
 
+  const profiles = window.ALISLAMIAH_PROFILES;
+  const allVideos = Array.isArray(window.ALISLAMIAH_VIDEOS)
+    ? window.ALISLAMIAH_VIDEOS
+    : [];
+
+  if (!requestedName) {
+    showError("الرابط يجب أن يحتوي على ?name=Alislamiah");
+    return;
+  }
+
+  function urlName(value) {
+    try {
+      return new URL(value, window.location.href).searchParams.get("name") || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  const profile = profiles.find(item =>
+    normalize(item.name) === normalize(requestedName) ||
+    normalize(urlName(item.url)) === normalize(requestedName)
+  );
+
+  if (!profile) {
+    showError('لم يتم العثور على بروفايل باسم "' + requestedName + '".');
+    return;
+  }
+
+  // عرض بيانات البروفايل دون تغيير التصميم.
   document.title = profile.name + " - Alislamiah Tube";
   card.hidden = false;
+  heading.hidden = false;
+
   const image = document.getElementById("profile-image");
   image.src = profile.image || "icon.png";
   image.alt = profile.name;
-  image.onerror = function(){ if (this.dataset.fallback !== "1") { this.dataset.fallback = "1"; this.src = "icon.png"; } };
-  document.getElementById("profile-name").textContent = profile.name;
-  document.getElementById("profile-description").textContent = profile.description || "";
-  document.getElementById("profile-information").textContent = profile.information || "";
+  image.onerror = function () {
+    this.onerror = null;
+    this.src = "icon.png";
+  };
 
-  // كل فيديو ينتمي للبروفايل عندما يشير profileUrl إلى اسم/رابط هذا البروفايل.
-  const canonicalProfileUrl = profileUrlKey(profile.url || ("profile.html?name=" + encodeURIComponent(profile.name)));
+  document.getElementById("profile-name").textContent = profile.name || "";
+  document.getElementById("profile-description").textContent =
+    profile.description || "";
+  document.getElementById("profile-information").textContent =
+    profile.information || "";
+
+  // الربط بواسطة profileUrl كما هو موجود في profiles.js.
   const ownedVideos = allVideos.filter(video => {
     if (!video || !video.profileUrl) return false;
-    if (profileUrlKey(video.profileUrl) === canonicalProfileUrl) return true;
-    const linkedName = new URLSearchParams(String(video.profileUrl).split("?")[1] || "").get("name");
-    return normalize(linkedName) === normalize(profile.name);
+
+    const linkedName = urlName(video.profileUrl);
+
+    if (linkedName) {
+      return normalize(linkedName) === normalize(profile.name);
+    }
+
+    return normalize(video.profileName) === normalize(profile.name);
   });
 
+  grid.replaceChildren();
+
   ownedVideos.forEach(video => {
+    if (!video.file) return;
+
     const link = document.createElement("a");
     link.className = "video-card";
-    link.href = "watch.html?v=" + encodeURIComponent(video.file) + "&title=" + encodeURIComponent(video.title || video.file);
+
+    const query = new URLSearchParams({
+      v: video.file,
+      title: video.title || video.file
+    });
+
+    link.href = "watch.html?" + query.toString();
+
     const thumbnail = document.createElement("div");
     thumbnail.className = "video-thumbnail";
+
     const preview = document.createElement("video");
     preview.src = video.file;
     preview.preload = "metadata";
     preview.muted = true;
     preview.playsInline = true;
+
     thumbnail.appendChild(preview);
+
     const info = document.createElement("div");
     info.className = "video-info";
+
     const title = document.createElement("div");
     title.className = "video-title";
     title.textContent = video.title || video.file;
+
     const meta = document.createElement("div");
     meta.className = "video-meta";
-    meta.textContent = profile.name;
+    meta.textContent = video.profileName || profile.name;
+
     info.append(title, meta);
     link.append(thumbnail, info);
     grid.appendChild(link);
   });
 
-  if (!ownedVideos.length) {
-    empty.hidden = false;
-    empty.textContent = 'لا توجد فيديوهات مرتبطة بالبروفايل "' + profile.name + '" في profiles.js.';
+  if (!grid.children.length) {
+    showError(
+      'تم العثور على البروفايل "' + profile.name +
+      '"، لكن لم توجد فيديوهات مرتبطة به.'
+    );
+  } else {
+    empty.hidden = true;
   }
 })();
 </script>
+
 </body>
 </html>
