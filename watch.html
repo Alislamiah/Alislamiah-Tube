@@ -480,16 +480,6 @@
 
     <h1 id="video-display-title" class="video-title">...</h1>
 
-    <div class="video-meta">
-      <span id="video-platform-text">Alislamiah-Tube</span>
-      <span>•</span>
-      <span>
-        👁️ <span id="view-count">0</span>
-        <span id="view-text-label">مشاهدة</span>
-      </span>
-    </div>
-
-
     <div class="channel-profile" id="channel-profile">
       <a class="channel-profile-link" id="channel-profile-link" href="profile.html?name=Alislamiah">
         <img class="channel-avatar" id="channel-profile-image" src="Alislamiah.png" alt="صورة البروفايل">
@@ -499,6 +489,16 @@
         </div>
       </a>
     </div>
+
+    <div class="video-meta">
+      <span id="video-platform-text">Alislamiah-Tube</span>
+      <span>•</span>
+      <span>
+        👁️ <span id="view-count">0</span>
+        <span id="view-text-label">مشاهدة</span>
+      </span>
+    </div>
+
 
     <!-- أزرار التفاعل -->
     <div class="actions-bar">
@@ -727,23 +727,32 @@
        بروفايل صاحب الفيديو: الرابط نفسه هو مرجع الانتماء
     ========================================= */
     function renderCurrentProfile() {
-      const video = allVideos.find(item => item.file === videoFile);
+      const cleanFile = value => {
+        try { return decodeURIComponent(String(value || "").split("/").pop()).trim(); }
+        catch (_) { return String(value || "").split("/").pop().trim(); }
+      };
+      const video = (Array.isArray(allVideos) ? allVideos : []).find(
+        item => cleanFile(item.file) === cleanFile(videoFile)
+      );
+
+      // أظهر بروفايل Alislamiah للفيديو المفتوح حتى إن لم تتطابق بيانات القائمة.
+      const profileUrl = (video && video.profileUrl) || "profile.html?name=Alislamiah";
+      const profiles = Array.isArray(window.ALISLAMIAH_PROFILES) ? window.ALISLAMIAH_PROFILES : [];
+      const profile = profiles.find(item => item.url === profileUrl) || {};
       const profileCard = document.getElementById("channel-profile");
-      if (!video || !video.profileUrl) {
-        profileCard.classList.remove("visible");
-        return;
-      }
-      const profile = (window.ALISLAMIAH_PROFILES || []).find(item => item.url === video.profileUrl);
-      if (!profile) {
-        profileCard.classList.remove("visible");
-        return;
-      }
-      document.getElementById("channel-profile-link").href = profile.url;
-      document.getElementById("channel-profile-image").src = profile.image || "Alislamiah.png";
-      document.getElementById("channel-profile-image").alt = profile.name || "Profile";
-      document.getElementById("channel-profile-name").textContent = profile.name || "";
+      const profileLink = document.getElementById("channel-profile-link");
+      const profileImage = document.getElementById("channel-profile-image");
+      const profileName = document.getElementById("channel-profile-name");
+      const profileLabel = document.getElementById("channel-profile-label");
+
+      profileLink.href = profile.url || profileUrl;
+      profileName.textContent = profile.name || (video && video.profileName) || "Alislamiah";
+      profileImage.src = profile.image || (video && video.profileImage) || "Alislamiah.png";
+      profileImage.alt = profileName.textContent;
+      profileLabel.textContent = "عرض البروفايل";
       profileCard.classList.add("visible");
     }
+
     /* =========================================
        الإعجابات والمشاركات
     ========================================= */
