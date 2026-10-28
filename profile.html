@@ -14,20 +14,22 @@ body{font-family:Arial,Tahoma,sans-serif;background:#07111f;color:#fff;min-heigh
 .header h1{font-size:1.2rem;color:#6fb7ff}
 .main{max-width:1100px;margin:auto;padding:22px 16px}
 .profile-card[hidden],.empty[hidden],.section-title[hidden]{display:none !important}
-.profile-card{display:flex;align-items:center;gap:18px;padding:22px;background:#0b1a2c;border:1px solid #173553;border-radius:18px;margin-bottom:28px}
-.profile-avatar{width:100px;height:100px;flex:0 0 100px;border-radius:50%;object-fit:cover;border:3px solid #31577e;background:#07111f}
-.profile-name{font-size:1.5rem;font-weight:700;margin-bottom:8px;overflow-wrap:anywhere}
-.profile-description{color:#a9bfd7;line-height:1.7;margin-bottom:6px}
-.profile-information{color:#dcecff;line-height:1.7;white-space:pre-wrap}
-.section-title{font-size:1.15rem;margin:24px 0 16px}
-.videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.profile-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 18px;background:transparent;border:0;border-radius:0;margin-bottom:24px}
+.profile-avatar{width:104px;height:104px;flex:0 0 104px;border-radius:50%;object-fit:cover;border:2px solid #31577e;background:#07111f}
+.profile-name{font-size:1.45rem;font-weight:700;margin:0 0 6px;overflow-wrap:anywhere;color:#f5f9ff}
+.profile-description{color:#a9bfd7;line-height:1.7;margin:0 0 4px;max-width:720px}
+.profile-information{color:#dcecff;line-height:1.7;white-space:pre-wrap;max-width:720px}
+.section-title{font-size:1.3rem;margin:20px 0;color:#fff;font-weight:700}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
 .video-card{display:block;min-width:0;overflow:hidden;text-decoration:none;color:#fff;background:#0b1a2c;border:1px solid #173553;border-radius:12px}
-.video-thumbnail{aspect-ratio:16/9;background:#000}
+.video-card:hover{border-color:#285b89}
+.video-thumbnail{width:100%;aspect-ratio:16/9;background:#000}
 .video-thumbnail video{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.video-info{padding:13px}
-.video-title{font-size:1rem;line-height:1.5;margin-bottom:7px}
-.video-meta{font-size:.82rem;color:#8ea8c4}
+.video-info{padding:14px}
+.video-title{font-size:1rem;font-weight:600;line-height:1.4;margin-bottom:6px;color:#f5f9ff}
+.video-meta{font-size:.85rem;color:#718ba6}
 .empty{padding:22px;text-align:center;color:#9cb2ca;background:#0b1a2c;border:1px solid #173553;border-radius:12px;line-height:1.8}
+@media(max-width:600px){.videos-grid{grid-template-columns:1fr}.profile-avatar{width:92px;height:92px;flex-basis:92px}}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:20;display:flex;justify-content:space-around;padding:10px 0;background:#081525;border-top:1px solid #17304a}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:#718096;font-size:.78rem;min-width:70px}
 .nav-item .icon{font-size:1.35rem}
@@ -53,39 +55,81 @@ body{font-family:Arial,Tahoma,sans-serif;background:#07111f;color:#fff;min-heigh
 <script src="profiles.js"></script>
 <script>
 (function(){
-  const params = new URLSearchParams(location.search);
-  const requestedName = params.get("name") || "";
-  const profiles = window.ALISLAMIAH_PROFILES || [];
-  const videos = window.ALISLAMIAH_VIDEOS || [];
-  const profile = profiles.find(item => item.name === requestedName && item.url === ("profile.html?name=" + encodeURIComponent(requestedName)));
+  const params = new URLSearchParams(window.location.search);
+  const requestedName = (params.get("name") || "").trim();
+  const normalize = value => String(value || "").trim().toLocaleLowerCase();
+  const profileUrlKey = value => {
+    try {
+      const u = new URL(value, window.location.href);
+      return (u.pathname.split("/").pop() || "profile.html") + "?name=" + (u.searchParams.get("name") || "");
+    } catch (_) { return String(value || "").trim(); }
+  };
+  const profiles = Array.isArray(window.ALISLAMIAH_PROFILES) ? window.ALISLAMIAH_PROFILES : [];
+  const allVideos = Array.isArray(window.ALISLAMIAH_VIDEOS) ? window.ALISLAMIAH_VIDEOS : [];
+  const profile = profiles.find(item => normalize(item.name) === normalize(requestedName)
+    || normalize(new URLSearchParams(String(item.url || "").split("?")[1] || "").get("name")) === normalize(requestedName));
+  const card = document.getElementById("profile-card");
   const grid = document.getElementById("profile-videos");
   const empty = document.getElementById("profile-empty");
-  if (!profile) { empty.hidden = false; document.getElementById("videos-heading").hidden = true; return; }
+  const heading = document.getElementById("videos-heading");
+
+  if (!requestedName || !profile) {
+    empty.hidden = false;
+    heading.hidden = true;
+    empty.textContent = requestedName
+      ? 'لم يتم العثور على بروفايل باسم "' + requestedName + '". تأكد من إضافته في profiles.js.'
+      : 'لم يُحدَّد اسم البروفايل في الرابط.';
+    return;
+  }
+
   document.title = profile.name + " - Alislamiah Tube";
-  document.getElementById("profile-card").hidden = false;
-  document.getElementById("profile-image").src = profile.image || "Alislamiah.png";
-  document.getElementById("profile-image").alt = profile.name;
+  card.hidden = false;
+  const image = document.getElementById("profile-image");
+  image.src = profile.image || "icon.png";
+  image.alt = profile.name;
+  image.onerror = function(){ if (this.dataset.fallback !== "1") { this.dataset.fallback = "1"; this.src = "icon.png"; } };
   document.getElementById("profile-name").textContent = profile.name;
   document.getElementById("profile-description").textContent = profile.description || "";
   document.getElementById("profile-information").textContent = profile.information || "";
 
-  /* الانتماء يُحدد بمطابقة رابط البروفايل نفسه، وليس بإنشاء معرف منفصل. */
-  const ownedVideos = videos.filter(video => video.profileUrl === profile.url);
-  ownedVideos.forEach(video => {
-    const card = document.createElement("a");
-    card.className = "video-card";
-    card.href = "watch.html?v=" + encodeURIComponent(video.file) + "&title=" + encodeURIComponent(video.title);
-    const thumb = document.createElement("div");
-    thumb.className = "video-thumbnail";
-    const preview = document.createElement("video");
-    preview.src = video.file; preview.preload = "metadata"; preview.muted = true; preview.playsInline = true;
-    thumb.appendChild(preview);
-    const info = document.createElement("div"); info.className = "video-info";
-    const title = document.createElement("h3"); title.className = "video-title"; title.textContent = video.title;
-    const meta = document.createElement("div"); meta.className = "video-meta"; meta.textContent = profile.name;
-    info.append(title, meta); card.append(thumb, info); grid.appendChild(card);
+  // كل فيديو ينتمي للبروفايل عندما يشير profileUrl إلى اسم/رابط هذا البروفايل.
+  const canonicalProfileUrl = profileUrlKey(profile.url || ("profile.html?name=" + encodeURIComponent(profile.name)));
+  const ownedVideos = allVideos.filter(video => {
+    if (!video || !video.profileUrl) return false;
+    if (profileUrlKey(video.profileUrl) === canonicalProfileUrl) return true;
+    const linkedName = new URLSearchParams(String(video.profileUrl).split("?")[1] || "").get("name");
+    return normalize(linkedName) === normalize(profile.name);
   });
-  if (!ownedVideos.length) empty.hidden = false;
+
+  ownedVideos.forEach(video => {
+    const link = document.createElement("a");
+    link.className = "video-card";
+    link.href = "watch.html?v=" + encodeURIComponent(video.file) + "&title=" + encodeURIComponent(video.title || video.file);
+    const thumbnail = document.createElement("div");
+    thumbnail.className = "video-thumbnail";
+    const preview = document.createElement("video");
+    preview.src = video.file;
+    preview.preload = "metadata";
+    preview.muted = true;
+    preview.playsInline = true;
+    thumbnail.appendChild(preview);
+    const info = document.createElement("div");
+    info.className = "video-info";
+    const title = document.createElement("div");
+    title.className = "video-title";
+    title.textContent = video.title || video.file;
+    const meta = document.createElement("div");
+    meta.className = "video-meta";
+    meta.textContent = profile.name;
+    info.append(title, meta);
+    link.append(thumbnail, info);
+    grid.appendChild(link);
+  });
+
+  if (!ownedVideos.length) {
+    empty.hidden = false;
+    empty.textContent = 'لا توجد فيديوهات مرتبطة بالبروفايل "' + profile.name + '" في profiles.js.';
+  }
 })();
 </script>
 </body>
