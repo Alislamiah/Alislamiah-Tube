@@ -234,141 +234,8 @@
 
     <h2 class="section-title" id="main-section-title">أحدث الفيديوهات</h2>
 
-    <div class="videos-grid">
-      <!-- فيديو 1 -->
-      <a href="watch.html?v=IMG_20260814_164242_861.mp4&title=ما تيسر من سورة إبراهيم" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="IMG_20260814_164242_861.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">ما تيسر من سورة إبراهيم</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 2 -->
-      <a href="watch.html?v=lv_0_20260824111719.mp4&title=آيات من سورة مريم بصوت مشاري راشد العفاسي" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="lv_0_20260824111719.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">آيات من سورة مريم بصوت مشاري راشد العفاسي</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 3 -->
-      <a href="watch.html?v=IMG_20260812_142700_033.mp4&title=بل الساعة موعدهم والساعة أدهى وأمر تلاوة عطرة بصوت الشيخ مشاري العفاسي" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="IMG_20260812_142700_033.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">بل الساعة موعدهم والساعة أدهى وأمر تلاوة عطرة بصوت الشيخ مشاري العفاسي</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 4 -->
-      <a href="watch.html?v=فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1).mp4&title=فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1)" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1).mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1)</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 5 -->
-      <a href="watch.html?v=فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية.mp4&title=فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 6 -->
-      <a href="watch.html?v=فرض الفصل الثالث في ماده العلوم الفيزيائيه السنه اولى متوسط.mp4&title=فرض الفصل الثالث في مادة العلوم الفيزيائية السنة الأولى متوسط" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="فرض الفصل الثالث في ماده العلوم الفيزيائيه السنه اولى متوسط.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">فرض الفصل الثالث في مادة العلوم الفيزيائية السنة الأولى متوسط</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 7 -->
-      <a href="watch.html?v=نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط.mp4&title=نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-      <!-- فيديو 8 -->
-      <a href="watch.html?v=شرح درس الخطاب المباشر والغير مباشر مكتوب.mp4&title=شرح درس الخطاب المباشر والغير مباشر مكتوب" class="video-card">
-        <div class="video-thumbnail">
-          <video preload="metadata" muted autoplay loop playsinline>
-            <source src="شرح درس الخطاب المباشر والغير مباشر مكتوب.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">شرح درس الخطاب المباشر والغير مباشر مكتوب</div>
-          <div class="video-meta">Alislamiah-Tube</div>
-        </div>
-      </a>
-
-
-<!-- فيديو 9 -->
-<a href="watch.html?v=شرح درس Despite and in spite of.mp4&title=شرح درس Despite and in spite of" class="video-card">
-  <div class="video-thumbnail">
-    <video preload="metadata" muted autoplay loop playsinline>
-      <source src="شرح درس Despite and in spite of.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="video-info">
-    <div class="video-title">شرح درس Despite and in spite of</div>
-    <div class="video-meta">Alislamiah-Tube</div>
-  </div>
-</a>
-
-<!-- فيديو 10 -->
-<a href="watch.html?v=شرح درس Linking words.mp4&title=شرح درس Linking words" class="video-card">
-  <div class="video-thumbnail">
-    <video preload="metadata" muted autoplay loop playsinline>
-      <source src="شرح درس Linking words.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="video-info">
-    <div class="video-title">شرح درس Linking words</div>
-    <div class="video-meta">Alislamiah-Tube</div>
-  </div>
-</a>
-
-
-    </div>
-  </main>
+    <div class="videos-grid" id="videos-grid"></div>
+   </main>
 
   <nav class="bottom-nav">
     <a href="index.html" class="nav-item active">
@@ -394,6 +261,7 @@
   </nav>
 
 
+<script src="profiles.js"></script>
 <script>
 /* شاشة الترحيب */
 window.addEventListener("load", function () {
@@ -446,6 +314,44 @@ document.getElementById("nav-home").textContent = t.home;
 document.getElementById("nav-search").textContent = t.search;
 document.getElementById("nav-create").textContent = t.create;
 document.getElementById("nav-settings").textContent = t.settings;
+
+
+/* عرض الفيديوهات من مصدر البيانات المشترك */
+function renderHomeVideos() {
+  const grid = document.getElementById("videos-grid");
+  if (!grid) return;
+  grid.replaceChildren();
+  (window.ALISLAMIAH_VIDEOS || []).forEach(video => {
+    const card = document.createElement("a");
+    card.className = "video-card";
+    card.href = "watch.html?v=" + encodeURIComponent(video.file) + "&title=" + encodeURIComponent(video.title);
+
+    const thumbnail = document.createElement("div");
+    thumbnail.className = "video-thumbnail";
+    const preview = document.createElement("video");
+    preview.preload = "metadata";
+    preview.muted = true;
+    preview.autoplay = true;
+    preview.loop = true;
+    preview.playsInline = true;
+    preview.src = video.file;
+    thumbnail.appendChild(preview);
+
+    const info = document.createElement("div");
+    info.className = "video-info";
+    const title = document.createElement("div");
+    title.className = "video-title";
+    title.textContent = video.title;
+    const meta = document.createElement("div");
+    meta.className = "video-meta";
+    const profile = (window.ALISLAMIAH_PROFILES || []).find(p => p.url === video.profileUrl);
+    meta.textContent = profile ? profile.name : "Alislamiah-Tube";
+    info.append(title, meta);
+    card.append(thumbnail, info);
+    grid.appendChild(card);
+  });
+}
+renderHomeVideos();
 
 /* تبديل البطاقات الإعلانية */
 const promoCards = [

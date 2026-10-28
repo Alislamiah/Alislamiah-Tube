@@ -69,6 +69,38 @@
       object-fit: contain;
     }
 
+
+    .channel-profile {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 15px;
+      margin: 0 0 18px;
+      background: #0b1a2c;
+      border: 1px solid #173553;
+      border-radius: 14px;
+    }
+    .channel-profile.visible { display: flex; }
+    .channel-profile-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      color: #fff;
+      text-decoration: none;
+    }
+    .channel-avatar {
+      width: 50px;
+      height: 50px;
+      flex: 0 0 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #284b70;
+      background: #07111f;
+    }
+    .channel-profile-name { font-size: 0.98rem; font-weight: 700; }
+    .channel-profile-label { color: #91a9c2; font-size: 0.78rem; margin-top: 3px; }
+
     .video-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -457,6 +489,17 @@
       </span>
     </div>
 
+
+    <div class="channel-profile" id="channel-profile">
+      <a class="channel-profile-link" id="channel-profile-link" href="profile.html?name=Alislamiah">
+        <img class="channel-avatar" id="channel-profile-image" src="Alislamiah.png" alt="صورة البروفايل">
+        <div>
+          <div class="channel-profile-name" id="channel-profile-name">Alislamiah</div>
+          <div class="channel-profile-label" id="channel-profile-label">عرض البروفايل</div>
+        </div>
+      </a>
+    </div>
+
     <!-- أزرار التفاعل -->
     <div class="actions-bar">
       <button class="action-btn" id="like-btn" onclick="toggleLike()">
@@ -534,7 +577,8 @@
     </a>
   </nav>
 
-  <script>
+  <script src="profiles.js"></script>
+<script>
     /* =========================================
        الترجمة
     ========================================= */
@@ -677,6 +721,28 @@
       titleElement.textContent = "Alislamiah-Tube";
     }
 
+
+    /* =========================================
+       بروفايل صاحب الفيديو: الرابط نفسه هو مرجع الانتماء
+    ========================================= */
+    function renderCurrentProfile() {
+      const video = allVideos.find(item => item.file === videoFile);
+      const profileCard = document.getElementById("channel-profile");
+      if (!video || !video.profileUrl) {
+        profileCard.classList.remove("visible");
+        return;
+      }
+      const profile = (window.ALISLAMIAH_PROFILES || []).find(item => item.url === video.profileUrl);
+      if (!profile) {
+        profileCard.classList.remove("visible");
+        return;
+      }
+      document.getElementById("channel-profile-link").href = profile.url;
+      document.getElementById("channel-profile-image").src = profile.image || "Alislamiah.png";
+      document.getElementById("channel-profile-image").alt = profile.name || "Profile";
+      document.getElementById("channel-profile-name").textContent = profile.name || "";
+      profileCard.classList.add("visible");
+    }
     /* =========================================
        الإعجابات والمشاركات
     ========================================= */
@@ -802,17 +868,6 @@
        زر تلخيص الفيديو
     ========================================= */
 
-    function summarizeVideo() {
-  const currentVideo = videoFile;
-  const currentTitle = videoTitle || "Alislamiah-Tube";
-
-  const summarizeUrl =
-    "sumarize.html?v=" + encodeURIComponent(currentVideo) +
-    "&title=" + encodeURIComponent(currentTitle);
-
-  window.location.href = summarizeUrl;
-}
-
 /* =========================================
    الإعلانات العشوائية
 ========================================= */
@@ -911,48 +966,7 @@ function renderRandomPromo() {
    أضف الفيديوهات الجديدة داخل هذه المصفوفة
 ========================================= */
 
-const allVideos = [
-  {
-    file: "IMG_20260814_164242_861.mp4",
-    title: "ما تيسر من سورة إبراهيم"
-  },
-  {
-    file: "lv_0_20260824111719.mp4",
-    title: "آيات من سورة مريم بصوت مشاري راشد العفاسي"
-  },
-  {
-    file: "IMG_20260812_142700_033.mp4",
-    title: "بل الساعة موعدهم والساعة أدهى وأمر تلاوة عطرة بصوت الشيخ مشاري العفاسي"
-  },
-  {
-    file: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1).mp4",
-    title: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية (1)"
-  },
-  {
-    file: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية.mp4",
-    title: "فرض الفصل الثالث سنة ثالثة متوسط في العلوم الفيزيائية"
-  },
-  {
-    file: "فرض الفصل الثالث في ماده العلوم الفيزيائيه السنه اولى متوسط.mp4",
-    title: "فرض الفصل الثالث في مادة العلوم الفيزيائية السنة الأولى متوسط"
-  },
-  {
-    file: "نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط.mp4",
-    title: "نموذج مقترح فرض الفصل الثالث سنة ثالثة متوسط"
-  },
-  {
-    file: "شرح درس الخطاب المباشر والغير مباشر مكتوب.mp4",
-    title: "شرح درس الخطاب المباشر والغير مباشر"
-  },
-  {
-    file: "شرح درس Despite and in spite of.mp4",
-    title: "شرح درس Despite and in spite of"
-  },
-  {
-    file: "شرح درس Linking words.mp4",
-    title: "شرح درس Linking words"
-  }
-];
+const allVideos = (window.ALISLAMIAH_VIDEOS || []).map(video => ({ ...video }));
 
 /* =========================================
    اختيار فيديوهات عشوائية دون تكرار
@@ -1017,20 +1031,17 @@ function renderRandomVideos() {
 ========================================= */
 
 applyLanguage(currentLang);
+renderCurrentProfile();
 renderRandomPromo();
 renderRandomVideos();
 
 function summarizeVideo() {
-  const currentVideo = videoFile;
-  const currentTitle = videoTitle || "Alislamiah-Tube";
-
   const params = new URLSearchParams({
     summarize: "1",
-    title: currentTitle,
-    videoUrl: currentVideo,
+    title: videoTitle || "Alislamiah-Tube",
+    videoUrl: videoFile,
     outputLang: localStorage.getItem("app_lang") || "ar"
   });
-
   window.location.href = "sumarize.html?" + params.toString();
 }
 </script>
